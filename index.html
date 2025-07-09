@@ -32,17 +32,6 @@
             transition: all 0.3s ease;
         }
 
-        .navbar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.1), transparent);
-            animation: navbarGlow 4s ease-in-out infinite;
-        }
-
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -88,11 +77,6 @@
             background-clip: text;
             letter-spacing: 2px;
             transition: all 0.3s ease;
-        }
-
-        .logo:hover .logo-text {
-            text-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
-            transform: scale(1.05);
         }
 
         .nav-menu {
@@ -149,7 +133,7 @@
             display: block;
         }
 
-        /* Home Page Styles */
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             background: radial-gradient(circle at center, #1a2332 0%, #0a0e1a 100%);
@@ -158,32 +142,6 @@
             position: relative;
             overflow: hidden;
             padding-top: 0;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(255, 107, 0, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 255, 65, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.2) 0%, transparent 70%);
-            animation: backgroundPulse 4s ease-in-out infinite alternate;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,107,0,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
-            animation: dotsMove 20s linear infinite;
-            opacity: 0.5;
         }
 
         .hero-container {
@@ -204,7 +162,6 @@
             line-height: 1.1;
             margin-bottom: 2rem;
             text-transform: uppercase;
-            animation: titleGlow 3s ease-in-out infinite alternate;
         }
 
         .hero-content .main-title {
@@ -213,28 +170,13 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
-            animation: gradientShift 3s ease-in-out infinite alternate, textGlow 2s ease-in-out infinite alternate;
+            animation: gradientShift 3s ease-in-out infinite alternate;
             display: block;
-            position: relative;
-        }
-
-        .hero-content .main-title::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
-            animation: shimmer 2s infinite;
-            pointer-events: none;
         }
 
         .hero-content .sub-title {
             color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.3);
-            animation: subtitlePulse 4s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .hero-content p {
@@ -243,32 +185,15 @@
             margin-bottom: 3rem;
             line-height: 1.6;
             font-weight: 500;
-            animation: fadeInUp 1s ease-out 0.5s both;
-            position: relative;
-        }
-
-        .hero-content p::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, #ff6b00, #00ff41);
-            border-radius: 2px;
-            animation: lineGrow 1s ease-out 1s both;
         }
 
         .hero-buttons {
             display: flex;
             gap: 1.5rem;
             align-items: center;
-            animation: fadeInUp 1s ease-out 0.8s both;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #ff6b00, #ff4500);
-            color: white;
+        .btn-primary, .btn-secondary {
             padding: 18px 40px;
             border-radius: 30px;
             text-decoration: none;
@@ -279,75 +204,29 @@
             border: none;
             cursor: pointer;
             box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
-            position: relative;
-            overflow: hidden;
         }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(255, 107, 0, 0.6);
-            background: linear-gradient(135deg, #ff4500, #ff6b00);
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b00, #ff4500);
+            color: white;
         }
 
         .btn-secondary {
             background: linear-gradient(135deg, #00ff41, #00cc33);
             color: #000;
-            padding: 18px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.4);
-            position: relative;
-            overflow: hidden;
         }
 
-        .btn-secondary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-secondary:hover {
+        .btn-primary:hover, .btn-secondary:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(0, 255, 65, 0.6);
-            background: linear-gradient(135deg, #00cc33, #00ff41);
         }
 
-        .btn-secondary:hover::before {
-            left: 100%;
-        }
-
-        /* Gaming Character Visual */
+        /* Hero Visual */
         .hero-visual {
             position: relative;
             height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: fadeInRight 1s ease-out 0.3s both;
         }
 
         .character-display {
@@ -358,62 +237,29 @@
             border-radius: 25px;
             position: relative;
             overflow: hidden;
-            animation: float 4s ease-in-out infinite, gradientRotate 8s ease-in-out infinite;
+            animation: gradientRotate 8s ease-in-out infinite;
             box-shadow: 
                 0 20px 40px rgba(255, 107, 0, 0.3),
-                0 0 60px rgba(0, 255, 65, 0.2),
-                inset 0 0 40px rgba(255, 255, 255, 0.1);
+                0 0 60px rgba(0, 255, 65, 0.2);
             border: 3px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .character-display::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="hexagon" width="30" height="30" patternUnits="userSpaceOnUse"><polygon points="15,5 25,12 25,23 15,30 5,23 5,12" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="200" height="200" fill="url(%23hexagon)"/></svg>'),
-                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-            animation: hexagonMove 6s linear infinite, shimmer 3s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .character-display::after {
             content: '🎮 NETHUWA EDITZ';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             font-size: 1.8rem;
             font-weight: 900;
             text-align: center;
             color: white;
-            text-shadow: 
-                2px 2px 4px rgba(0, 0, 0, 0.8),
-                0 0 20px rgba(255, 255, 255, 0.5),
-                0 0 40px rgba(0, 255, 65, 0.3);
-            z-index: 2;
-            animation: textFloat 3s ease-in-out infinite alternate;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
-        /* Services Preview on Home */
+        /* Services Section */
         .services-preview {
             padding: 120px 0;
             background: linear-gradient(135deg, #1a2332 0%, #0f1821 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .services-preview::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 70%, rgba(255, 107, 0, 0.1) 0%, transparent 50%);
-            animation: serviceGlow 6s ease-in-out infinite alternate;
         }
 
         .services-container {
@@ -425,23 +271,6 @@
         .section-header {
             text-align: center;
             margin-bottom: 5rem;
-            position: relative;
-            z-index: 2;
-            animation: headerAppear 1s ease-out both;
-        }
-
-        .section-header::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: headerGlow 4s ease-in-out infinite alternate;
-            z-index: -1;
         }
 
         .section-header h2 {
@@ -454,21 +283,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientShift 3s ease-in-out infinite, headerTextGlow 2s ease-in-out infinite alternate;
-            position: relative;
-        }
-
-        .section-header h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(to right, #ff6b00, #ffdd00);
-            border-radius: 2px;
-            animation: underlineGrow 1s ease-out 0.5s both;
+            animation: gradientShift 3s ease-in-out infinite;
         }
 
         .section-header p {
@@ -477,8 +292,6 @@
             max-width: 600px;
             margin: 0 auto;
             font-weight: 500;
-            animation: fadeInUp 1s ease-out 0.3s both;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
 
         .services-grid {
@@ -493,43 +306,14 @@
             border-radius: 20px;
             padding: 3rem;
             transition: all 0.4s ease;
-            backdrop-filter: blur(20px);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
             text-align: center;
-            animation: fadeInUp 0.8s ease-out both;
-        }
-
-        .service-card:nth-child(1) { animation-delay: 0.2s; }
-        .service-card:nth-child(2) { animation-delay: 0.4s; }
-        .service-card:nth-child(3) { animation-delay: 0.6s; }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-            opacity: 0;
+            cursor: pointer;
         }
 
         .service-card:hover {
             transform: translateY(-15px) scale(1.02);
             border-color: #ff6b00;
-            box-shadow: 
-                0 25px 50px rgba(255, 107, 0, 0.3),
-                0 0 60px rgba(255, 107, 0, 0.2),
-                inset 0 0 30px rgba(255, 107, 0, 0.1);
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-            transform: rotate(45deg) scale(1.2);
+            box-shadow: 0 25px 50px rgba(255, 107, 0, 0.3);
         }
 
         .service-icon {
@@ -543,16 +327,6 @@
             font-size: 3rem;
             margin: 0 auto 2rem;
             box-shadow: 0 10px 20px rgba(255, 107, 0, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
-        }
-
-        .service-card:hover .service-icon {
-            transform: scale(1.1) rotate(10deg);
-            box-shadow: 
-                0 15px 30px rgba(255, 107, 0, 0.4),
-                0 0 40px rgba(255, 221, 0, 0.3);
         }
 
         .service-card h3 {
@@ -580,47 +354,17 @@
             text-transform: uppercase;
         }
 
-        /* Portfolio Page Styles */
+        /* Portfolio Pages */
         .portfolio-page {
             padding: 120px 0;
             background: linear-gradient(135deg, #1a2332 0%, #0a0e1a 100%);
             min-height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .portfolio-page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 15% 85%, rgba(255, 107, 0, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 85% 15%, rgba(0, 255, 65, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
-            animation: portfolioGlow 8s ease-in-out infinite alternate;
-        }
-
-        .portfolio-page::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="portfolio-pattern" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="1.5" fill="rgba(255,107,0,0.05)"/><circle cx="0" cy="0" r="1" fill="rgba(0,255,65,0.05)"/><circle cx="25" cy="25" r="1" fill="rgba(0,102,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23portfolio-pattern)"/></svg>');
-            animation: patternDrift 25s linear infinite;
-            opacity: 0.6;
         }
 
         .portfolio-container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
-            position: relative;
-            z-index: 2;
         }
 
         .portfolio-grid {
@@ -628,7 +372,6 @@
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2.5rem;
             padding: 1rem 0;
-            animation: gridAppear 1s ease-out 0.3s both;
         }
 
         .portfolio-item {
@@ -638,42 +381,12 @@
             overflow: hidden;
             transition: all 0.5s ease;
             position: relative;
-            animation: portfolioItemSlide 0.8s ease-out both;
-            backdrop-filter: blur(15px);
-        }
-
-        .portfolio-item:nth-child(odd) {
-            animation-delay: 0.1s;
-        }
-
-        .portfolio-item:nth-child(even) {
-            animation-delay: 0.3s;
-        }
-
-        .portfolio-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(255, 107, 0, 0.1), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-            z-index: 1;
         }
 
         .portfolio-item:hover {
             transform: translateY(-15px) scale(1.02);
-            box-shadow: 
-                0 30px 60px rgba(255, 107, 0, 0.3),
-                0 0 80px rgba(255, 107, 0, 0.2),
-                inset 0 0 40px rgba(255, 107, 0, 0.1);
+            box-shadow: 0 30px 60px rgba(255, 107, 0, 0.3);
             border-color: #ffdd00;
-        }
-
-        .portfolio-item:hover::before {
-            transform: translateX(100%);
         }
 
         .portfolio-image {
@@ -685,94 +398,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            border-radius: 15px 15px 0 0;
-            transition: all 0.4s ease;
-        }
-
-        .portfolio-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(0, 255, 65, 0.1));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 2;
-        }
-
-        .portfolio-item:hover .portfolio-image::before {
-            opacity: 1;
         }
 
         .portfolio-image.logo-theme {
             background: linear-gradient(135deg, #ff6b00, #ffdd00);
-            position: relative;
-        }
-
-        .portfolio-image.logo-theme::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-            animation: logoShimmer 3s ease-in-out infinite;
         }
 
         .portfolio-image.post-theme {
             background: linear-gradient(135deg, #00ff41, #00cc33);
-            animation: postGlow 4s ease-in-out infinite alternate;
         }
 
         .portfolio-image.youtube-theme {
             background: linear-gradient(135deg, #ff0066, #cc0044);
-            position: relative;
         }
 
-        .portfolio-image.youtube-theme::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
-            animation: youtubePulse 2s ease-in-out infinite;
-        }
-
-        .image-upload-text {
-            color: white;
-            font-weight: 900;
-            font-size: 1.2rem;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .portfolio-content {
             padding: 2rem;
             background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-            position: relative;
-            z-index: 2;
-        }
-
-        .portfolio-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(255, 107, 0, 0.05), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .portfolio-item:hover .portfolio-content::before {
-            opacity: 1;
         }
 
         .portfolio-content h3 {
@@ -781,29 +429,6 @@
             margin-bottom: 1rem;
             color: #ffffff;
             text-transform: uppercase;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .portfolio-content h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(to right, #ff6b00, #ffdd00);
-            transition: width 0.4s ease;
-            border-radius: 2px;
-        }
-
-        .portfolio-item:hover .portfolio-content h3::after {
-            width: 100%;
-        }
-
-        .portfolio-item:hover .portfolio-content h3 {
-            color: #ffdd00;
-            text-shadow: 0 0 15px rgba(255, 221, 0, 0.4);
         }
 
         .portfolio-content p {
@@ -811,23 +436,6 @@
             margin-bottom: 1.5rem;
             line-height: 1.6;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .portfolio-item:hover .portfolio-content p {
-            color: #cbd5e0;
-        }
-
-        .portfolio-image img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: contain !important;
-            object-position: center !important;
-            border-radius: 15px 15px 0 0 !important;
-            display: block !important;
-            max-width: none !important;
-            max-height: none !important;
-            background: #2d3748 !important;
         }
 
         .portfolio-tags {
@@ -845,30 +453,6 @@
             font-size: 0.7rem;
             font-weight: 900;
             text-transform: uppercase;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tag::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .portfolio-item:hover .tag {
-            background: linear-gradient(135deg, #ffdd00, #ff6b00);
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
-        }
-
-        .portfolio-item:hover .tag::before {
-            left: 100%;
         }
 
         .portfolio-price {
@@ -880,31 +464,6 @@
             font-size: 1rem;
             text-align: center;
             text-transform: uppercase;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .portfolio-price::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .portfolio-item:hover .portfolio-price {
-            background: linear-gradient(135deg, #ffdd00, #00ff41);
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 255, 65, 0.4);
-        }
-
-        .portfolio-item:hover .portfolio-price::before {
-            transform: translateX(100%);
         }
 
         /* Add Work Button */
@@ -919,66 +478,18 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(15px);
-            animation: addButtonFloat 4s ease-in-out infinite;
-        }
-
-        .add-work-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            animation: addButtonGlow 3s ease-in-out infinite alternate;
-        }
-
-        .add-work-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 107, 0, 0.1), transparent);
-            transform: rotate(45deg) translateX(-100%);
-            transition: transform 0.8s ease;
         }
 
         .add-work-btn:hover {
             border-color: #ffdd00;
             background: rgba(255, 107, 0, 0.15);
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 20px 40px rgba(255, 107, 0, 0.3),
-                0 0 60px rgba(255, 107, 0, 0.2);
-        }
-
-        .add-work-btn:hover::before {
-            opacity: 1;
-        }
-
-        .add-work-btn:hover::after {
-            transform: rotate(45deg) translateX(100%);
         }
 
         .add-work-btn .icon {
             font-size: 4rem;
             margin-bottom: 2rem;
             color: #ff6b00;
-            transition: all 0.4s ease;
-            animation: iconPulse 2s ease-in-out infinite;
-        }
-
-        .add-work-btn:hover .icon {
-            transform: scale(1.2) rotate(180deg);
-            color: #ffdd00;
-            text-shadow: 0 0 20px rgba(255, 107, 0, 0.8);
         }
 
         .add-work-btn h3 {
@@ -987,14 +498,6 @@
             text-transform: uppercase;
             margin-bottom: 1rem;
             color: #ff6b00;
-            transition: all 0.3s ease;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
-
-        .add-work-btn:hover h3 {
-            color: #ffdd00;
-            text-shadow: 0 0 15px rgba(255, 221, 0, 0.6);
-            transform: scale(1.05);
         }
 
         .add-work-btn p {
@@ -1002,12 +505,28 @@
             text-align: center;
             margin: 0;
             font-size: 1rem;
-            transition: all 0.3s ease;
         }
 
-        .add-work-btn:hover p {
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        /* Delete Button */
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: none;
+            z-index: 10;
+        }
+
+        .portfolio-item:hover .delete-btn {
+            display: block;
         }
 
         /* Modal */
@@ -1020,7 +539,6 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
         }
 
         .modal-content {
@@ -1033,25 +551,7 @@
             max-height: 90vh;
             overflow-y: auto;
             border: 2px solid #ff6b00;
-            box-shadow: 0 20px 60px rgba(255, 107, 0, 0.3);
-            animation: modalSlideIn 0.3s ease-out;
             position: relative;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 1rem;
         }
 
         .modal-header h2 {
@@ -1059,24 +559,12 @@
             font-size: 1.4rem;
             font-weight: 900;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #ff6b00, #ffdd00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 0;
+            margin: 0 0 1rem 0;
+            text-align: center;
         }
 
         .form-group {
             margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            color: #ffffff;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-            text-transform: uppercase;
-            font-size: 0.8rem;
         }
 
         .form-group label {
@@ -1097,7 +585,6 @@
             border-radius: 8px;
             color: #ffffff;
             font-size: 0.85rem;
-            transition: all 0.3s ease;
             font-family: 'Arial', sans-serif;
         }
 
@@ -1111,27 +598,6 @@
             background: rgba(255, 107, 0, 0.1);
             border: 2px dashed rgba(255, 107, 0, 0.5);
             cursor: pointer;
-            font-size: 0.8rem;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #ff6b00;
-            box-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .form-group input[type="file"] {
-            padding: 0.8rem;
-            background: rgba(255, 107, 0, 0.1);
-            border: 2px dashed rgba(255, 107, 0, 0.5);
-            cursor: pointer;
-        }
-
-        .form-group input[type="file"]:hover {
-            border-color: #ff6b00;
-            background: rgba(255, 107, 0, 0.2);
         }
 
         .close {
@@ -1140,10 +606,6 @@
             font-size: 2rem;
             font-weight: bold;
             cursor: pointer;
-            margin-top: -1rem;
-            margin-right: -0.5rem;
-            transition: all 0.3s ease;
-            line-height: 1;
             position: absolute;
             top: 10px;
             right: 15px;
@@ -1151,8 +613,36 @@
 
         .close:hover {
             color: #ffdd00;
-            transform: scale(1.1) rotate(90deg);
-            text-shadow: 0 0 10px rgba(255, 221, 0, 0.8);
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(255, 107, 0, 0.2);
+        }
+
+        .modal-content .btn-primary,
+        .modal-content .btn-secondary {
+            margin: 0.2rem;
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .modal-content .btn-primary {
+            background: linear-gradient(135deg, #ff6b00, #ff4500);
+            color: white;
+        }
+
+        .modal-content .btn-secondary {
+            background: linear-gradient(135deg, #666, #444);
+            color: white;
         }
 
         /* Success Message */
@@ -1166,114 +656,14 @@
             border-radius: 15px;
             font-weight: 900;
             z-index: 3000;
-            animation: slideInRight 0.4s ease-out;
-            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.4);
             max-width: 350px;
             text-align: center;
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        /* Form Buttons */
-        .modal-content .btn-primary,
-        .modal-content .btn-secondary {
-            margin: 0.2rem;
-            display: inline-block;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Arial Black', Arial, sans-serif;
-            font-size: 0.8rem;
-            border-radius: 20px;
-            text-transform: uppercase;
-            font-weight: 900;
-            transition: all 0.3s ease;
-        }
-
-        .modal-content .btn-primary {
-            background: linear-gradient(135deg, #ff6b00, #ff4500);
-            color: white;
-        }
-
-        .modal-content .btn-secondary {
-            background: linear-gradient(135deg, #666, #444);
-            color: white;
-        }
-
-        .modal-content .btn-primary:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
-        }
-
-        .modal-content .btn-secondary:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(102, 102, 102, 0.4);
-        }
-
-        /* Button container */
-        .button-container {
-            text-align: center;
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px solid rgba(255, 107, 0, 0.2);
-        }
-
-        /* Delete Button */
-        .delete-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: linear-gradient(135deg, #ff4444, #cc0000);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            font-weight: bold;
-            display: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
-            z-index: 10;
-        }
-
-        .delete-btn:hover {
-            background: linear-gradient(135deg, #ff6666, #ff4444);
-            transform: scale(1.1) rotate(90deg);
-            box-shadow: 0 6px 20px rgba(255, 68, 68, 0.6);
-        }
-
-        .portfolio-item:hover .delete-btn {
-            display: block;
-            animation: deleteAppear 0.3s ease-out;
-        }
-
-        @keyframes deleteAppear {
-            from {
-                opacity: 0;
-                transform: scale(0) rotate(180deg);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
         }
 
         /* Contact Section */
         .contact {
             padding: 120px 0;
             background: radial-gradient(circle at center, #1a2332 0%, #0a0e1a 100%);
-            position: relative;
         }
 
         .contact-container {
@@ -1357,8 +747,8 @@
             font-weight: 500;
         }
 
-        /* Storage Status */
-        .storage-status {
+        /* Storage Info */
+        .storage-info {
             position: fixed;
             bottom: 20px;
             left: 20px;
@@ -1370,108 +760,50 @@
             font-size: 0.8rem;
             max-width: 300px;
             z-index: 1500;
-            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
         }
 
-        .storage-status h4 {
+        .storage-info h4 {
             color: #ff6b00;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
+            margin-bottom: 8px;
         }
 
-        .storage-status p {
-            margin: 3px 0;
-            color: #ccc;
-        }
-
-        .storage-status .highlight {
+        .storage-info .status {
             color: #00ff41;
             font-weight: bold;
         }
 
+        .storage-info .warning {
+            color: #ffdd00;
+            font-weight: bold;
+        }
+
+        .github-info {
+            position: fixed;
+            top: 120px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #00ff41;
+            font-size: 0.8rem;
+            max-width: 320px;
+            z-index: 1500;
+            display: none;
+        }
+
+        .github-info h4 {
+            color: #00ff41;
+            margin-bottom: 8px;
+        }
+
         /* Animations */
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         @keyframes gradientShift {
             0% {
                 background-position: 0% 50%;
             }
             100% {
                 background-position: 100% 50%;
-            }
-        }
-
-        @keyframes textGlow {
-            0% {
-                text-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
-            }
-            100% {
-                text-shadow: 0 0 50px rgba(255, 107, 0, 0.8), 0 0 80px rgba(255, 221, 0, 0.4);
-            }
-        }
-
-        @keyframes titleGlow {
-            0% {
-                filter: brightness(1);
-            }
-            100% {
-                filter: brightness(1.1);
-            }
-        }
-
-        @keyframes subtitlePulse {
-            0%, 100% {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.3);
-            }
-            50% {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 255, 255, 0.5);
-            }
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        @keyframes lineGrow {
-            from {
-                height: 0;
-            }
-            to {
-                height: 100%;
             }
         }
 
@@ -1493,212 +825,14 @@
             }
         }
 
-        @keyframes textFloat {
-            0% {
-                transform: translate(-50%, -50%) translateY(0px);
-            }
-            100% {
-                transform: translate(-50%, -50%) translateY(-10px);
-            }
-        }
-
-        @keyframes hexagonMove {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 60px 60px;
-            }
-        }
-
-        @keyframes backgroundPulse {
-            0% {
-                opacity: 0.3;
-            }
-            100% {
-                opacity: 0.6;
-            }
-        }
-
-        @keyframes dotsMove {
-            0% {
-                transform: translateX(0) translateY(0);
-            }
-            100% {
-                transform: translateX(-20px) translateY(-20px);
-            }
-        }
-
-        @keyframes serviceGlow {
-            0% {
-                opacity: 0.1;
-            }
-            100% {
-                opacity: 0.3;
-            }
-        }
-
-        @keyframes navbarGlow {
-            0%, 100% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes particleFloat {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-                opacity: 0.3;
-            }
-            25% {
-                transform: translateY(-100px) rotate(90deg);
-                opacity: 0.8;
-            }
-            50% {
-                transform: translateY(-150px) rotate(180deg);
-                opacity: 0.5;
-            }
-            75% {
-                transform: translateY(-50px) rotate(270deg);
-                opacity: 0.7;
-            }
-        }
-
-        @keyframes portfolioGlow {
-            0% {
-                opacity: 0.2;
-            }
-            100% {
-                opacity: 0.5;
-            }
-        }
-
-        @keyframes patternDrift {
-            0% {
-                transform: translateX(0) translateY(0);
-            }
-            100% {
-                transform: translateX(-25px) translateY(-25px);
-            }
-        }
-
-        @keyframes gridAppear {
+        @keyframes slideInRight {
             from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes portfolioItemSlide {
-            from {
-                opacity: 0;
-                transform: translateX(-50px) translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0) translateY(0);
-            }
-        }
-
-        @keyframes logoShimmer {
-            0%, 100% {
-                transform: translateX(-100%);
-            }
-            50% {
                 transform: translateX(100%);
-            }
-        }
-
-        @keyframes postGlow {
-            0% {
-                box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.3);
-            }
-            100% {
-                box-shadow: inset 0 0 40px rgba(0, 255, 65, 0.6);
-            }
-        }
-
-        @keyframes youtubePulse {
-            0%, 100% {
-                opacity: 0.2;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.4;
-                transform: scale(1.1);
-            }
-        }
-
-        @keyframes headerAppear {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes headerGlow {
-            0% {
-                opacity: 0.3;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            100% {
-                opacity: 0.6;
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-        }
-
-        @keyframes headerTextGlow {
-            0% {
-                text-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
-            }
-            100% {
-                text-shadow: 0 0 40px rgba(255, 107, 0, 0.6), 0 0 60px rgba(255, 221, 0, 0.3);
-            }
-        }
-
-        @keyframes underlineGrow {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100px;
-            }
-        }
-
-        @keyframes addButtonFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes addButtonGlow {
-            0% {
                 opacity: 0;
             }
-            100% {
+            to {
+                transform: translateX(0);
                 opacity: 1;
-            }
-        }
-
-        @keyframes iconPulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
             }
         }
 
@@ -1711,10 +845,6 @@
 
             .hero-content h1 {
                 font-size: 3rem;
-            }
-
-            .nav-menu {
-                gap: 1rem;
             }
 
             .character-display {
@@ -1739,24 +869,12 @@
                 flex-direction: column;
             }
 
-            .storage-status {
-                bottom: 10px;
-                left: 10px;
-                right: 10px;
+            .storage-info,
+            .github-info {
+                position: relative;
+                margin: 20px;
                 max-width: none;
             }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
     </style>
 </head>
@@ -1802,27 +920,27 @@
 
         <section class="services-preview">
             <div class="services-container">
-                <div class="section-header fade-in">
+                <div class="section-header">
                     <h2>Our Services</h2>
                     <p>Professional gaming graphics for content creators and gamers</p>
                 </div>
                 
                 <div class="services-grid">
-                    <div class="service-card fade-in" onclick="showPage('logos')">
+                    <div class="service-card" onclick="showPage('logos')">
                         <div class="service-icon">💎</div>
                         <h3>Logo Design</h3>
                         <p>Gaming logos, clan emblems, brand identity designs that make you stand out</p>
                         <div class="service-price">From LKR 1200</div>
                     </div>
                     
-                    <div class="service-card fade-in" onclick="showPage('posts')">
+                    <div class="service-card" onclick="showPage('posts')">
                         <div class="service-icon">📸</div>
                         <h3>Social Posts</h3>
                         <p>Instagram, Facebook, TikTok graphics that boost your social media presence</p>
                         <div class="service-price">From LKR 250</div>
                     </div>
                     
-                    <div class="service-card fade-in" onclick="showPage('youtube')">
+                    <div class="service-card" onclick="showPage('youtube')">
                         <div class="service-icon">🎥</div>
                         <h3>YouTube Graphics</h3>
                         <p>Banners, thumbnails, channel art that increase views and subscribers</p>
@@ -1836,7 +954,7 @@
     <div id="logos" class="page">
         <section class="portfolio-page">
             <div class="portfolio-container">
-                <div class="section-header fade-in">
+                <div class="section-header">
                     <h2>Logo Design Portfolio</h2>
                     <p>Professional gaming logos, clan emblems, and brand identity designs</p>
                 </div>
@@ -1855,7 +973,7 @@
     <div id="posts" class="page">
         <section class="portfolio-page">
             <div class="portfolio-container">
-                <div class="section-header fade-in">
+                <div class="section-header">
                     <h2>Social Media Posts</h2>
                     <p>Instagram, Facebook, TikTok and social media graphics portfolio</p>
                 </div>
@@ -1874,7 +992,7 @@
     <div id="youtube" class="page">
         <section class="portfolio-page">
             <div class="portfolio-container">
-                <div class="section-header fade-in">
+                <div class="section-header">
                     <h2>YouTube Graphics</h2>
                     <p>YouTube banners, thumbnails, channel art and video graphics portfolio</p>
                 </div>
@@ -1893,12 +1011,10 @@
     <div id="contact" class="page">
         <section class="contact">
             <div class="contact-container">
-                <div class="fade-in">
-                    <h2>Ready to Order?</h2>
-                    <p>Get professional gaming graphics that will take your content to the next level!</p>
-                </div>
+                <h2>Ready to Order?</h2>
+                <p>Get professional gaming graphics that will take your content to the next level!</p>
                 
-                <div class="contact-methods fade-in">
+                <div class="contact-methods">
                     <div class="contact-method">
                         <h3>WhatsApp</h3>
                         <p>0773116253</p>
@@ -1951,7 +1067,7 @@
                     <label for="workImage">Image:</label>
                     <input type="file" id="workImage" name="image" accept="image/*" required>
                     <div id="imagePreview" style="margin-top: 5px; display: none; text-align: center;">
-                        <img id="previewImg" style="max-width: 120px; max-height: 90px; border-radius: 6px; border: 2px solid rgba(255, 107, 0, 0.3);">
+                        <img id="previewImg" style="max-width: 120px; max-height: 90px; border-radius: 6px;">
                     </div>
                 </div>
                 
@@ -1970,24 +1086,38 @@
 
     <!-- Success Message -->
     <div id="successMessage" class="success-message" style="display: none;">
-        Work added successfully and saved!
+        Item added successfully! (Session only)
     </div>
 
-    <!-- Storage Status -->
-    <div id="storageStatus" class="storage-status" style="display: none;">
-        <h4>🎮 NETHUWA EDITZ - SAVED ITEMS</h4>
-        <p>✅ Items saved in browser memory</p>
-        <p>📊 <span class="highlight" id="savedCount">0</span> saved items loaded</p>
-        <p>🔄 Data persists after refresh</p>
-        <p style="margin-top: 10px; font-size: 0.7rem;">💡 Use browser console for advanced commands</p>
+    <!-- Storage Info -->
+    <div class="storage-info" id="storageInfo">
+        <h4>📊 Storage Status</h4>
+        <p>Mode: <span class="status">Session Memory</span></p>
+        <p>Items: <span id="itemCount">0</span> added this session</p>
+        <p class="warning">⚠️ Items lost on refresh - see GitHub info!</p>
+        <p style="font-size: 0.7rem; margin-top: 5px;">For permanent storage, use GitHub version</p>
+    </div>
+
+    <!-- GitHub Info Panel -->
+    <div class="github-info" id="githubInfo">
+        <h4>🚀 GitHub Pages Version</h4>
+        <p><strong>For REAL persistent storage:</strong></p>
+        <p>1. Copy this HTML code</p>
+        <p>2. Replace your index.html file</p>
+        <p>3. Commit to GitHub repository</p>
+        <p>4. Items will save permanently!</p>
+        <p style="margin-top: 8px;"><strong>Current limitations:</strong></p>
+        <p>• Claude.ai artifacts = session only</p>
+        <p>• GitHub Pages = real localStorage</p>
+        <button onclick="copyCodeToClipboard()" style="background: #00ff41; color: #000; border: none; padding: 5px 10px; border-radius: 5px; font-weight: bold; margin-top: 8px; cursor: pointer;">Copy HTML Code</button>
     </div>
 
     <script>
         // =======================================
-        // NETHUWA EDITZ - COMPLETE PORTFOLIO DATA WITH PERSISTENT STORAGE
+        // NETHUWA EDITZ - IN-MEMORY STORAGE VERSION
         // =======================================
 
-        // Original portfolio data (built into the website)
+        // Portfolio data with original items
         const originalPortfolioData = {
             logo: [
                 {
@@ -2069,112 +1199,20 @@
             ]
         };
 
-        // Working portfolio data (includes original + user-added items)
+        // Working portfolio data (includes user-added items in memory)
         let portfolioData = {
             logo: [...originalPortfolioData.logo],
             post: [...originalPortfolioData.post],
             youtube: [...originalPortfolioData.youtube]
         };
 
-        // =======================================
-        // PERSISTENT STORAGE SYSTEM
-        // =======================================
-
-        const STORAGE_KEY = 'nethuwa_editz_portfolio_v2';
-
-        // Save data to localStorage
-        function saveToStorage() {
-            try {
-                const userAddedItems = {
-                    logo: portfolioData.logo.filter(item => !item.isOriginal),
-                    post: portfolioData.post.filter(item => !item.isOriginal),
-                    youtube: portfolioData.youtube.filter(item => !item.isOriginal)
-                };
-                
-                const dataToSave = {
-                    items: userAddedItems,
-                    timestamp: new Date().toISOString(),
-                    version: '2.0'
-                };
-                
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
-                console.log('✅ Data saved to localStorage successfully');
-                
-                updateStorageStatus();
-                return true;
-            } catch (error) {
-                console.error('❌ Failed to save to localStorage:', error);
-                return false;
-            }
-        }
-
-        // Load data from localStorage
-        function loadFromStorage() {
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (!saved) {
-                    console.log('📝 No saved data found - using original portfolio only');
-                    return false;
-                }
-                
-                const data = JSON.parse(saved);
-                
-                if (data && data.items) {
-                    // Reset to original data first
-                    portfolioData = {
-                        logo: [...originalPortfolioData.logo],
-                        post: [...originalPortfolioData.post],
-                        youtube: [...originalPortfolioData.youtube]
-                    };
-                    
-                    // Add saved user items
-                    Object.keys(data.items).forEach(category => {
-                        if (portfolioData[category] && Array.isArray(data.items[category])) {
-                            portfolioData[category].push(...data.items[category]);
-                        }
-                    });
-                    
-                    const totalSaved = Object.values(data.items).reduce((sum, arr) => sum + arr.length, 0);
-                    console.log(`✅ Loaded ${totalSaved} saved items from localStorage`);
-                    console.log('📅 Data saved on:', data.timestamp);
-                    
-                    updateStorageStatus();
-                    return true;
-                }
-            } catch (error) {
-                console.error('❌ Failed to load from localStorage:', error);
-            }
-            return false;
-        }
-
-        // Update storage status display
-        function updateStorageStatus() {
-            const savedCount = portfolioData.logo.filter(item => !item.isOriginal).length +
-                             portfolioData.post.filter(item => !item.isOriginal).length +
-                             portfolioData.youtube.filter(item => !item.isOriginal).length;
-            
-            const statusDiv = document.getElementById('storageStatus');
-            const countSpan = document.getElementById('savedCount');
-            
-            if (countSpan) {
-                countSpan.textContent = savedCount;
-            }
-            
-            if (statusDiv && savedCount > 0) {
-                statusDiv.style.display = 'block';
-                setTimeout(() => {
-                    statusDiv.style.display = 'none';
-                }, 8000);
-            }
-        }
-
-        // =======================================
-        // PORTFOLIO MANAGEMENT FUNCTIONS
-        // =======================================
-
         let currentUploadCategory = '';
+        let sessionItemCount = 0;
 
-        // Show specific page
+        // =======================================
+        // PORTFOLIO FUNCTIONS
+        // =======================================
+
         function showPage(pageId) {
             console.log('🔄 Navigating to page:', pageId);
             
@@ -2189,7 +1227,6 @@
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => link.classList.remove('active'));
 
-            // Find and activate the corresponding nav link
             const activeLink = Array.from(navLinks).find(link => 
                 link.getAttribute('onclick') && link.getAttribute('onclick').includes(pageId)
             );
@@ -2200,18 +1237,12 @@
             // Load portfolio items for the specific category
             if (['logos', 'posts', 'youtube'].includes(pageId)) {
                 const category = pageId === 'logos' ? 'logo' : (pageId === 'posts' ? 'post' : 'youtube');
-                console.log(`📂 Loading ${category} items for page ${pageId}`);
                 displayPortfolioItems(category);
             }
 
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Trigger animations for visible elements
-            setTimeout(() => triggerAnimations(), 100);
         }
 
-        // Display portfolio items for a category
         function displayPortfolioItems(category) {
             const gridElement = document.getElementById(category === 'logo' ? 'logoGrid' : (category === 'post' ? 'postsGrid' : 'youtubeGrid'));
             
@@ -2236,10 +1267,9 @@
             console.log(`📊 Displayed ${portfolioData[category].length} ${category} items`);
         }
 
-        // Create portfolio item HTML element
         function createPortfolioItemElement(item, category, index) {
             const portfolioItem = document.createElement('div');
-            portfolioItem.className = 'portfolio-item fade-in visible';
+            portfolioItem.className = 'portfolio-item';
             
             const themeClass = category === 'logo' ? 'logo-theme' : (category === 'post' ? 'post-theme' : 'youtube-theme');
             
@@ -2274,7 +1304,6 @@
             return portfolioItem;
         }
 
-        // Delete portfolio item
         function deletePortfolioItem(category, index) {
             const item = portfolioData[category][index];
             
@@ -2283,20 +1312,19 @@
                 return;
             }
             
-            if (confirm(`🗑️ Are you sure you want to delete "${item.title}"?\n\nThis action cannot be undone.`)) {
+            if (confirm(`🗑️ Are you sure you want to delete "${item.title}"?`)) {
                 portfolioData[category].splice(index, 1);
-                saveToStorage();
+                sessionItemCount--;
+                updateStorageInfo();
                 displayPortfolioItems(category);
-                showSuccessMessage('🗑️ Item deleted successfully!');
-                console.log('🗑️ Deleted item:', item.title);
+                showSuccessMessage('🗑️ Item deleted from session!');
             }
         }
 
         // =======================================
-        // MODAL AND UPLOAD FUNCTIONS
+        // MODAL FUNCTIONS
         // =======================================
 
-        // Open upload modal
         function openUploadModal(category) {
             currentUploadCategory = category;
             const categoryNames = {
@@ -2311,170 +1339,44 @@
             document.getElementById('imagePreview').style.display = 'none';
         }
 
-        // Close upload modal
         function closeUploadModal() {
             document.getElementById('uploadModal').style.display = 'none';
             document.getElementById('uploadForm').reset();
             document.getElementById('imagePreview').style.display = 'none';
         }
 
-        // Show success message
         function showSuccessMessage(message) {
             const messageDiv = document.getElementById('successMessage');
             messageDiv.textContent = message;
             messageDiv.style.display = 'block';
+            messageDiv.style.animation = 'slideInRight 0.4s ease-out';
             
             setTimeout(() => {
                 messageDiv.style.display = 'none';
             }, 4000);
         }
 
-        // =======================================
-        // UTILITY FUNCTIONS
-        // =======================================
-
-        // Clear all saved items
-        function clearAllSavedItems() {
-            if (confirm('🗑️ Are you sure you want to clear ALL saved items?\n\nThis will remove all items you added but keep the original portfolio.\n\n⚠️ THIS CANNOT BE UNDONE!')) {
-                try {
-                    localStorage.removeItem(STORAGE_KEY);
-                    
-                    // Reset to original data only
-                    portfolioData = {
-                        logo: [...originalPortfolioData.logo],
-                        post: [...originalPortfolioData.post],
-                        youtube: [...originalPortfolioData.youtube]
-                    };
-                    
-                    // Refresh all displays
-                    displayPortfolioItems('logo');
-                    displayPortfolioItems('post');
-                    displayPortfolioItems('youtube');
-                    
-                    showSuccessMessage('🗑️ All saved items cleared! Original portfolio restored.');
-                    updateStorageStatus();
-                    console.log('🗑️ All saved items cleared - portfolio reset to original');
-                } catch (error) {
-                    console.error('❌ Error clearing saved items:', error);
-                    alert('❌ Error clearing saved items. Check console for details.');
-                }
+        function updateStorageInfo() {
+            const itemCountSpan = document.getElementById('itemCount');
+            if (itemCountSpan) {
+                itemCountSpan.textContent = sessionItemCount;
             }
         }
 
-        // Export portfolio as JSON
-        function exportPortfolioData() {
-            try {
-                const exportData = {
-                    originalItems: originalPortfolioData,
-                    userAddedItems: {
-                        logo: portfolioData.logo.filter(item => !item.isOriginal),
-                        post: portfolioData.post.filter(item => !item.isOriginal),
-                        youtube: portfolioData.youtube.filter(item => !item.isOriginal)
-                    },
-                    allItems: portfolioData,
-                    exportedOn: new Date().toISOString(),
-                    websiteUrl: 'https://nethuwa22.github.io/NETHUWA-EDITZ-22/',
-                    version: '2.0'
-                };
-                
-                const dataStr = JSON.stringify(exportData, null, 2);
-                const dataBlob = new Blob([dataStr], { type: 'application/json' });
-                const url = URL.createObjectURL(dataBlob);
-                
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `nethuwa_editz_portfolio_backup_${new Date().toISOString().split('T')[0]}.json`;
-                link.click();
-                
-                URL.revokeObjectURL(url);
-                showSuccessMessage('💾 Portfolio backup downloaded successfully!');
-                console.log('💾 Portfolio data exported successfully');
-            } catch (error) {
-                console.error('❌ Error exporting portfolio:', error);
-                alert('❌ Error exporting portfolio. Check console for details.');
-            }
-        }
-
-        // Get storage statistics
-        function getStorageStats() {
-            const stats = {
-                original: {
-                    logo: originalPortfolioData.logo.length,
-                    post: originalPortfolioData.post.length,
-                    youtube: originalPortfolioData.youtube.length
-                },
-                userAdded: {
-                    logo: portfolioData.logo.filter(item => !item.isOriginal).length,
-                    post: portfolioData.post.filter(item => !item.isOriginal).length,
-                    youtube: portfolioData.youtube.filter(item => !item.isOriginal).length
-                },
-                total: {
-                    logo: portfolioData.logo.length,
-                    post: portfolioData.post.length,
-                    youtube: portfolioData.youtube.length
-                }
-            };
-            
-            console.log('📊 NETHUWA EDITZ Portfolio Statistics:');
-            console.table(stats);
-            return stats;
-        }
-
-        // Trigger scroll animations
-        function triggerAnimations() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.fade-in').forEach(el => {
-                observer.observe(el);
+        function copyCodeToClipboard() {
+            const htmlContent = document.documentElement.outerHTML;
+            navigator.clipboard.writeText(htmlContent).then(() => {
+                showSuccessMessage('✅ HTML code copied to clipboard!');
+                console.log('📋 Full HTML code copied to clipboard');
+            }).catch(err => {
+                console.error('❌ Failed to copy code:', err);
+                alert('❌ Failed to copy code. Check browser permissions.');
             });
         }
 
-        // Create floating particles effect
-        function createFloatingParticles() {
-            const hero = document.querySelector('.hero');
-            
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = Math.random() * 4 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.background = Math.random() > 0.5 ? 'rgba(255, 107, 0, 0.3)' : 'rgba(0, 255, 65, 0.3)';
-                particle.style.borderRadius = '50%';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animation = `particleFloat ${Math.random() * 10 + 10}s ease-in-out infinite`;
-                particle.style.animationDelay = Math.random() * 5 + 's';
-                particle.style.pointerEvents = 'none';
-                particle.style.zIndex = '1';
-                
-                hero.appendChild(particle);
-            }
-        }
-
         // =======================================
-        // EVENT LISTENERS AND INITIALIZATION
+        // EVENT LISTENERS
         // =======================================
-
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.95))';
-            } else {
-                navbar.style.background = 'linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9))';
-            }
-        });
 
         // Close modal when clicking outside
         window.onclick = function(event) {
@@ -2484,35 +1386,40 @@
             }
         }
 
-        // =======================================
-        // INITIALIZE WEBSITE
-        // =======================================
-
+        // Initialize website
         document.addEventListener('DOMContentLoaded', function() {
             console.log(`
-🎮 NETHUWA EDITZ WEBSITE LOADED - PERSISTENT STORAGE VERSION v2.0
+🎮 NETHUWA EDITZ - SESSION MEMORY VERSION
 
-✅ Original portfolio items: ${originalPortfolioData.logo.length + originalPortfolioData.post.length + originalPortfolioData.youtube.length} items
-✅ Real image upload functionality
-✅ Persistent localStorage storage
-✅ Auto-save on add/delete
-✅ Data survives browser refresh
-✅ Delete protection for original items
+⚠️  IMPORTANT: Items added here are stored in session memory only!
+📝 They will be lost when you refresh the page.
 
-🔄 Loading saved data...
+🚀 For PERMANENT storage:
+1. Copy this HTML code to your GitHub repository
+2. Replace your index.html file 
+3. GitHub Pages will have real localStorage support
+
+Current status:
+✅ Original portfolio: ${originalPortfolioData.logo.length + originalPortfolioData.post.length + originalPortfolioData.youtube.length} items
+✅ Add/delete functionality working
+⚠️  Session-only storage (lost on refresh)
+
+Ready to test! Add items to see the functionality work.
             `);
             
-            // Load saved items from localStorage
-            const savedItemsLoaded = loadFromStorage();
-            
-            // Initialize animations and effects
-            triggerAnimations();
-            createFloatingParticles();
-            
-            // Load portfolio items by default (logos page)
+            // Load portfolio items
             displayPortfolioItems('logo');
+            updateStorageInfo();
             
-            // Setup image preview functionality
+            // Show GitHub info after 3 seconds
+            setTimeout(() => {
+                document.getElementById('githubInfo').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('githubInfo').style.display = 'none';
+                }, 15000); // Hide after 15 seconds
+            }, 3000);
+            
+            // Setup image preview
             const imageInput = document.getElementById('workImage');
             if (imageInput) {
                 imageInput.addEventListener('change', function(e) {
@@ -2530,7 +1437,7 @@
                 });
             }
 
-            // Setup upload form functionality
+            // Setup upload form
             const uploadForm = document.getElementById('uploadForm');
             if (uploadForm) {
                 uploadForm.addEventListener('submit', function(e) {
@@ -2549,13 +1456,11 @@
                     
                     console.log('📤 Processing new item upload...');
                     
-                    // Create image element to resize
                     const img = new Image();
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
                     
                     img.onload = function() {
-                        // Set canvas size to portfolio image dimensions
                         canvas.width = 400;
                         canvas.height = 350;
                         
@@ -2564,7 +1469,6 @@
                         
                         let drawWidth, drawHeight, drawX, drawY;
 
-                        // Fill the canvas with a background color
                         ctx.fillStyle = '#2d3748'; 
                         ctx.fillRect(0, 0, canvas.width, canvas.height);
                         
@@ -2580,10 +1484,7 @@
                             drawX = (canvas.width - drawWidth) / 2;
                         }
                         
-                        // Draw the correctly scaled image
                         ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
-                        
-                        // Convert canvas to base64
                         const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
                         
                         const newItem = {
@@ -2596,28 +1497,20 @@
                             isOriginal: false
                         };
                         
-                        // Add to portfolio data
+                        // Add to session memory
                         portfolioData[currentUploadCategory].push(newItem);
+                        sessionItemCount++;
                         
-                        // Save to localStorage
-                        const saved = saveToStorage();
-                        
-                        // Display updated items
+                        // Update display
+                        updateStorageInfo();
                         displayPortfolioItems(currentUploadCategory);
                         
-                        // Close modal and show success
                         closeUploadModal();
+                        showSuccessMessage('✅ Item added to session! (Lost on refresh)');
                         
-                        if (saved) {
-                            showSuccessMessage('✅ Item added and saved permanently!');
-                            console.log('✅ Successfully added and saved new item:', newItem.title);
-                        } else {
-                            showSuccessMessage('⚠️ Item added but save failed - check console');
-                            console.error('⚠️ Item added to display but failed to save to localStorage');
-                        }
+                        console.log('✅ Item added to session memory:', newItem.title);
                     };
                     
-                    // Load the uploaded image
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         img.src = e.target.result;
@@ -2625,57 +1518,7 @@
                     reader.readAsDataURL(imageFile);
                 });
             }
-            
-            // Show final status
-            const totalItems = portfolioData.logo.length + portfolioData.post.length + portfolioData.youtube.length;
-            const savedItems = portfolioData.logo.filter(item => !item.isOriginal).length +
-                             portfolioData.post.filter(item => !item.isOriginal).length +
-                             portfolioData.youtube.filter(item => !item.isOriginal).length;
-            
-            console.log(`
-🚀 WEBSITE READY!
-
-📊 Portfolio Status:
-- Total items: ${totalItems}
-- Original items: ${totalItems - savedItems}
-- Saved items: ${savedItems}
-- Data loaded: ${savedItemsLoaded ? '✅' : '📝 No saved data'}
-
-🎯 FEATURES ACTIVE:
-✅ Add new items with real image upload
-✅ Automatic save to localStorage
-✅ Delete user-added items (× button on hover)
-✅ Data persists after browser refresh
-✅ Original items are protected from deletion
-
-🔧 CONSOLE COMMANDS AVAILABLE:
-- getStorageStats() - View detailed statistics  
-- clearAllSavedItems() - Clear all saved items
-- exportPortfolioData() - Download backup file
-- loadFromStorage() - Manually reload saved data
-
-📞 Need help? Contact: 0773116253
-🌐 Live site: https://nethuwa22.github.io/NETHUWA-EDITZ-22/
-
-Ready to build your portfolio! 🎨✨
-            `);
-            
-            // Show storage status if there are saved items
-            if (savedItems > 0) {
-                setTimeout(() => updateStorageStatus(), 2000);
-            }
         });
-
-        // =======================================
-        // GLOBAL FUNCTIONS (for console use)
-        // =======================================
-
-        // Make these functions available globally for console access
-        window.getStorageStats = getStorageStats;
-        window.clearAllSavedItems = clearAllSavedItems;
-        window.exportPortfolioData = exportPortfolioData;
-        window.loadFromStorage = loadFromStorage;
-        window.saveToStorage = saveToStorage;
     </script>
 </body>
 </html>
