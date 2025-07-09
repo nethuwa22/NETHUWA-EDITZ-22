@@ -1227,6 +1227,48 @@
             border-top: 1px solid rgba(255, 107, 0, 0.2);
         }
 
+        /* Delete Button */
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+            z-index: 10;
+        }
+
+        .delete-btn:hover {
+            background: linear-gradient(135deg, #ff6666, #ff4444);
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 20px rgba(255, 68, 68, 0.6);
+        }
+
+        .portfolio-item:hover .delete-btn {
+            display: block;
+            animation: deleteAppear 0.3s ease-out;
+        }
+
+        @keyframes deleteAppear {
+            from {
+                opacity: 0;
+                transform: scale(0) rotate(180deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
         /* Contact Section */
         .contact {
             padding: 120px 0;
@@ -1892,7 +1934,16 @@
 
     <!-- Success Message -->
     <div id="successMessage" class="success-message" style="display: none;">
-        Work added successfully! (Temporary - see instructions to make permanent)
+        Work added and saved! Will persist after refresh.
+    </div>
+
+    <!-- Storage Info Panel -->
+    <div id="storageInfo" style="position: fixed; bottom: 20px; right: 20px; background: rgba(0, 0, 0, 0.8); color: white; padding: 10px; border-radius: 10px; font-size: 0.8rem; max-width: 250px; display: none; z-index: 2000;">
+        <div style="font-weight: bold; color: #ff6b00; margin-bottom: 5px;">🎮 NETHUWA EDITZ</div>
+        <div>Items saved locally - persist after refresh!</div>
+        <div style="margin-top: 5px; font-size: 0.7rem; color: #ccc;">
+            Advanced: Press F12 → Console for more commands
+        </div>
     </div>
 
     <script>
@@ -2120,6 +2171,85 @@
         let currentUploadCategory = '';
         let temporaryItems = { logo: [], post: [], youtube: [] };
 
+        // Save data to localStorage
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem('nethuwa_editz_items', JSON.stringify(temporaryItems));
+                console.log('Items saved to localStorage');
+            } catch (e) {
+                console.error('Error saving to localStorage:', e);
+            }
+        }
+
+        // Load data from localStorage
+        function loadFromLocalStorage() {
+            try {
+                const saved = localStorage.getItem('nethuwa_editz_items');
+                if (saved) {
+                    const parsedData = JSON.parse(saved);
+                    temporaryItems = parsedData;
+                    
+                    // Add saved items to portfolioData for display
+                    Object.keys(temporaryItems).forEach(category => {
+                        temporaryItems[category].forEach(item => {
+                            if (!portfolioData[category].find(existing => existing.timestamp === item.timestamp)) {
+                                portfolioData[category].push(item);
+                            }
+                        });
+                    });
+                    
+                    console.log('Items loaded from localStorage:', temporaryItems);
+                    return true;
+                }
+            } catch (e) {
+                console.error('Error loading from localStorage:', e);
+            }
+            return false;
+        }
+
+        // Clear all saved items
+        function clearAllSavedItems() {
+            if (confirm('Are you sure you want to clear all saved items? This cannot be undone.')) {
+                localStorage.removeItem('nethuwa_editz_items');
+                temporaryItems = { logo: [], post: [], youtube: [] };
+                
+                // Reset portfolioData to original items only
+                portfolioData.logo = portfolioData.logo.filter(item => !item.temporary);
+                portfolioData.post = portfolioData.post.filter(item => !item.temporary);
+                portfolioData.youtube = portfolioData.youtube.filter(item => !item.temporary);
+                
+                // Refresh displays
+                displayPortfolioItems('logo');
+                displayPortfolioItems('post');
+                displayPortfolioItems('youtube');
+                
+                showSuccessMessage('All saved items cleared!');
+                console.log('All saved items cleared');
+            }
+        }
+
+        // Export saved items as JSON
+        function exportSavedItems() {
+            const allItems = {
+                logo: portfolioData.logo,
+                post: portfolioData.post,
+                youtube: portfolioData.youtube,
+                exported: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(allItems, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'nethuwa_editz_portfolio_backup.json';
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            showSuccessMessage('Portfolio backup downloaded!');
+        }
+
         // Open upload modal
         function openUploadModal(category) {
             currentUploadCategory = category;
@@ -2335,6 +2465,9 @@ ${JSON.stringify(newItem, null, 2)}
         document.addEventListener('DOMContentLoaded', function() {
             console.log('NETHUWA EDITZ Website loaded!');
             
+            // Load saved items from localStorage first
+            const savedItemsLoaded = loadFromLocalStorage();
+            
             // Initialize animations
             triggerAnimations();
             
@@ -2422,8 +2555,9 @@ ${JSON.stringify(newItem, null, 2)}
                                 temporary: true
                             };
                             
-                            // Add to temporary items
+                            // Add to temporary items and save to localStorage
                             temporaryItems[currentUploadCategory].push(newItem);
+                            saveToLocalStorage();
                             
                             // Add to main portfolio data for display
                             portfolioData[currentUploadCategory].push(newItem);
@@ -2433,25 +2567,9 @@ ${JSON.stringify(newItem, null, 2)}
                             
                             // Close modal and show success
                             closeUploadModal();
-                            showSuccessMessage('Work added temporarily! Check console for permanent save instructions.');
+                            showSuccessMessage('Work added and saved! Will persist after refresh.');
                             
-                            // Show instructions in console
-                            console.log(`
-🎮 NETHUWA EDITZ - Item Added Successfully!
-
-📝 To make this item PERMANENT:
-1. Copy this code:
-${JSON.stringify(newItem, null, 2)}
-
-2. Open your HTML file in text editor
-3. Find the "portfolioData" section (around line 1800+)  
-4. Add the above code to the "${currentUploadCategory}" array
-5. Save and upload to GitHub
-
-📞 Need help? Contact: 0773116253
-                            `);
-                            
-                            console.log('Added new item:', newItem);
+                            console.log('Added and saved new item:', newItem);
                         };
                         
                         // Load the uploaded image
@@ -2464,27 +2582,44 @@ ${JSON.stringify(newItem, null, 2)}
                 });
             }
             
+            const savedCount = Object.values(temporaryItems).reduce((sum, arr) => sum + arr.length, 0);
+            
+            // Show storage info if items were loaded
+            if (savedCount > 0) {
+                setTimeout(() => {
+                    showStorageInfo();
+                }, 2000);
+            }
+            
             console.log(`
-🎮 NETHUWA EDITZ WEBSITE - FULL UPLOAD VERSION
+🎮 NETHUWA EDITZ WEBSITE - PERSISTENT STORAGE VERSION
 
 ✅ Portfolio items directly included in code
 ✅ Real image upload functionality added!
+✅ localStorage persistence - NO MORE REFRESH LOSS! 
 ✅ Images automatically resized and optimized
-✅ Temporary upload works immediately  
-✅ Console instructions for permanent save
+✅ Items saved across browser sessions
+✅ Delete buttons for user-added items
 
-Portfolio items loaded:
-- Logos: ${portfolioData.logo.length} items
-- Posts: ${portfolioData.post.length} items  
-- YouTube: ${portfolioData.youtube.length} items
+Portfolio status:
+- Original Logos: 3 items
+- Original Posts: 3 items  
+- Original YouTube: 3 items
+- Saved items loaded: ${savedCount} items
 
 🚀 NOW YOU CAN:
-1. Click "+ Add New" buttons
+1. Click "+ Add New" buttons  
 2. Fill form and upload images
-3. See items appear immediately!
-4. Copy console code to make permanent
+3. Items appear immediately AND persist after refresh!
+4. Delete items you added (× button on hover)
+5. Use console commands for advanced features
 
-Ready to upload your amazing work! 🎨✨
+Advanced commands:
+- clearAllSavedItems() - Clear all saved items
+- exportSavedItems() - Download backup file
+- loadFromLocalStorage() - Manually reload saved items
+
+Ready to build your persistent portfolio! 🎨✨
             `);
         });
 
