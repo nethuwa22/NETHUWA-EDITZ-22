@@ -1010,6 +1010,161 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a2332, #0f1821);
+            margin: 3% auto;
+            padding: 3rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            border: 2px solid #ff6b00;
+            box-shadow: 0 20px 60px rgba(255, 107, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            color: #ff6b00;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ff6b00, #ffdd00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 107, 0, 0.3);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b00;
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group input[type="file"] {
+            padding: 0.8rem;
+            background: rgba(255, 107, 0, 0.1);
+            border: 2px dashed rgba(255, 107, 0, 0.5);
+            cursor: pointer;
+        }
+
+        .form-group input[type="file"]:hover {
+            border-color: #ff6b00;
+            background: rgba(255, 107, 0, 0.2);
+        }
+
+        .close {
+            color: #ff6b00;
+            float: right;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: -1.5rem;
+            margin-right: -1rem;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: #ffdd00;
+            transform: scale(1.1) rotate(90deg);
+            text-shadow: 0 0 10px rgba(255, 221, 0, 0.8);
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            font-weight: 900;
+            z-index: 3000;
+            animation: slideInRight 0.4s ease-out;
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.4);
+            max-width: 350px;
+            text-align: center;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Form Buttons */
+        .modal-content .btn-primary,
+        .modal-content .btn-secondary {
+            margin: 0.5rem;
+            display: inline-block;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Arial Black', Arial, sans-serif;
+        }
+
         /* Contact Section */
         .contact {
             padding: 120px 0;
@@ -1544,10 +1699,10 @@
                 </div>
                 
                 <div class="portfolio-grid" id="logoGrid">
-                    <div class="add-work-btn" onclick="showAddInstructions('logo')">
+                    <div class="add-work-btn" onclick="openUploadModal('logo')">
                         <div class="icon">+</div>
                         <h3>Add New Logo</h3>
-                        <p>Click to see how to add your logo designs</p>
+                        <p>Click to upload your logo designs</p>
                     </div>
                     <!-- Portfolio items will be loaded here -->
                 </div>
@@ -1564,10 +1719,10 @@
                 </div>
                 
                 <div class="portfolio-grid" id="postsGrid">
-                    <div class="add-work-btn" onclick="showAddInstructions('post')">
+                    <div class="add-work-btn" onclick="openUploadModal('post')">
                         <div class="icon">+</div>
                         <h3>Add New Post</h3>
-                        <p>Click to see how to add your social media designs</p>
+                        <p>Click to upload your social media designs</p>
                     </div>
                     <!-- Portfolio items will be loaded here -->
                 </div>
@@ -1584,10 +1739,10 @@
                 </div>
                 
                 <div class="portfolio-grid" id="youtubeGrid">
-                    <div class="add-work-btn" onclick="showAddInstructions('youtube')">
+                    <div class="add-work-btn" onclick="openUploadModal('youtube')">
                         <div class="icon">+</div>
                         <h3>Add YouTube Work</h3>
-                        <p>Click to see how to add your YouTube graphics</p>
+                        <p>Click to upload your YouTube graphics</p>
                     </div>
                     <!-- Portfolio items will be loaded here -->
                 </div>
@@ -1628,6 +1783,53 @@
             <p>&copy; 2025 NETHUWA EDITZ STUDIO. Professional Gaming Graphics Designer • Sri Lanka</p>
         </div>
     </footer>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeUploadModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Work</h2>
+            </div>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label for="workTitle">Title:</label>
+                    <input type="text" id="workTitle" name="title" placeholder="Enter work title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workDescription">Description:</label>
+                    <textarea id="workDescription" name="description" rows="3" placeholder="Enter work description" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workPrice">Price (LKR):</label>
+                    <input type="number" id="workPrice" name="price" placeholder="Enter price" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workImage">Image:</label>
+                    <input type="file" id="workImage" name="image" accept="image/*" required>
+                    <div id="imagePreview" style="margin-top: 10px; display: none;">
+                        <img id="previewImg" style="max-width: 200px; max-height: 200px; border-radius: 10px;">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workTags">Tags (comma separated):</label>
+                    <input type="text" id="workTags" name="tags" placeholder="e.g., Gaming, Logo, Professional" required>
+                </div>
+                
+                <button type="submit" class="btn-primary">Add Work</button>
+                <button type="button" onclick="closeUploadModal()" class="btn-secondary">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message" style="display: none;">
+        Work added successfully! (Temporary - see instructions to make permanent)
+    </div>
 
     <script>
         // Portfolio data - Directly included in code for GitHub Pages
@@ -1851,46 +2053,172 @@
             }
         }
 
-        // Show instructions for adding new work
-        function showAddInstructions(category) {
+        let currentUploadCategory = '';
+        let temporaryItems = { logo: [], post: [], youtube: [] };
+
+        // Open upload modal
+        function openUploadModal(category) {
+            currentUploadCategory = category;
             const categoryNames = {
-                'logo': 'Logo Designs',
-                'post': 'Social Media Posts', 
-                'youtube': 'YouTube Graphics'
+                'logo': 'Logo Design',
+                'post': 'Social Media Post', 
+                'youtube': 'YouTube Graphic'
             };
             
-            const instructions = `
-🎨 How to Add New ${categoryNames[category]}:
+            document.getElementById('modalTitle').textContent = `Add New ${categoryNames[category]}`;
+            document.getElementById('uploadModal').style.display = 'block';
+            document.getElementById('uploadForm').reset();
+            document.getElementById('imagePreview').style.display = 'none';
+        }
 
-📝 STEP 1: Edit the Code
-- Open your HTML file in a text editor
-- Find the "portfolioData" section (around line 1800+)
-- Add your new item to the "${category}" array
+        // Close upload modal
+        function closeUploadModal() {
+            document.getElementById('uploadModal').style.display = 'none';
+            document.getElementById('uploadForm').reset();
+            document.getElementById('imagePreview').style.display = 'none';
+        }
 
-📋 STEP 2: Item Format
-{
-    title: "Your Design Title",
-    description: "Description of your work",
-    price: 500,
-    tags: ["Tag1", "Tag2", "Tag3"],
-    image: "your-image-url-here"
-}
-
-🖼️ STEP 3: Image Options
-- Upload to imgur.com and use direct link
-- Use base64 data URL (for small images)
-- Host on your own server
-
-💾 STEP 4: Save & Upload
-- Save the HTML file
-- Upload to your GitHub repository
-- Changes will appear on your website
-
-📞 Need Help?
-Contact NETHUWA EDITZ on WhatsApp: 0773116253
-            `;
+        // Show success message
+        function showSuccessMessage(message) {
+            const messageDiv = document.getElementById('successMessage');
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
             
-            alert(instructions);
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Image preview functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageInput = document.getElementById('workImage');
+            if (imageInput) {
+                imageInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const preview = document.getElementById('imagePreview');
+                            const previewImg = document.getElementById('previewImg');
+                            previewImg.src = e.target.result;
+                            preview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        });
+
+        // Handle form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadForm = document.getElementById('uploadForm');
+            if (uploadForm) {
+                uploadForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const title = document.getElementById('workTitle').value;
+                    const description = document.getElementById('workDescription').value;
+                    const price = document.getElementById('workPrice').value;
+                    const tags = document.getElementById('workTags').value.split(',').map(tag => tag.trim());
+                    const imageFile = document.getElementById('workImage').files[0];
+                    
+                    if (imageFile) {
+                        // Create image element to resize
+                        const img = new Image();
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        
+                        img.onload = function() {
+                            // Set canvas size to portfolio image dimensions
+                            canvas.width = 400;
+                            canvas.height = 350;
+                            
+                            const imageAspect = img.width / img.height;
+                            const canvasAspect = canvas.width / canvas.height;
+                            
+                            let drawWidth, drawHeight, drawX, drawY;
+
+                            // Fill the canvas with a background color
+                            ctx.fillStyle = '#2d3748'; 
+                            ctx.fillRect(0, 0, canvas.width, canvas.height);
+                            
+                            if (imageAspect > canvasAspect) {
+                                drawWidth = canvas.width;
+                                drawHeight = drawWidth / imageAspect;
+                                drawX = 0;
+                                drawY = (canvas.height - drawHeight) / 2;
+                            } else {
+                                drawHeight = canvas.height;
+                                drawWidth = drawHeight * imageAspect;
+                                drawY = 0;
+                                drawX = (canvas.width - drawWidth) / 2;
+                            }
+                            
+                            // Draw the correctly scaled image
+                            ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+                            
+                            // Convert canvas to base64
+                            const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
+                            
+                            const newItem = {
+                                title: title,
+                                description: description,
+                                price: parseFloat(price),
+                                tags: tags,
+                                image: resizedImageData,
+                                timestamp: new Date().toISOString(),
+                                temporary: true
+                            };
+                            
+                            // Add to temporary items
+                            temporaryItems[currentUploadCategory].push(newItem);
+                            
+                            // Add to main portfolio data for display
+                            portfolioData[currentUploadCategory].push(newItem);
+                            
+                            // Display updated items
+                            displayPortfolioItems(currentUploadCategory);
+                            
+                            // Close modal and show success
+                            closeUploadModal();
+                            showSuccessMessage('Work added temporarily! Check console for permanent save instructions.');
+                            
+                            // Show instructions in console
+                            console.log(`
+🎮 NETHUWA EDITZ - Item Added Successfully!
+
+📝 To make this item PERMANENT:
+1. Copy this code:
+${JSON.stringify(newItem, null, 2)}
+
+2. Open your HTML file in text editor
+3. Find the "portfolioData" section (around line 1800+)
+4. Add the above code to the "${currentUploadCategory}" array
+5. Save and upload to GitHub
+
+📞 Need help? Contact: 0773116253
+                            `);
+                            
+                            console.log('Added new item:', newItem);
+                        };
+                        
+                        // Load the uploaded image
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            img.src = e.target.result;
+                        };
+                        reader.readAsDataURL(imageFile);
+                    }
+                });
+            }
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('uploadModal');
+            if (event.target == modal) {
+                closeUploadModal();
+            }
         }
         function createPortfolioParticles(pageId) {
             const portfolioPage = document.querySelector(`#${pageId} .portfolio-page`);
@@ -1952,20 +2280,147 @@ Contact NETHUWA EDITZ on WhatsApp: 0773116253
             // Create floating particles
             createFloatingParticles();
             
-            console.log(`
-🎮 NETHUWA EDITZ WEBSITE - GITHUB PAGES VERSION
+            // Setup image preview functionality
+            const imageInput = document.getElementById('workImage');
+            if (imageInput) {
+                imageInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const preview = document.getElementById('imagePreview');
+                            const previewImg = document.getElementById('previewImg');
+                            previewImg.src = e.target.result;
+                            preview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
 
-✅ Portfolio items now directly included in code
-✅ Will display same for all visitors
-✅ No localStorage dependency
-✅ Ready for GitHub Pages deployment
+            // Setup upload form functionality
+            const uploadForm = document.getElementById('uploadForm');
+            if (uploadForm) {
+                uploadForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const title = document.getElementById('workTitle').value;
+                    const description = document.getElementById('workDescription').value;
+                    const price = document.getElementById('workPrice').value;
+                    const tags = document.getElementById('workTags').value.split(',').map(tag => tag.trim());
+                    const imageFile = document.getElementById('workImage').files[0];
+                    
+                    if (imageFile) {
+                        // Create image element to resize
+                        const img = new Image();
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        
+                        img.onload = function() {
+                            // Set canvas size to portfolio image dimensions
+                            canvas.width = 400;
+                            canvas.height = 350;
+                            
+                            const imageAspect = img.width / img.height;
+                            const canvasAspect = canvas.width / canvas.height;
+                            
+                            let drawWidth, drawHeight, drawX, drawY;
+
+                            // Fill the canvas with a background color
+                            ctx.fillStyle = '#2d3748'; 
+                            ctx.fillRect(0, 0, canvas.width, canvas.height);
+                            
+                            if (imageAspect > canvasAspect) {
+                                drawWidth = canvas.width;
+                                drawHeight = drawWidth / imageAspect;
+                                drawX = 0;
+                                drawY = (canvas.height - drawHeight) / 2;
+                            } else {
+                                drawHeight = canvas.height;
+                                drawWidth = drawHeight * imageAspect;
+                                drawY = 0;
+                                drawX = (canvas.width - drawWidth) / 2;
+                            }
+                            
+                            // Draw the correctly scaled image
+                            ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+                            
+                            // Convert canvas to base64
+                            const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
+                            
+                            const newItem = {
+                                title: title,
+                                description: description,
+                                price: parseFloat(price),
+                                tags: tags,
+                                image: resizedImageData,
+                                timestamp: new Date().toISOString(),
+                                temporary: true
+                            };
+                            
+                            // Add to temporary items
+                            temporaryItems[currentUploadCategory].push(newItem);
+                            
+                            // Add to main portfolio data for display
+                            portfolioData[currentUploadCategory].push(newItem);
+                            
+                            // Display updated items
+                            displayPortfolioItems(currentUploadCategory);
+                            
+                            // Close modal and show success
+                            closeUploadModal();
+                            showSuccessMessage('Work added temporarily! Check console for permanent save instructions.');
+                            
+                            // Show instructions in console
+                            console.log(`
+🎮 NETHUWA EDITZ - Item Added Successfully!
+
+📝 To make this item PERMANENT:
+1. Copy this code:
+${JSON.stringify(newItem, null, 2)}
+
+2. Open your HTML file in text editor
+3. Find the "portfolioData" section (around line 1800+)  
+4. Add the above code to the "${currentUploadCategory}" array
+5. Save and upload to GitHub
+
+📞 Need help? Contact: 0773116253
+                            `);
+                            
+                            console.log('Added new item:', newItem);
+                        };
+                        
+                        // Load the uploaded image
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            img.src = e.target.result;
+                        };
+                        reader.readAsDataURL(imageFile);
+                    }
+                });
+            }
+            
+            console.log(`
+🎮 NETHUWA EDITZ WEBSITE - FULL UPLOAD VERSION
+
+✅ Portfolio items directly included in code
+✅ Real image upload functionality added!
+✅ Images automatically resized and optimized
+✅ Temporary upload works immediately  
+✅ Console instructions for permanent save
 
 Portfolio items loaded:
 - Logos: ${portfolioData.logo.length} items
 - Posts: ${portfolioData.post.length} items  
 - YouTube: ${portfolioData.youtube.length} items
 
-Ready to showcase your amazing work! 🚀
+🚀 NOW YOU CAN:
+1. Click "+ Add New" buttons
+2. Fill form and upload images
+3. See items appear immediately!
+4. Copy console code to make permanent
+
+Ready to upload your amazing work! 🎨✨
             `);
         });
 
