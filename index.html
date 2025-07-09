@@ -1,0 +1,2358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NETHUWA EDITZ - Gaming Design Studio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: #0a0e1a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 2px solid #ff6b00;
+            transition: all 0.3s ease;
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.1), transparent);
+            animation: navbarGlow 4s ease-in-out infinite;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff6b00, #ffdd00);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .logo-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 30px rgba(255, 107, 0, 0.8);
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff6b00, #ffdd00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .logo-text {
+            text-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #ff6b00;
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.3);
+            cursor: pointer;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 255, 65, 0.5);
+        }
+
+        /* Page Container */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Home Page Styles */
+        .hero {
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #1a2332 0%, #0a0e1a 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 0, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 65, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.2) 0%, transparent 70%);
+            animation: backgroundPulse 4s ease-in-out infinite alternate;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,107,0,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            animation: dotsMove 20s linear infinite;
+            opacity: 0.5;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        .hero-content .main-title {
+            background: linear-gradient(135deg, #ff6b00, #ffdd00, #ff6b00);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
+            animation: gradientShift 3s ease-in-out infinite alternate, textGlow 2s ease-in-out infinite alternate;
+            display: block;
+            position: relative;
+        }
+
+        .hero-content .main-title::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+            animation: shimmer 2s infinite;
+            pointer-events: none;
+        }
+
+        .hero-content .sub-title {
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: subtitlePulse 4s ease-in-out infinite;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: #cccccc;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            font-weight: 500;
+            animation: fadeInUp 1s ease-out 0.5s both;
+            position: relative;
+        }
+
+        .hero-content p::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #ff6b00, #00ff41);
+            border-radius: 2px;
+            animation: lineGrow 1s ease-out 1s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b00, #ff4500);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 107, 0, 0.6);
+            background: linear-gradient(135deg, #ff4500, #ff6b00);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            padding: 18px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 255, 65, 0.6);
+            background: linear-gradient(135deg, #00cc33, #00ff41);
+        }
+
+        .btn-secondary:hover::before {
+            left: 100%;
+        }
+
+        /* Gaming Character Visual */
+        .hero-visual {
+            position: relative;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInRight 1s ease-out 0.3s both;
+        }
+
+        .character-display {
+            width: 450px;
+            height: 550px;
+            background: linear-gradient(135deg, #ff6b00, #00ff41, #0066ff, #ff6b00);
+            background-size: 400% 400%;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+            animation: float 4s ease-in-out infinite, gradientRotate 8s ease-in-out infinite;
+            box-shadow: 
+                0 20px 40px rgba(255, 107, 0, 0.3),
+                0 0 60px rgba(0, 255, 65, 0.2),
+                inset 0 0 40px rgba(255, 255, 255, 0.1);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .character-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="hexagon" width="30" height="30" patternUnits="userSpaceOnUse"><polygon points="15,5 25,12 25,23 15,30 5,23 5,12" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="200" height="200" fill="url(%23hexagon)"/></svg>'),
+                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            animation: hexagonMove 6s linear infinite, shimmer 3s ease-in-out infinite;
+        }
+
+        .character-display::after {
+            content: '🎮 NETHUWA EDITZ';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-align: center;
+            color: white;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.5),
+                0 0 40px rgba(0, 255, 65, 0.3);
+            z-index: 2;
+            animation: textFloat 3s ease-in-out infinite alternate;
+        }
+
+        /* Services Preview on Home */
+        .services-preview {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1821 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(255, 107, 0, 0.1) 0%, transparent 50%);
+            animation: serviceGlow 6s ease-in-out infinite alternate;
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 2;
+            animation: headerAppear 1s ease-out both;
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: headerGlow 4s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+
+        .section-header h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ff6b00, #ffdd00, #ff6b00);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite, headerTextGlow 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #ff6b00, #ffdd00);
+            border-radius: 2px;
+            animation: underlineGrow 1s ease-out 0.5s both;
+        }
+
+        .section-header p {
+            font-size: 1.3rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 500;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes headerAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes headerGlow {
+            0% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        @keyframes headerTextGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 40px rgba(255, 107, 0, 0.6), 0 0 60px rgba(255, 221, 0, 0.3);
+            }
+        }
+
+        @keyframes underlineGrow {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100px;
+            }
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 107, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.2s; }
+        .service-card:nth-child(2) { animation-delay: 0.4s; }
+        .service-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: #ff6b00;
+            box-shadow: 
+                0 25px 50px rgba(255, 107, 0, 0.3),
+                0 0 60px rgba(255, 107, 0, 0.2),
+                inset 0 0 30px rgba(255, 107, 0, 0.1);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) scale(1.2);
+        }
+
+        .service-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff6b00, #ffdd00);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 20px rgba(255, 107, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 
+                0 15px 30px rgba(255, 107, 0, 0.4),
+                0 0 40px rgba(255, 221, 0, 0.3);
+        }
+
+        .service-card h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .service-card p {
+            color: #cccccc;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-price {
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        /* Portfolio Page Styles */
+        .portfolio-page {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1a2332 0%, #0a0e1a 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 85%, rgba(255, 107, 0, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 85% 15%, rgba(0, 255, 65, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+            animation: portfolioGlow 8s ease-in-out infinite alternate;
+        }
+
+        .portfolio-page::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="portfolio-pattern" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="1.5" fill="rgba(255,107,0,0.05)"/><circle cx="0" cy="0" r="1" fill="rgba(0,255,65,0.05)"/><circle cx="25" cy="25" r="1" fill="rgba(0,102,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23portfolio-pattern)"/></svg>');
+            animation: patternDrift 25s linear infinite;
+            opacity: 0.6;
+        }
+
+        .portfolio-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            padding: 1rem 0;
+            animation: gridAppear 1s ease-out 0.3s both;
+        }
+
+        .portfolio-item {
+            background: rgba(45, 55, 72, 0.8);
+            border: 2px solid rgba(255, 107, 0, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            position: relative;
+            animation: portfolioItemSlide 0.8s ease-out both;
+            backdrop-filter: blur(15px);
+        }
+
+        .portfolio-item:nth-child(odd) {
+            animation-delay: 0.1s;
+        }
+
+        .portfolio-item:nth-child(even) {
+            animation-delay: 0.3s;
+        }
+
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 107, 0, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: 1;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 
+                0 30px 60px rgba(255, 107, 0, 0.3),
+                0 0 80px rgba(255, 107, 0, 0.2),
+                inset 0 0 40px rgba(255, 107, 0, 0.1);
+            border-color: #ffdd00;
+        }
+
+        .portfolio-item:hover::before {
+            transform: translateX(100%);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 350px;
+            background: #2d3748;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 15px 15px 0 0;
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(0, 255, 65, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+        }
+
+        .portfolio-item:hover .portfolio-image::before {
+            opacity: 1;
+        }
+
+        .portfolio-image.logo-theme {
+            background: linear-gradient(135deg, #ff6b00, #ffdd00);
+            position: relative;
+        }
+
+        .portfolio-image.logo-theme::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            animation: logoShimmer 3s ease-in-out infinite;
+        }
+
+        .portfolio-image.post-theme {
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            animation: postGlow 4s ease-in-out infinite alternate;
+        }
+
+        .portfolio-image.youtube-theme {
+            background: linear-gradient(135deg, #ff0066, #cc0044);
+            position: relative;
+        }
+
+        .portfolio-image.youtube-theme::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            animation: youtubePulse 2s ease-in-out infinite;
+        }
+
+        .image-upload-text {
+            color: white;
+            font-weight: 900;
+            font-size: 1.2rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .portfolio-content {
+            padding: 2rem;
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            position: relative;
+            z-index: 2;
+        }
+
+        .portfolio-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 107, 0, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-content::before {
+            opacity: 1;
+        }
+
+        .portfolio-content h3 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .portfolio-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, #ff6b00, #ffdd00);
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .portfolio-item:hover .portfolio-content h3::after {
+            width: 100%;
+        }
+
+        .portfolio-item:hover .portfolio-content h3 {
+            color: #ffdd00;
+            text-shadow: 0 0 15px rgba(255, 221, 0, 0.4);
+        }
+
+        .portfolio-content p {
+            color: #a0aec0;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-content p {
+            color: #cbd5e0;
+        }
+
+        /* FIXED: Image display improvements - Changed from cover to contain */
+        .portfolio-image img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+            object-position: center !important;
+            border-radius: 15px 15px 0 0 !important;
+            display: block !important;
+            max-width: none !important;
+            max-height: none !important;
+            background: #2d3748 !important;
+        }
+
+        /* Ensure portfolio image container maintains aspect ratio */
+        .portfolio-image {
+            width: 100%;
+            height: 350px;
+            background: #2d3748;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 15px 15px 0 0;
+        }
+
+        /* Fix for small images - scale them properly */
+        .portfolio-image img[src*="data:image"] {
+            min-width: 100% !important;
+            min-height: 100% !important;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #ff6b00, #ff4500);
+            color: #000;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .portfolio-item:hover .tag {
+            background: linear-gradient(135deg, #ffdd00, #ff6b00);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
+        }
+
+        .portfolio-item:hover .tag::before {
+            left: 100%;
+        }
+
+        .portfolio-price {
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 1rem;
+            text-align: center;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-price::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-item:hover .portfolio-price {
+            background: linear-gradient(135deg, #ffdd00, #00ff41);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 255, 65, 0.4);
+        }
+
+        .portfolio-item:hover .portfolio-price::before {
+            transform: translateX(100%);
+        }
+
+        /* Add Work Button */
+        .add-work-btn {
+            background: rgba(45, 55, 72, 0.8);
+            border: 3px dashed rgba(255, 107, 0, 0.5);
+            border-radius: 20px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+            animation: addButtonFloat 4s ease-in-out infinite;
+        }
+
+        .add-work-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            animation: addButtonGlow 3s ease-in-out infinite alternate;
+        }
+
+        .add-work-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 107, 0, 0.1), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform 0.8s ease;
+        }
+
+        .add-work-btn:hover {
+            border-color: #ffdd00;
+            background: rgba(255, 107, 0, 0.15);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(255, 107, 0, 0.3),
+                0 0 60px rgba(255, 107, 0, 0.2);
+        }
+
+        .add-work-btn:hover::before {
+            opacity: 1;
+        }
+
+        .add-work-btn:hover::after {
+            transform: rotate(45deg) translateX(100%);
+        }
+
+        .add-work-btn .icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: #ff6b00;
+            transition: all 0.4s ease;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        .add-work-btn:hover .icon {
+            transform: scale(1.2) rotate(180deg);
+            color: #ffdd00;
+            text-shadow: 0 0 20px rgba(255, 107, 0, 0.8);
+        }
+
+        .add-work-btn h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: #ff6b00;
+            transition: all 0.3s ease;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        .add-work-btn:hover h3 {
+            color: #ffdd00;
+            text-shadow: 0 0 15px rgba(255, 221, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .add-work-btn p {
+            color: #a0aec0;
+            text-align: center;
+            margin: 0;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .add-work-btn:hover p {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background: radial-gradient(circle at center, #1a2332 0%, #0a0e1a 100%);
+            position: relative;
+        }
+
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ff6b00, #ffdd00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact p {
+            font-size: 1.3rem;
+            color: #cccccc;
+            margin-bottom: 3rem;
+            font-weight: 500;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-method {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 107, 0, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-10px);
+            border-color: #ff6b00;
+            box-shadow: 0 20px 40px rgba(255, 107, 0, 0.2);
+        }
+
+        .contact-method h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .contact-method p {
+            color: #00ff41;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: #000000;
+            padding: 3rem 0;
+            border-top: 3px solid #ff6b00;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #cccccc;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a2332, #0f1821);
+            margin: 5% auto;
+            padding: 3rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            border: 2px solid #ff6b00;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            color: #ff6b00;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b00;
+            box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
+        }
+
+        .close {
+            color: #ff6b00;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: -1rem;
+        }
+
+        .close:hover {
+            color: #ffdd00;
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 900;
+            z-index: 3000;
+            animation: slideIn 0.3s ease;
+        }
+
+        /* Delete Button */
+        .delete-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+            z-index: 10;
+        }
+
+        .delete-btn:hover {
+            background: linear-gradient(135deg, #ff6666, #ff4444);
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 20px rgba(255, 68, 68, 0.6);
+        }
+
+        .portfolio-item:hover .delete-btn {
+            display: block;
+            animation: deleteAppear 0.3s ease-out;
+        }
+
+        @keyframes deleteAppear {
+            from {
+                opacity: 0;
+                transform: scale(0) rotate(180deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 50px rgba(255, 107, 0, 0.8), 0 0 80px rgba(255, 221, 0, 0.4);
+            }
+        }
+
+        @keyframes titleGlow {
+            0% {
+                filter: brightness(1);
+            }
+            100% {
+                filter: brightness(1.1);
+            }
+        }
+
+        @keyframes subtitlePulse {
+            0%, 100% {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        @keyframes lineGrow {
+            from {
+                height: 0;
+            }
+            to {
+                height: 100%;
+            }
+        }
+
+        @keyframes gradientRotate {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 100% 50%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            75% {
+                background-position: 0% 100%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes textFloat {
+            0% {
+                transform: translate(-50%, -50%) translateY(0px);
+            }
+            100% {
+                transform: translate(-50%, -50%) translateY(-10px);
+            }
+        }
+
+        @keyframes hexagonMove {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 60px 60px;
+            }
+        }
+
+        @keyframes backgroundPulse {
+            0% {
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes dotsMove {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            100% {
+                transform: translateX(-20px) translateY(-20px);
+            }
+        }
+
+        @keyframes serviceGlow {
+            0% {
+                opacity: 0.1;
+            }
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes navbarGlow {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes particleFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-100px) rotate(90deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-150px) rotate(180deg);
+                opacity: 0.5;
+            }
+            75% {
+                transform: translateY(-50px) rotate(270deg);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes portfolioGlow {
+            0% {
+                opacity: 0.2;
+            }
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes patternDrift {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            100% {
+                transform: translateX(-25px) translateY(-25px);
+            }
+        }
+
+        @keyframes gridAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes portfolioItemSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-50px) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) translateY(0);
+            }
+        }
+
+        @keyframes logoShimmer {
+            0%, 100% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(100%);
+            }
+        }
+
+        @keyframes postGlow {
+            0% {
+                box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.3);
+            }
+            100% {
+                box-shadow: inset 0 0 40px rgba(0, 255, 65, 0.6);
+            }
+        }
+
+        @keyframes youtubePulse {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes addButtonFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes addButtonGlow {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+            }
+
+            .character-display {
+                width: 300px;
+                height: 350px;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .services-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="showPage('home')">
+                <div class="logo-icon">NE</div>
+                <div class="logo-text">EDITZ</div>
+            </div>
+            <ul class="nav-menu">
+                <li><a onclick="showPage('home')" class="nav-link active">Home</a></li>
+                <li><a onclick="showPage('logos')" class="nav-link">Logos</a></li>
+                <li><a onclick="showPage('posts')" class="nav-link">Posts</a></li>
+                <li><a onclick="showPage('youtube')" class="nav-link">YouTube</a></li>
+                <li><a onclick="showPage('contact')" class="nav-link">Contact</a></li>
+                <li><a onclick="showPage('contact')" class="contact-btn">Order Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>
+                        <span class="main-title">FREE FIRE</span><br>
+                        <span class="sub-title">GRAPHICS DESIGNER</span>
+                    </h1>
+                    <p>Professional Gaming Graphics • YouTube Thumbnails • Social Media Posts • Logos • Banners • All Your Creative Needs in One Place!</p>
+                    
+                    <div class="hero-buttons">
+                        <a onclick="showPage('logos')" class="btn-primary">View Portfolio</a>
+                        <a onclick="showPage('contact')" class="btn-secondary">Contact Us</a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="character-display"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-preview">
+            <div class="services-container">
+                <div class="section-header fade-in">
+                    <h2>Our Services</h2>
+                    <p>Professional gaming graphics for content creators and gamers</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card fade-in" onclick="showPage('logos')">
+                        <div class="service-icon">💎</div>
+                        <h3>Logo Design</h3>
+                        <p>Gaming logos, clan emblems, brand identity designs that make you stand out</p>
+                        <div class="service-price">From LKR 1200</div>
+                    </div>
+                    
+                    <div class="service-card fade-in" onclick="showPage('posts')">
+                        <div class="service-icon">📸</div>
+                        <h3>Social Posts</h3>
+                        <p>Instagram, Facebook, TikTok graphics that boost your social media presence</p>
+                        <div class="service-price">From LKR 250</div>
+                    </div>
+                    
+                    <div class="service-card fade-in" onclick="showPage('youtube')">
+                        <div class="service-icon">🎥</div>
+                        <h3>YouTube Graphics</h3>
+                        <p>Banners, thumbnails, channel art that increase views and subscribers</p>
+                        <div class="service-price">From LKR 500</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="logos" class="page">
+        <section class="portfolio-page">
+            <div class="portfolio-container">
+                <div class="section-header fade-in">
+                    <h2>Logo Design Portfolio</h2>
+                    <p>Professional gaming logos, clan emblems, and brand identity designs</p>
+                </div>
+                
+                <div class="portfolio-grid" id="logoGrid">
+                    <div class="add-work-btn" onclick="openModal('logo')">
+                        <div class="icon">+</div>
+                        <h3>Add New Logo</h3>
+                        <p>Click to upload your logo design work</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="posts" class="page">
+        <section class="portfolio-page">
+            <div class="portfolio-container">
+                <div class="section-header fade-in">
+                    <h2>Social Media Posts</h2>
+                    <p>Instagram, Facebook, TikTok and social media graphics portfolio</p>
+                </div>
+                
+                <div class="portfolio-grid" id="postsGrid">
+                    <div class="add-work-btn" onclick="openModal('post')">
+                        <div class="icon">+</div>
+                        <h3>Add New Post</h3>
+                        <p>Click to upload your social media work</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="youtube" class="page">
+        <section class="portfolio-page">
+            <div class="portfolio-container">
+                <div class="section-header fade-in">
+                    <h2>YouTube Graphics</h2>
+                    <p>YouTube banners, thumbnails, channel art and video graphics portfolio</p>
+                </div>
+                
+                <div class="portfolio-grid" id="youtubeGrid">
+                    <div class="add-work-btn" onclick="openModal('youtube')">
+                        <div class="icon">+</div>
+                        <h3>Add YouTube Work</h3>
+                        <p>Click to upload your YouTube graphics</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="contact" class="page">
+        <section class="contact">
+            <div class="contact-container">
+                <div class="fade-in">
+                    <h2>Ready to Order?</h2>
+                    <p>Get professional gaming graphics that will take your content to the next level!</p>
+                </div>
+                
+                <div class="contact-methods fade-in">
+                    <div class="contact-method">
+                        <h3>WhatsApp</h3>
+                        <p>0773116253</p>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <h3>Email</h3>
+                        <p>Fnethuwa@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="https://wa.me/94773116253" class="btn-primary">WhatsApp Now</a>
+                    <a onclick="showPage('home')" class="btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2025 NETHUWA EDITZ STUDIO. Professional Gaming Graphics Designer • Sri Lanka</p>
+        </div>
+    </footer>
+
+    <div id="workModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Add New Work</h2>
+            </div>
+            <form id="workForm">
+                <div class="form-group">
+                    <label for="workTitle">Title:</label>
+                    <input type="text" id="workTitle" name="title" placeholder="Enter work title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workDescription">Description:</label>
+                    <textarea id="workDescription" name="description" rows="3" placeholder="Enter work description" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workPrice">Price (LKR):</label>
+                    <input type="number" id="workPrice" name="price" placeholder="Enter price" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workImage">Image:</label>
+                    <input type="file" id="workImage" name="image" accept="image/*" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workTags">Tags (comma separated):</label>
+                    <input type="text" id="workTags" name="tags" placeholder="e.g., Gaming, Logo, Professional" required>
+                </div>
+                
+                <button type="submit" class="btn-primary">Add Work</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentCategory = '';
+        let portfolioData = {
+            logo: [],
+            post: [],
+            youtube: []
+        };
+
+        // Load saved data on page load
+        function loadSavedData() {
+            const saved = localStorage.getItem('portfolioData');
+            if (saved) {
+                try {
+                    portfolioData = JSON.parse(saved);
+                    console.log('Loaded saved data:', portfolioData);
+                } catch (e) {
+                    console.error('Error loading saved data:', e);
+                }
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            try {
+                localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
+                console.log('Data saved successfully');
+            } catch (e) {
+                console.error('Error saving data:', e);
+            }
+        }
+
+        // Page Navigation
+        function showPage(pageId) {
+            console.log('Navigating to page:', pageId);
+            
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update navigation active state
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Find and activate the corresponding nav link
+            const activeLink = Array.from(navLinks).find(link => 
+                link.getAttribute('onclick').includes(pageId)
+            );
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+
+            // Load portfolio items for the specific category
+            if (['logos', 'posts', 'youtube'].includes(pageId)) {
+                const category = pageId === 'logos' ? 'logo' : (pageId === 'posts' ? 'post' : 'youtube');
+                console.log(`Loading ${category} items for page ${pageId}`);
+                displayPortfolioItems(category);
+                
+                // Add portfolio page particles
+                setTimeout(() => {
+                    createPortfolioParticles(pageId);
+                }, 300);
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Trigger animations for visible elements
+            setTimeout(() => {
+                triggerAnimations();
+            }, 100);
+        }
+
+        // Display portfolio items
+        function displayPortfolioItems(category) {
+            console.log(`Displaying items for ${category}:`, portfolioData[category]);
+            
+            const gridElement = document.getElementById(category === 'logo' ? 'logoGrid' : (category === 'post' ? 'postsGrid' : 'youtubeGrid'));
+            
+            if (!gridElement) {
+                console.error('Grid element not found for category:', category);
+                return;
+            }
+            
+            // Keep the add button, remove other items
+            const addButton = gridElement.querySelector('.add-work-btn');
+            gridElement.innerHTML = '';
+            if (addButton) {
+                gridElement.appendChild(addButton);
+            }
+
+            // Add items from saved data
+            portfolioData[category].forEach((item, index) => {
+                const portfolioItem = createPortfolioItemElement(item, category, index);
+                gridElement.appendChild(portfolioItem);
+            });
+        }
+
+        // Create portfolio item HTML element
+        function createPortfolioItemElement(item, category, index) {
+            const portfolioItem = document.createElement('div');
+            portfolioItem.className = 'portfolio-item fade-in visible';
+            
+            const themeClass = category === 'logo' ? 'logo-theme' : (category === 'post' ? 'post-theme' : 'youtube-theme');
+            
+            // Handle tags
+            let tagsHtml = '';
+            if (Array.isArray(item.tags)) {
+                tagsHtml = item.tags.map(tag => `<span class="tag">${tag.toUpperCase()}</span>`).join('');
+            } else if (typeof item.tags === 'string' && item.tags) {
+                const tagArray = item.tags.split(',').map(tag => tag.trim());
+                tagsHtml = tagArray.map(tag => `<span class="tag">${tag.toUpperCase()}</span>`).join('');
+            }
+            
+            portfolioItem.innerHTML = `
+                <button class="delete-btn" onclick="deleteItem('${category}', ${index})" title="Delete item">×</button>
+                <div class="portfolio-image ${themeClass}">
+                    <img src="${item.image}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <div class="portfolio-content">
+                    <h3>${item.title.toUpperCase()}</h3>
+                    <p>${item.description}</p>
+                    <div class="portfolio-tags">
+                        ${tagsHtml}
+                    </div>
+                    <div class="portfolio-price">LKR ${parseFloat(item.price).toFixed(0)}</div>
+                </div>
+            `;
+
+            return portfolioItem;
+        }
+
+        // Delete item
+        function deleteItem(category, index) {
+            if (confirm('Are you sure you want to delete this item?')) {
+                portfolioData[category].splice(index, 1);
+                saveData();
+                displayPortfolioItems(category);
+                showSuccessMessage('Item deleted successfully!');
+            }
+        }
+
+        // Show success message
+        function showSuccessMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'success-message';
+            messageDiv.textContent = message;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        // Trigger scroll animations
+        function triggerAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Modal functions
+        function openModal(category) {
+            currentCategory = category;
+            document.getElementById('workModal').style.display = 'block';
+            console.log('Opening modal for category:', category);
+        }
+
+        function closeModal() {
+            document.getElementById('workModal').style.display = 'none';
+            document.getElementById('workForm').reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('workModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Form submission to add new work
+        document.getElementById('workForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('workTitle').value;
+            const description = document.getElementById('workDescription').value;
+            const price = document.getElementById('workPrice').value;
+            const tags = document.getElementById('workTags').value.split(',').map(tag => tag.trim());
+            const imageFile = document.getElementById('workImage').files[0];
+            
+            if (imageFile) {
+                // Create image element to resize
+                const img = new Image();
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                img.onload = function() {
+                    // Set canvas size to portfolio image dimensions
+                    canvas.width = 400;
+                    canvas.height = 350;
+                    
+                    // FIXED: Now using contain logic instead of cover
+                    const imageAspect = img.width / img.height;
+                    const canvasAspect = canvas.width / canvas.height;
+                    
+                    let drawWidth, drawHeight, drawX, drawY;
+
+                    // Fill the canvas with a background color
+                    ctx.fillStyle = '#2d3748'; 
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    if (imageAspect > canvasAspect) {
+                        // Image is wider than the canvas, so scale by width to fit
+                        drawWidth = canvas.width;
+                        drawHeight = drawWidth / imageAspect;
+                        drawX = 0;
+                        drawY = (canvas.height - drawHeight) / 2; // Center it vertically
+                    } else {
+                        // Image is taller or same aspect, so scale by height to fit
+                        drawHeight = canvas.height;
+                        drawWidth = drawHeight * imageAspect;
+                        drawY = 0;
+                        drawX = (canvas.width - drawWidth) / 2; // Center it horizontally
+                    }
+                    
+                    // Draw the correctly scaled (contained) image onto the canvas
+                    ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+                    
+                    // Convert canvas to base64
+                    const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
+                    
+                    const newItem = {
+                        title: title,
+                        description: description,
+                        price: parseFloat(price),
+                        tags: tags,
+                        image: resizedImageData,
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    // Add to portfolio data
+                    portfolioData[currentCategory].push(newItem);
+                    
+                    // Save to localStorage
+                    saveData();
+                    
+                    // Display updated items
+                    displayPortfolioItems(currentCategory);
+                    
+                    // Close modal and show success
+                    closeModal();
+                    showSuccessMessage('Work added successfully!');
+                    
+                    console.log('Added new item with properly fitted image:', newItem);
+                };
+                
+                // Load the uploaded image
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(imageFile);
+            }
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.95))';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9))';
+            }
+        });
+
+        // Initialize website
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('NETHUWA EDITZ Website loaded!');
+            
+            // Load saved data
+            loadSavedData();
+            
+            // Initialize animations
+            triggerAnimations();
+            
+            // Add sample text-based items if no data exists
+            addSampleItemsIfEmpty();
+            
+            // Load logo items by default
+            displayPortfolioItems('logo');
+            
+            // Create floating particles
+            createFloatingParticles();
+            
+            // Welcome message
+            showSuccessMessage('Welcome to NETHUWA EDITZ! Images will now display without cropping.');
+        });
+
+        // Create floating particles effect
+        function createFloatingParticles() {
+            const hero = document.querySelector('.hero');
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = Math.random() > 0.5 ? 'rgba(255, 107, 0, 0.3)' : 'rgba(0, 255, 65, 0.3)';
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animation = `particleFloat ${Math.random() * 10 + 10}s ease-in-out infinite`;
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '1';
+                
+                hero.appendChild(particle);
+            }
+        }
+
+        // Create portfolio page particles
+        function createPortfolioParticles(pageId) {
+            const portfolioPage = document.querySelector(`#${pageId} .portfolio-page`);
+            
+            // Remove existing particles
+            const existingParticles = portfolioPage.querySelectorAll('.portfolio-particle');
+            existingParticles.forEach(particle => particle.remove());
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'portfolio-particle';
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 6 + 3 + 'px';
+                particle.style.height = particle.style.width;
+                
+                // Different colors for different pages
+                let colors = [];
+                if (pageId === 'logos') {
+                    colors = ['rgba(255, 107, 0, 0.4)', 'rgba(255, 221, 0, 0.4)', 'rgba(255, 69, 0, 0.3)'];
+                } else if (pageId === 'posts') {
+                    colors = ['rgba(0, 255, 65, 0.4)', 'rgba(0, 204, 51, 0.4)', 'rgba(34, 197, 94, 0.3)'];
+                } else if (pageId === 'youtube') {
+                    colors = ['rgba(255, 0, 102, 0.4)', 'rgba(204, 0, 68, 0.4)', 'rgba(239, 68, 68, 0.3)'];
+                }
+                
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '20%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animation = `particleFloat ${Math.random() * 8 + 12}s ease-in-out infinite`;
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '1';
+                
+                portfolioPage.appendChild(particle);
+            }
+        }
+
+        // Add sample text items if portfolios are empty
+        function addSampleItemsIfEmpty() {
+            // Check if portfolios are empty and add sample items
+            if (portfolioData.post.length === 0) {
+                portfolioData.post = [
+                    {
+                        title: "Free Fire Character Post",
+                        description: "Epic Free Fire character showcase with special effects and lighting for social media",
+                        price: 350,
+                        tags: ["Free Fire", "Character", "Gaming"],
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ECHARACTER POST%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EEpic character showcase%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith special effects%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎮%3C/text%3E%3C/svg%3E",
+                        timestamp: new Date().toISOString()
+                    },
+                    {
+                        title: "Instagram Gaming Story",
+                        description: "Professional Instagram story design for gaming content highlights and achievements",
+                        price: 250,
+                        tags: ["Instagram", "Story", "Gaming"],
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EINSTAGRAM%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3EGAMING STORY%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional story design%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming highlights%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E📱%3C/text%3E%3C/svg%3E",
+                        timestamp: new Date().toISOString()
+                    }
+                ];
+            }
+
+            if (portfolioData.logo.length === 0) {
+                portfolioData.logo = [
+                    {
+                        title: "Gaming Clan Logo",
+                        description: "Professional gaming clan logo with modern design elements and custom typography",
+                        price: 1500,
+                        tags: ["Logo", "Gaming", "Clan"],
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3ECLAN LOGO%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional design%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith custom typography%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎨%3C/text%3E%3C/svg%3E",
+                        timestamp: new Date().toISOString()
+                    },
+                    {
+                        title: "Esports Team Logo",
+                        description: "Professional esports team branding with mascot design and team identity elements",
+                        price: 2000,
+                        tags: ["Logo", "Esports", "Team"],
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EESPORTS%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ETEAM LOGO%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional team branding%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith mascot design%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E",
+                        timestamp: new Date().toISOString()
+                    }
+                ];
+            }
+
+            if (portfolioData.youtube.length === 0) {
+                portfolioData.youtube = [
+                    {
+                        title: "Free Fire Gameplay Thumbnail",
+                        description: "Epic Free Fire gameplay thumbnail with character showcase and special effects",
+                        price: 500,
+                        tags: ["Thumbnail", "Free Fire", "Gameplay"],
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='110' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3EGAMEPLAY%3C/text%3E%3Ctext x='200' y='170' font-family='Arial Black' font-size='18' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EEpic gameplay showcase%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith special effects%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='45' text-anchor='middle' fill='white'%3E🎬%3C/text%3E%3C/svg%3E",
+                        timestamp: new Date().toISOString()
+                    },
+                    {
+                        title: "Free Fire Channel Banner",
+                        description: "Professional Free Fire YouTube banner with character design and channel branding",
+                        price: 800,
+                        tags: ["Banner", "Free Fire", "Channel"],
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='110' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ECHANNEL%3C/text%3E%3Ctext x='200' y='170' font-family='Arial Black' font-size='18' font-weight='900' text-anchor='middle' fill='white'%3EBANNER%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EProfessional YouTube%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echannel branding%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='45' text-anchor='middle' fill='white'%3E🎯%3C/text%3E%3C/svg%3E",
+                        timestamp: new Date().toISOString()
+                    }
+                ];
+            }
+
+            // Save the sample data
+            saveData();
+        }
+
+        // Interactive effects
+        document.addEventListener('mouseenter', function(e) {
+            if (e.target.classList.contains('portfolio-item') || 
+                e.target.classList.contains('service-card') || 
+                e.target.classList.contains('contact-method')) {
+                e.target.style.filter = 'brightness(1.1)';
+            }
+        }, true);
+
+        document.addEventListener('mouseleave', function(e) {
+            if (e.target.classList.contains('portfolio-item') || 
+                e.target.classList.contains('service-card') || 
+                e.target.classList.contains('contact-method')) {
+                e.target.style.filter = 'brightness(1)';
+            }
+        }, true);
+
+        // Clear all data function (for testing)
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all portfolio data?')) {
+                localStorage.removeItem('portfolioData');
+                portfolioData = { logo: [], post: [], youtube: [] };
+                displayPortfolioItems('logo');
+                displayPortfolioItems('post');
+                displayPortfolioItems('youtube');
+                showSuccessMessage('All data cleared successfully!');
+            }
+        }
+
+        // Export data function
+        function exportData() {
+            const dataStr = JSON.stringify(portfolioData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'nethuwa_editz_portfolio.json';
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            showSuccessMessage('Portfolio data exported successfully!');
+        }
+
+        // Console commands for easy testing
+        console.log(`
+🎮 NETHUWA EDITZ WEBSITE LOADED! [ENHANCED VERSION]
+
+✅ FIXED: Image cropping issue resolved!
+✅ Images now display completely without cropping
+✅ object-fit changed from 'cover' to 'contain'
+
+🎨 NEW: Advanced Animations Added!
+✅ Home page: Particles, gradients, shimmer effects
+✅ Portfolio pages: Enhanced cards, floating particles
+✅ Service cards: Staggered animations, glow effects
+✅ Navigation: Smooth transitions, hover effects
+✅ Buttons: Shimmer, scale, rotation animations
+
+Commands available:
+- clearAllData() - Clear all saved portfolio items
+- exportData() - Download portfolio data as JSON
+- portfolioData - View current portfolio data
+
+Features:
+✅ Add Logo, Post, YouTube graphics
+✅ Upload and save images (full image visible)
+✅ Data persists after browser refresh
+✅ Delete items with enhanced × button
+✅ Responsive design with advanced animations
+✅ Professional particle effects
+✅ Dynamic gradient backgrounds
+✅ Interactive hover states
+
+Ready to build your stunning portfolio! 🚀
+        `);
+    </script>
+</body>
+</html>
