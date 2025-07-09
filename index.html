@@ -481,46 +481,6 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
 
-        @keyframes headerAppear {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes headerGlow {
-            0% {
-                opacity: 0.3;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            100% {
-                opacity: 0.6;
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-        }
-
-        @keyframes headerTextGlow {
-            0% {
-                text-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
-            }
-            100% {
-                text-shadow: 0 0 40px rgba(255, 107, 0, 0.6), 0 0 60px rgba(255, 221, 0, 0.3);
-            }
-        }
-
-        @keyframes underlineGrow {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100px;
-            }
-        }
-
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -858,7 +818,6 @@
             color: #cbd5e0;
         }
 
-        /* FIXED: Image display improvements - Changed from cover to contain */
         .portfolio-image img {
             width: 100% !important;
             height: 100% !important;
@@ -869,26 +828,6 @@
             max-width: none !important;
             max-height: none !important;
             background: #2d3748 !important;
-        }
-
-        /* Ensure portfolio image container maintains aspect ratio */
-        .portfolio-image {
-            width: 100%;
-            height: 350px;
-            background: #2d3748;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border-radius: 15px 15px 0 0;
-        }
-
-        /* Fix for small images - scale them properly */
-        .portfolio-image img[src*="data:image"] {
-            min-width: 100% !important;
-            min-height: 100% !important;
         }
 
         .portfolio-tags {
@@ -966,109 +905,6 @@
 
         .portfolio-item:hover .portfolio-price::before {
             transform: translateX(100%);
-        }
-
-        /* Add Work Button */
-        .add-work-btn {
-            background: rgba(45, 55, 72, 0.8);
-            border: 3px dashed rgba(255, 107, 0, 0.5);
-            border-radius: 20px;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(15px);
-            animation: addButtonFloat 4s ease-in-out infinite;
-        }
-
-        .add-work-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            animation: addButtonGlow 3s ease-in-out infinite alternate;
-        }
-
-        .add-work-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 107, 0, 0.1), transparent);
-            transform: rotate(45deg) translateX(-100%);
-            transition: transform 0.8s ease;
-        }
-
-        .add-work-btn:hover {
-            border-color: #ffdd00;
-            background: rgba(255, 107, 0, 0.15);
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 20px 40px rgba(255, 107, 0, 0.3),
-                0 0 60px rgba(255, 107, 0, 0.2);
-        }
-
-        .add-work-btn:hover::before {
-            opacity: 1;
-        }
-
-        .add-work-btn:hover::after {
-            transform: rotate(45deg) translateX(100%);
-        }
-
-        .add-work-btn .icon {
-            font-size: 4rem;
-            margin-bottom: 2rem;
-            color: #ff6b00;
-            transition: all 0.4s ease;
-            animation: iconPulse 2s ease-in-out infinite;
-        }
-
-        .add-work-btn:hover .icon {
-            transform: scale(1.2) rotate(180deg);
-            color: #ffdd00;
-            text-shadow: 0 0 20px rgba(255, 107, 0, 0.8);
-        }
-
-        .add-work-btn h3 {
-            font-size: 1.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            color: #ff6b00;
-            transition: all 0.3s ease;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
-
-        .add-work-btn:hover h3 {
-            color: #ffdd00;
-            text-shadow: 0 0 15px rgba(255, 221, 0, 0.6);
-            transform: scale(1.05);
-        }
-
-        .add-work-btn p {
-            color: #a0aec0;
-            text-align: center;
-            margin: 0;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .add-work-btn:hover p {
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         /* Contact Section */
@@ -1159,139 +995,6 @@
             font-weight: 500;
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #1a2332, #0f1821);
-            margin: 5% auto;
-            padding: 3rem;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 600px;
-            border: 2px solid #ff6b00;
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .modal-header h2 {
-            color: #ff6b00;
-            font-size: 2rem;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-group label {
-            display: block;
-            color: #ffffff;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 107, 0, 0.3);
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #ff6b00;
-            box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
-        }
-
-        .close {
-            color: #ff6b00;
-            float: right;
-            font-size: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: -1rem;
-        }
-
-        .close:hover {
-            color: #ffdd00;
-        }
-
-        /* Success Message */
-        .success-message {
-            position: fixed;
-            top: 120px;
-            right: 20px;
-            background: linear-gradient(135deg, #00ff41, #00cc33);
-            color: #000;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            font-weight: 900;
-            z-index: 3000;
-            animation: slideIn 0.3s ease;
-        }
-
-        /* Delete Button */
-        .delete-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, #ff4444, #cc0000);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            cursor: pointer;
-            font-size: 1.4rem;
-            font-weight: bold;
-            display: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
-            z-index: 10;
-        }
-
-        .delete-btn:hover {
-            background: linear-gradient(135deg, #ff6666, #ff4444);
-            transform: scale(1.1) rotate(90deg);
-            box-shadow: 0 6px 20px rgba(255, 68, 68, 0.6);
-        }
-
-        .portfolio-item:hover .delete-btn {
-            display: block;
-            animation: deleteAppear 0.3s ease-out;
-        }
-
-        @keyframes deleteAppear {
-            from {
-                opacity: 0;
-                transform: scale(0) rotate(180deg);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
-        }
-
         /* Animations */
         @keyframes float {
             0%, 100% {
@@ -1299,17 +1002,6 @@
             }
             50% {
                 transform: translateY(-20px);
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
             }
         }
 
@@ -1549,30 +1241,43 @@
             }
         }
 
-        @keyframes addButtonFloat {
-            0%, 100% {
+        @keyframes headerAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
                 transform: translateY(0);
             }
-            50% {
-                transform: translateY(-10px);
-            }
         }
 
-        @keyframes addButtonGlow {
+        @keyframes headerGlow {
             0% {
-                opacity: 0;
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
             }
             100% {
-                opacity: 1;
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1.2);
             }
         }
 
-        @keyframes iconPulse {
-            0%, 100% {
-                transform: scale(1);
+        @keyframes headerTextGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
             }
-            50% {
-                transform: scale(1.1);
+            100% {
+                text-shadow: 0 0 40px rgba(255, 107, 0, 0.6), 0 0 60px rgba(255, 221, 0, 0.3);
+            }
+        }
+
+        @keyframes underlineGrow {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100px;
             }
         }
 
@@ -1709,11 +1414,7 @@
                 </div>
                 
                 <div class="portfolio-grid" id="logoGrid">
-                    <div class="add-work-btn" onclick="openModal('logo')">
-                        <div class="icon">+</div>
-                        <h3>Add New Logo</h3>
-                        <p>Click to upload your logo design work</p>
-                    </div>
+                    <!-- Portfolio items will be loaded here -->
                 </div>
             </div>
         </section>
@@ -1728,11 +1429,7 @@
                 </div>
                 
                 <div class="portfolio-grid" id="postsGrid">
-                    <div class="add-work-btn" onclick="openModal('post')">
-                        <div class="icon">+</div>
-                        <h3>Add New Post</h3>
-                        <p>Click to upload your social media work</p>
-                    </div>
+                    <!-- Portfolio items will be loaded here -->
                 </div>
             </div>
         </section>
@@ -1747,11 +1444,7 @@
                 </div>
                 
                 <div class="portfolio-grid" id="youtubeGrid">
-                    <div class="add-work-btn" onclick="openModal('youtube')">
-                        <div class="icon">+</div>
-                        <h3>Add YouTube Work</h3>
-                        <p>Click to upload your YouTube graphics</p>
-                    </div>
+                    <!-- Portfolio items will be loaded here -->
                 </div>
             </div>
         </section>
@@ -1791,73 +1484,79 @@
         </div>
     </footer>
 
-    <div id="workModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <div class="modal-header">
-                <h2>Add New Work</h2>
-            </div>
-            <form id="workForm">
-                <div class="form-group">
-                    <label for="workTitle">Title:</label>
-                    <input type="text" id="workTitle" name="title" placeholder="Enter work title" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="workDescription">Description:</label>
-                    <textarea id="workDescription" name="description" rows="3" placeholder="Enter work description" required></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="workPrice">Price (LKR):</label>
-                    <input type="number" id="workPrice" name="price" placeholder="Enter price" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="workImage">Image:</label>
-                    <input type="file" id="workImage" name="image" accept="image/*" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="workTags">Tags (comma separated):</label>
-                    <input type="text" id="workTags" name="tags" placeholder="e.g., Gaming, Logo, Professional" required>
-                </div>
-                
-                <button type="submit" class="btn-primary">Add Work</button>
-            </form>
-        </div>
-    </div>
-
     <script>
-        let currentCategory = '';
-        let portfolioData = {
-            logo: [],
-            post: [],
-            youtube: []
-        };
-
-        // Load saved data on page load
-        function loadSavedData() {
-            const saved = localStorage.getItem('portfolioData');
-            if (saved) {
-                try {
-                    portfolioData = JSON.parse(saved);
-                    console.log('Loaded saved data:', portfolioData);
-                } catch (e) {
-                    console.error('Error loading saved data:', e);
+        // Portfolio data - Directly included in code for GitHub Pages
+        const portfolioData = {
+            logo: [
+                {
+                    title: "Elite Gaming Clan Logo",
+                    description: "Professional gaming clan logo with modern design elements and custom typography for esports teams",
+                    price: 1500,
+                    tags: ["Logo", "Gaming", "Clan", "Esports"],
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='36' font-weight='900' text-anchor='middle' fill='white'%3EELITE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='180' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ECLAN LOGO%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional esports%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eteam branding%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E"
+                },
+                {
+                    title: "Free Fire Team Emblem",
+                    description: "Custom Free Fire team emblem with mascot design and professional typography for competitive gaming",
+                    price: 2000,
+                    tags: ["Free Fire", "Team", "Emblem", "Competitive"],
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='32' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3ETEAM EMBLEM%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3ECustom mascot design%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith professional typography%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor competitive gaming%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='60' text-anchor='middle' fill='white'%3E🔥%3C/text%3E%3C/svg%3E"
+                },
+                {
+                    title: "Streamer Brand Logo",
+                    description: "Personal brand logo for gaming streamers with unique identity and memorable visual elements",
+                    price: 1200,
+                    tags: ["Streamer", "Brand", "Identity", "Gaming"],
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3ESTREAMER%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EBRAND LOGO%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EPersonal brand identity%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming streamers%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith memorable elements%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='55' text-anchor='middle' fill='white'%3E🎮%3C/text%3E%3C/svg%3E"
                 }
-            }
-        }
-
-        // Save data to localStorage
-        function saveData() {
-            try {
-                localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
-                console.log('Data saved successfully');
-            } catch (e) {
-                console.error('Error saving data:', e);
-            }
-        }
+            ],
+            post: [
+                {
+                    title: "Free Fire Character Showcase",
+                    description: "Epic Free Fire character showcase post with special effects and professional lighting for social media",
+                    price: 350,
+                    tags: ["Free Fire", "Character", "Showcase", "Effects"],
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='32' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ECHARACTER%3C/text%3E%3Ctext x='200' y='160' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ESHOWCASE%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EEpic character showcase%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith special effects%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eand professional lighting%3C/text%3E%3Ctext x='200' y='300' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E⚡%3C/text%3E%3C/svg%3E"
+                },
+                {
+                    title: "Instagram Gaming Story",
+                    description: "Professional Instagram story design for gaming content highlights and achievement posts",
+                    price: 250,
+                    tags: ["Instagram", "Story", "Gaming", "Highlights"],
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EINSTAGRAM%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMING STORY%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional story design%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming highlights%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eand achievements%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='55' text-anchor='middle' fill='white'%3E📱%3C/text%3E%3C/svg%3E"
+                },
+                {
+                    title: "Victory Post Design",
+                    description: "Celebrate your gaming victories with epic post designs featuring dynamic effects and bold typography",
+                    price: 300,
+                    tags: ["Victory", "Gaming", "Celebration", "Dynamic"],
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='36' font-weight='900' text-anchor='middle' fill='white'%3EVICTORY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EPOST DESIGN%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3ECelebrate gaming victories%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith epic designs and%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Edynamic effects%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='60' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E"
+                }
+            ],
+            youtube: [
+                {
+                    title: "Free Fire Gameplay Thumbnail",
+                    description: "Epic Free Fire gameplay thumbnail with character showcase and explosive effects to maximize views",
+                    price: 500,
+                    tags: ["Thumbnail", "Free Fire", "Gameplay", "Epic"],
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='110' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMEPLAY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EEpic gameplay showcase%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith explosive effects%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Eto maximize views%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎬%3C/text%3E%3C/svg%3E"
+                },
+                {
+                    title: "Free Fire Channel Banner",
+                    description: "Professional Free Fire YouTube banner with character design and channel branding elements",
+                    price: 800,
+                    tags: ["Banner", "Free Fire", "Channel", "Branding"],
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ECHANNEL%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3EBANNER%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EProfessional YouTube%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echannel branding with%3C/text%3E%3Ctext x='200' y='230' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echaracter design%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎯%3C/text%3E%3C/svg%3E"
+                },
+                {
+                    title: "Gaming Montage Thumbnail",
+                    description: "High-energy gaming montage thumbnail with dynamic composition and eye-catching visual effects",
+                    price: 600,
+                    tags: ["Montage", "Gaming", "Thumbnail", "Dynamic"],
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EMONTAGE%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EHigh-energy montage%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith dynamic composition%3C/text%3E%3Ctext x='200' y='230' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Eand eye-catching effects%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E⚡%3C/text%3E%3C/svg%3E"
+                }
+            ]
+        };
 
         // Page Navigation
         function showPage(pageId) {
@@ -1918,14 +1617,10 @@
                 return;
             }
             
-            // Keep the add button, remove other items
-            const addButton = gridElement.querySelector('.add-work-btn');
+            // Clear the grid
             gridElement.innerHTML = '';
-            if (addButton) {
-                gridElement.appendChild(addButton);
-            }
 
-            // Add items from saved data
+            // Add items from portfolio data
             portfolioData[category].forEach((item, index) => {
                 const portfolioItem = createPortfolioItemElement(item, category, index);
                 gridElement.appendChild(portfolioItem);
@@ -1949,7 +1644,6 @@
             }
             
             portfolioItem.innerHTML = `
-                <button class="delete-btn" onclick="deleteItem('${category}', ${index})" title="Delete item">×</button>
                 <div class="portfolio-image ${themeClass}">
                     <img src="${item.image}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: contain;">
                 </div>
@@ -1964,29 +1658,6 @@
             `;
 
             return portfolioItem;
-        }
-
-        // Delete item
-        function deleteItem(category, index) {
-            if (confirm('Are you sure you want to delete this item?')) {
-                portfolioData[category].splice(index, 1);
-                saveData();
-                displayPortfolioItems(category);
-                showSuccessMessage('Item deleted successfully!');
-            }
-        }
-
-        // Show success message
-        function showSuccessMessage(message) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'success-message';
-            messageDiv.textContent = message;
-            
-            document.body.appendChild(messageDiv);
-            
-            setTimeout(() => {
-                messageDiv.remove();
-            }, 3000);
         }
 
         // Trigger scroll animations
@@ -2008,144 +1679,6 @@
                 observer.observe(el);
             });
         }
-
-        // Modal functions
-        function openModal(category) {
-            currentCategory = category;
-            document.getElementById('workModal').style.display = 'block';
-            console.log('Opening modal for category:', category);
-        }
-
-        function closeModal() {
-            document.getElementById('workModal').style.display = 'none';
-            document.getElementById('workForm').reset();
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('workModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-
-        // Form submission to add new work
-        document.getElementById('workForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const title = document.getElementById('workTitle').value;
-            const description = document.getElementById('workDescription').value;
-            const price = document.getElementById('workPrice').value;
-            const tags = document.getElementById('workTags').value.split(',').map(tag => tag.trim());
-            const imageFile = document.getElementById('workImage').files[0];
-            
-            if (imageFile) {
-                // Create image element to resize
-                const img = new Image();
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                
-                img.onload = function() {
-                    // Set canvas size to portfolio image dimensions
-                    canvas.width = 400;
-                    canvas.height = 350;
-                    
-                    // FIXED: Now using contain logic instead of cover
-                    const imageAspect = img.width / img.height;
-                    const canvasAspect = canvas.width / canvas.height;
-                    
-                    let drawWidth, drawHeight, drawX, drawY;
-
-                    // Fill the canvas with a background color
-                    ctx.fillStyle = '#2d3748'; 
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    
-                    if (imageAspect > canvasAspect) {
-                        // Image is wider than the canvas, so scale by width to fit
-                        drawWidth = canvas.width;
-                        drawHeight = drawWidth / imageAspect;
-                        drawX = 0;
-                        drawY = (canvas.height - drawHeight) / 2; // Center it vertically
-                    } else {
-                        // Image is taller or same aspect, so scale by height to fit
-                        drawHeight = canvas.height;
-                        drawWidth = drawHeight * imageAspect;
-                        drawY = 0;
-                        drawX = (canvas.width - drawWidth) / 2; // Center it horizontally
-                    }
-                    
-                    // Draw the correctly scaled (contained) image onto the canvas
-                    ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
-                    
-                    // Convert canvas to base64
-                    const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
-                    
-                    const newItem = {
-                        title: title,
-                        description: description,
-                        price: parseFloat(price),
-                        tags: tags,
-                        image: resizedImageData,
-                        timestamp: new Date().toISOString()
-                    };
-                    
-                    // Add to portfolio data
-                    portfolioData[currentCategory].push(newItem);
-                    
-                    // Save to localStorage
-                    saveData();
-                    
-                    // Display updated items
-                    displayPortfolioItems(currentCategory);
-                    
-                    // Close modal and show success
-                    closeModal();
-                    showSuccessMessage('Work added successfully!');
-                    
-                    console.log('Added new item with properly fitted image:', newItem);
-                };
-                
-                // Load the uploaded image
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    img.src = e.target.result;
-                };
-                reader.readAsDataURL(imageFile);
-            }
-        });
-
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.95))';
-            } else {
-                navbar.style.background = 'linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9))';
-            }
-        });
-
-        // Initialize website
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('NETHUWA EDITZ Website loaded!');
-            
-            // Load saved data
-            loadSavedData();
-            
-            // Initialize animations
-            triggerAnimations();
-            
-            // Add sample text-based items if no data exists
-            addSampleItemsIfEmpty();
-            
-            // Load logo items by default
-            displayPortfolioItems('logo');
-            
-            // Create floating particles
-            createFloatingParticles();
-            
-            // Welcome message
-            showSuccessMessage('Welcome to NETHUWA EDITZ! Images will now display without cropping.');
-        });
 
         // Create floating particles effect
         function createFloatingParticles() {
@@ -2207,75 +1740,45 @@
             }
         }
 
-        // Add sample text items if portfolios are empty
-        function addSampleItemsIfEmpty() {
-            // Check if portfolios are empty and add sample items
-            if (portfolioData.post.length === 0) {
-                portfolioData.post = [
-                    {
-                        title: "Free Fire Character Post",
-                        description: "Epic Free Fire character showcase with special effects and lighting for social media",
-                        price: 350,
-                        tags: ["Free Fire", "Character", "Gaming"],
-                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ECHARACTER POST%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EEpic character showcase%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith special effects%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎮%3C/text%3E%3C/svg%3E",
-                        timestamp: new Date().toISOString()
-                    },
-                    {
-                        title: "Instagram Gaming Story",
-                        description: "Professional Instagram story design for gaming content highlights and achievements",
-                        price: 250,
-                        tags: ["Instagram", "Story", "Gaming"],
-                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EINSTAGRAM%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3EGAMING STORY%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional story design%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming highlights%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E📱%3C/text%3E%3C/svg%3E",
-                        timestamp: new Date().toISOString()
-                    }
-                ];
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.95))';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9))';
             }
+        });
 
-            if (portfolioData.logo.length === 0) {
-                portfolioData.logo = [
-                    {
-                        title: "Gaming Clan Logo",
-                        description: "Professional gaming clan logo with modern design elements and custom typography",
-                        price: 1500,
-                        tags: ["Logo", "Gaming", "Clan"],
-                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3ECLAN LOGO%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional design%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith custom typography%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎨%3C/text%3E%3C/svg%3E",
-                        timestamp: new Date().toISOString()
-                    },
-                    {
-                        title: "Esports Team Logo",
-                        description: "Professional esports team branding with mascot design and team identity elements",
-                        price: 2000,
-                        tags: ["Logo", "Esports", "Team"],
-                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EESPORTS%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ETEAM LOGO%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional team branding%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith mascot design%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E",
-                        timestamp: new Date().toISOString()
-                    }
-                ];
-            }
+        // Initialize website
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('NETHUWA EDITZ Website loaded!');
+            
+            // Initialize animations
+            triggerAnimations();
+            
+            // Load logo items by default
+            displayPortfolioItems('logo');
+            
+            // Create floating particles
+            createFloatingParticles();
+            
+            console.log(`
+🎮 NETHUWA EDITZ WEBSITE - GITHUB PAGES VERSION
 
-            if (portfolioData.youtube.length === 0) {
-                portfolioData.youtube = [
-                    {
-                        title: "Free Fire Gameplay Thumbnail",
-                        description: "Epic Free Fire gameplay thumbnail with character showcase and special effects",
-                        price: 500,
-                        tags: ["Thumbnail", "Free Fire", "Gameplay"],
-                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='110' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3EGAMEPLAY%3C/text%3E%3Ctext x='200' y='170' font-family='Arial Black' font-size='18' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EEpic gameplay showcase%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith special effects%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='45' text-anchor='middle' fill='white'%3E🎬%3C/text%3E%3C/svg%3E",
-                        timestamp: new Date().toISOString()
-                    },
-                    {
-                        title: "Free Fire Channel Banner",
-                        description: "Professional Free Fire YouTube banner with character design and channel branding",
-                        price: 800,
-                        tags: ["Banner", "Free Fire", "Channel"],
-                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='110' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ECHANNEL%3C/text%3E%3Ctext x='200' y='170' font-family='Arial Black' font-size='18' font-weight='900' text-anchor='middle' fill='white'%3EBANNER%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EProfessional YouTube%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echannel branding%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='45' text-anchor='middle' fill='white'%3E🎯%3C/text%3E%3C/svg%3E",
-                        timestamp: new Date().toISOString()
-                    }
-                ];
-            }
+✅ Portfolio items now directly included in code
+✅ Will display same for all visitors
+✅ No localStorage dependency
+✅ Ready for GitHub Pages deployment
 
-            // Save the sample data
-            saveData();
-        }
+Portfolio items loaded:
+- Logos: ${portfolioData.logo.length} items
+- Posts: ${portfolioData.post.length} items  
+- YouTube: ${portfolioData.youtube.length} items
+
+Ready to showcase your amazing work! 🚀
+            `);
+        });
 
         // Interactive effects
         document.addEventListener('mouseenter', function(e) {
@@ -2293,66 +1796,6 @@
                 e.target.style.filter = 'brightness(1)';
             }
         }, true);
-
-        // Clear all data function (for testing)
-        function clearAllData() {
-            if (confirm('Are you sure you want to clear all portfolio data?')) {
-                localStorage.removeItem('portfolioData');
-                portfolioData = { logo: [], post: [], youtube: [] };
-                displayPortfolioItems('logo');
-                displayPortfolioItems('post');
-                displayPortfolioItems('youtube');
-                showSuccessMessage('All data cleared successfully!');
-            }
-        }
-
-        // Export data function
-        function exportData() {
-            const dataStr = JSON.stringify(portfolioData, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(dataBlob);
-            
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'nethuwa_editz_portfolio.json';
-            link.click();
-            
-            URL.revokeObjectURL(url);
-            showSuccessMessage('Portfolio data exported successfully!');
-        }
-
-        // Console commands for easy testing
-        console.log(`
-🎮 NETHUWA EDITZ WEBSITE LOADED! [ENHANCED VERSION]
-
-✅ FIXED: Image cropping issue resolved!
-✅ Images now display completely without cropping
-✅ object-fit changed from 'cover' to 'contain'
-
-🎨 NEW: Advanced Animations Added!
-✅ Home page: Particles, gradients, shimmer effects
-✅ Portfolio pages: Enhanced cards, floating particles
-✅ Service cards: Staggered animations, glow effects
-✅ Navigation: Smooth transitions, hover effects
-✅ Buttons: Shimmer, scale, rotation animations
-
-Commands available:
-- clearAllData() - Clear all saved portfolio items
-- exportData() - Download portfolio data as JSON
-- portfolioData - View current portfolio data
-
-Features:
-✅ Add Logo, Post, YouTube graphics
-✅ Upload and save images (full image visible)
-✅ Data persists after browser refresh
-✅ Delete items with enhanced × button
-✅ Responsive design with advanced animations
-✅ Professional particle effects
-✅ Dynamic gradient backgrounds
-✅ Interactive hover states
-
-Ready to build your stunning portfolio! 🚀
-        `);
     </script>
 </body>
 </html>
