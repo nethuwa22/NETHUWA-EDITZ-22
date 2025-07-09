@@ -1357,6 +1357,38 @@
             font-weight: 500;
         }
 
+        /* Storage Status */
+        .storage-status {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #ff6b00;
+            font-size: 0.8rem;
+            max-width: 300px;
+            z-index: 1500;
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
+        }
+
+        .storage-status h4 {
+            color: #ff6b00;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .storage-status p {
+            margin: 3px 0;
+            color: #ccc;
+        }
+
+        .storage-status .highlight {
+            color: #00ff41;
+            font-weight: bold;
+        }
+
         /* Animations */
         @keyframes float {
             0%, 100% {
@@ -1706,6 +1738,13 @@
             .hero-buttons {
                 flex-direction: column;
             }
+
+            .storage-status {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                max-width: none;
+            }
         }
 
         /* Scroll animations */
@@ -1808,7 +1847,6 @@
                         <h3>Add New Logo</h3>
                         <p>Click to upload your logo designs</p>
                     </div>
-                    <!-- Portfolio items will be loaded here -->
                 </div>
             </div>
         </section>
@@ -1828,7 +1866,6 @@
                         <h3>Add New Post</h3>
                         <p>Click to upload your social media designs</p>
                     </div>
-                    <!-- Portfolio items will be loaded here -->
                 </div>
             </div>
         </section>
@@ -1848,7 +1885,6 @@
                         <h3>Add YouTube Work</h3>
                         <p>Click to upload your YouTube graphics</p>
                     </div>
-                    <!-- Portfolio items will be loaded here -->
                 </div>
             </div>
         </section>
@@ -1934,42 +1970,49 @@
 
     <!-- Success Message -->
     <div id="successMessage" class="success-message" style="display: none;">
-        Work added and saved! Will persist after refresh.
+        Work added successfully and saved!
     </div>
 
-    <!-- Storage Info Panel -->
-    <div id="storageInfo" style="position: fixed; bottom: 20px; right: 20px; background: rgba(0, 0, 0, 0.8); color: white; padding: 10px; border-radius: 10px; font-size: 0.8rem; max-width: 250px; display: none; z-index: 2000;">
-        <div style="font-weight: bold; color: #ff6b00; margin-bottom: 5px;">🎮 NETHUWA EDITZ</div>
-        <div>Items saved locally - persist after refresh!</div>
-        <div style="margin-top: 5px; font-size: 0.7rem; color: #ccc;">
-            Advanced: Press F12 → Console for more commands
-        </div>
+    <!-- Storage Status -->
+    <div id="storageStatus" class="storage-status" style="display: none;">
+        <h4>🎮 NETHUWA EDITZ - SAVED ITEMS</h4>
+        <p>✅ Items saved in browser memory</p>
+        <p>📊 <span class="highlight" id="savedCount">0</span> saved items loaded</p>
+        <p>🔄 Data persists after refresh</p>
+        <p style="margin-top: 10px; font-size: 0.7rem;">💡 Use browser console for advanced commands</p>
     </div>
 
     <script>
-        // Portfolio data - Directly included in code for GitHub Pages
-        const portfolioData = {
+        // =======================================
+        // NETHUWA EDITZ - COMPLETE PORTFOLIO DATA WITH PERSISTENT STORAGE
+        // =======================================
+
+        // Original portfolio data (built into the website)
+        const originalPortfolioData = {
             logo: [
                 {
                     title: "Elite Gaming Clan Logo",
                     description: "Professional gaming clan logo with modern design elements and custom typography for esports teams",
                     price: 1500,
                     tags: ["Logo", "Gaming", "Clan", "Esports"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='36' font-weight='900' text-anchor='middle' fill='white'%3EELITE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='180' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ECLAN LOGO%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional esports%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eteam branding%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E"
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='36' font-weight='900' text-anchor='middle' fill='white'%3EELITE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='180' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ECLAN LOGO%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional esports%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eteam branding%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E",
+                    isOriginal: true
                 },
                 {
                     title: "Free Fire Team Emblem",
                     description: "Custom Free Fire team emblem with mascot design and professional typography for competitive gaming",
                     price: 2000,
                     tags: ["Free Fire", "Team", "Emblem", "Competitive"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='32' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3ETEAM EMBLEM%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3ECustom mascot design%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith professional typography%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor competitive gaming%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='60' text-anchor='middle' fill='white'%3E🔥%3C/text%3E%3C/svg%3E"
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='32' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3ETEAM EMBLEM%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3ECustom mascot design%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith professional typography%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor competitive gaming%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='60' text-anchor='middle' fill='white'%3E🔥%3C/text%3E%3C/svg%3E",
+                    isOriginal: true
                 },
                 {
                     title: "Streamer Brand Logo",
                     description: "Personal brand logo for gaming streamers with unique identity and memorable visual elements",
                     price: 1200,
                     tags: ["Streamer", "Brand", "Identity", "Gaming"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3ESTREAMER%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EBRAND LOGO%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EPersonal brand identity%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming streamers%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith memorable elements%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='55' text-anchor='middle' fill='white'%3E🎮%3C/text%3E%3C/svg%3E"
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3ESTREAMER%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EBRAND LOGO%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EPersonal brand identity%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming streamers%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith memorable elements%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='55' text-anchor='middle' fill='white'%3E🎮%3C/text%3E%3C/svg%3E",
+                    isOriginal: true
                 }
             ],
             post: [
@@ -1978,21 +2021,24 @@
                     description: "Epic Free Fire character showcase post with special effects and professional lighting for social media",
                     price: 350,
                     tags: ["Free Fire", "Character", "Showcase", "Effects"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='32' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ECHARACTER%3C/text%3E%3Ctext x='200' y='160' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ESHOWCASE%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EEpic character showcase%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith special effects%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eand professional lighting%3C/text%3E%3Ctext x='200' y='300' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E⚡%3C/text%3E%3C/svg%3E"
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='32' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ECHARACTER%3C/text%3E%3Ctext x='200' y='160' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ESHOWCASE%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EEpic character showcase%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith special effects%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eand professional lighting%3C/text%3E%3Ctext x='200' y='300' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E⚡%3C/text%3E%3C/svg%3E",
+                    isOriginal: true
                 },
                 {
                     title: "Instagram Gaming Story",
                     description: "Professional Instagram story design for gaming content highlights and achievement posts",
                     price: 250,
                     tags: ["Instagram", "Story", "Gaming", "Highlights"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EINSTAGRAM%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMING STORY%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional story design%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming highlights%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eand achievements%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='55' text-anchor='middle' fill='white'%3E📱%3C/text%3E%3C/svg%3E"
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EINSTAGRAM%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMING STORY%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional story design%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming highlights%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eand achievements%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='55' text-anchor='middle' fill='white'%3E📱%3C/text%3E%3C/svg%3E",
+                    isOriginal: true
                 },
                 {
                     title: "Victory Post Design",
                     description: "Celebrate your gaming victories with epic post designs featuring dynamic effects and bold typography",
                     price: 300,
                     tags: ["Victory", "Gaming", "Celebration", "Dynamic"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='36' font-weight='900' text-anchor='middle' fill='white'%3EVICTORY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EPOST DESIGN%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3ECelebrate gaming victories%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith epic designs and%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Edynamic effects%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='60' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E"
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='36' font-weight='900' text-anchor='middle' fill='white'%3EVICTORY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EPOST DESIGN%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3ECelebrate gaming victories%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith epic designs and%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Edynamic effects%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='60' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E",
+                    isOriginal: true
                 }
             ],
             youtube: [
@@ -2001,47 +2047,151 @@
                     description: "Epic Free Fire gameplay thumbnail with character showcase and explosive effects to maximize views",
                     price: 500,
                     tags: ["Thumbnail", "Free Fire", "Gameplay", "Epic"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='110' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMEPLAY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EEpic gameplay showcase%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith explosive effects%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Eto maximize views%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎬%3C/text%3E%3C/svg%3E"
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='110' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMEPLAY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EEpic gameplay showcase%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith explosive effects%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Eto maximize views%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎬%3C/text%3E%3C/svg%3E",
+                    isOriginal: true
                 },
                 {
                     title: "Free Fire Channel Banner",
                     description: "Professional Free Fire YouTube banner with character design and channel branding elements",
                     price: 800,
                     tags: ["Banner", "Free Fire", "Channel", "Branding"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ECHANNEL%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3EBANNER%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EProfessional YouTube%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echannel branding with%3C/text%3E%3Ctext x='200' y='230' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echaracter design%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎯%3C/text%3E%3C/svg%3E"
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ECHANNEL%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3EBANNER%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EProfessional YouTube%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echannel branding with%3C/text%3E%3Ctext x='200' y='230' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echaracter design%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎯%3C/text%3E%3C/svg%3E",
+                    isOriginal: true
                 },
                 {
                     title: "Gaming Montage Thumbnail",
                     description: "High-energy gaming montage thumbnail with dynamic composition and eye-catching visual effects",
                     price: 600,
                     tags: ["Montage", "Gaming", "Thumbnail", "Dynamic"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EMONTAGE%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EHigh-energy montage%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith dynamic composition%3C/text%3E%3Ctext x='200' y='230' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Eand eye-catching effects%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E⚡%3C/text%3E%3C/svg%3E"
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EMONTAGE%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EHigh-energy montage%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith dynamic composition%3C/text%3E%3Ctext x='200' y='230' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Eand eye-catching effects%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E⚡%3C/text%3E%3C/svg%3E",
+                    isOriginal: true
                 }
             ]
         };
 
-        // Page Navigation
+        // Working portfolio data (includes original + user-added items)
+        let portfolioData = {
+            logo: [...originalPortfolioData.logo],
+            post: [...originalPortfolioData.post],
+            youtube: [...originalPortfolioData.youtube]
+        };
+
+        // =======================================
+        // PERSISTENT STORAGE SYSTEM
+        // =======================================
+
+        const STORAGE_KEY = 'nethuwa_editz_portfolio_v2';
+
+        // Save data to localStorage
+        function saveToStorage() {
+            try {
+                const userAddedItems = {
+                    logo: portfolioData.logo.filter(item => !item.isOriginal),
+                    post: portfolioData.post.filter(item => !item.isOriginal),
+                    youtube: portfolioData.youtube.filter(item => !item.isOriginal)
+                };
+                
+                const dataToSave = {
+                    items: userAddedItems,
+                    timestamp: new Date().toISOString(),
+                    version: '2.0'
+                };
+                
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+                console.log('✅ Data saved to localStorage successfully');
+                
+                updateStorageStatus();
+                return true;
+            } catch (error) {
+                console.error('❌ Failed to save to localStorage:', error);
+                return false;
+            }
+        }
+
+        // Load data from localStorage
+        function loadFromStorage() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (!saved) {
+                    console.log('📝 No saved data found - using original portfolio only');
+                    return false;
+                }
+                
+                const data = JSON.parse(saved);
+                
+                if (data && data.items) {
+                    // Reset to original data first
+                    portfolioData = {
+                        logo: [...originalPortfolioData.logo],
+                        post: [...originalPortfolioData.post],
+                        youtube: [...originalPortfolioData.youtube]
+                    };
+                    
+                    // Add saved user items
+                    Object.keys(data.items).forEach(category => {
+                        if (portfolioData[category] && Array.isArray(data.items[category])) {
+                            portfolioData[category].push(...data.items[category]);
+                        }
+                    });
+                    
+                    const totalSaved = Object.values(data.items).reduce((sum, arr) => sum + arr.length, 0);
+                    console.log(`✅ Loaded ${totalSaved} saved items from localStorage`);
+                    console.log('📅 Data saved on:', data.timestamp);
+                    
+                    updateStorageStatus();
+                    return true;
+                }
+            } catch (error) {
+                console.error('❌ Failed to load from localStorage:', error);
+            }
+            return false;
+        }
+
+        // Update storage status display
+        function updateStorageStatus() {
+            const savedCount = portfolioData.logo.filter(item => !item.isOriginal).length +
+                             portfolioData.post.filter(item => !item.isOriginal).length +
+                             portfolioData.youtube.filter(item => !item.isOriginal).length;
+            
+            const statusDiv = document.getElementById('storageStatus');
+            const countSpan = document.getElementById('savedCount');
+            
+            if (countSpan) {
+                countSpan.textContent = savedCount;
+            }
+            
+            if (statusDiv && savedCount > 0) {
+                statusDiv.style.display = 'block';
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 8000);
+            }
+        }
+
+        // =======================================
+        // PORTFOLIO MANAGEMENT FUNCTIONS
+        // =======================================
+
+        let currentUploadCategory = '';
+
+        // Show specific page
         function showPage(pageId) {
-            console.log('Navigating to page:', pageId);
+            console.log('🔄 Navigating to page:', pageId);
             
             // Hide all pages
             const pages = document.querySelectorAll('.page');
-            pages.forEach(page => {
-                page.classList.remove('active');
-            });
+            pages.forEach(page => page.classList.remove('active'));
 
             // Show selected page
             document.getElementById(pageId).classList.add('active');
 
             // Update navigation active state
             const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
+            navLinks.forEach(link => link.classList.remove('active'));
 
             // Find and activate the corresponding nav link
             const activeLink = Array.from(navLinks).find(link => 
-                link.getAttribute('onclick').includes(pageId)
+                link.getAttribute('onclick') && link.getAttribute('onclick').includes(pageId)
             );
             if (activeLink) {
                 activeLink.classList.add('active');
@@ -2050,32 +2200,23 @@
             // Load portfolio items for the specific category
             if (['logos', 'posts', 'youtube'].includes(pageId)) {
                 const category = pageId === 'logos' ? 'logo' : (pageId === 'posts' ? 'post' : 'youtube');
-                console.log(`Loading ${category} items for page ${pageId}`);
+                console.log(`📂 Loading ${category} items for page ${pageId}`);
                 displayPortfolioItems(category);
-                
-                // Add portfolio page particles
-                setTimeout(() => {
-                    createPortfolioParticles(pageId);
-                }, 300);
             }
 
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             // Trigger animations for visible elements
-            setTimeout(() => {
-                triggerAnimations();
-            }, 100);
+            setTimeout(() => triggerAnimations(), 100);
         }
 
-        // Display portfolio items
+        // Display portfolio items for a category
         function displayPortfolioItems(category) {
-            console.log(`Displaying items for ${category}:`, portfolioData[category]);
-            
             const gridElement = document.getElementById(category === 'logo' ? 'logoGrid' : (category === 'post' ? 'postsGrid' : 'youtubeGrid'));
             
             if (!gridElement) {
-                console.error('Grid element not found for category:', category);
+                console.error('❌ Grid element not found for category:', category);
                 return;
             }
             
@@ -2091,6 +2232,8 @@
                 const portfolioItem = createPortfolioItemElement(item, category, index);
                 gridElement.appendChild(portfolioItem);
             });
+            
+            console.log(`📊 Displayed ${portfolioData[category].length} ${category} items`);
         }
 
         // Create portfolio item HTML element
@@ -2109,7 +2252,12 @@
                 tagsHtml = tagArray.map(tag => `<span class="tag">${tag.toUpperCase()}</span>`).join('');
             }
             
+            // Add delete button for user-added items
+            const deleteButton = !item.isOriginal ? 
+                `<button class="delete-btn" onclick="deletePortfolioItem('${category}', ${index})" title="Delete this item">×</button>` : '';
+            
             portfolioItem.innerHTML = `
+                ${deleteButton}
                 <div class="portfolio-image ${themeClass}">
                     <img src="${item.image}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: contain;">
                 </div>
@@ -2124,6 +2272,152 @@
             `;
 
             return portfolioItem;
+        }
+
+        // Delete portfolio item
+        function deletePortfolioItem(category, index) {
+            const item = portfolioData[category][index];
+            
+            if (item.isOriginal) {
+                alert('❌ Cannot delete original portfolio items!');
+                return;
+            }
+            
+            if (confirm(`🗑️ Are you sure you want to delete "${item.title}"?\n\nThis action cannot be undone.`)) {
+                portfolioData[category].splice(index, 1);
+                saveToStorage();
+                displayPortfolioItems(category);
+                showSuccessMessage('🗑️ Item deleted successfully!');
+                console.log('🗑️ Deleted item:', item.title);
+            }
+        }
+
+        // =======================================
+        // MODAL AND UPLOAD FUNCTIONS
+        // =======================================
+
+        // Open upload modal
+        function openUploadModal(category) {
+            currentUploadCategory = category;
+            const categoryNames = {
+                'logo': 'Logo Design',
+                'post': 'Social Media Post', 
+                'youtube': 'YouTube Graphic'
+            };
+            
+            document.getElementById('modalTitle').textContent = `Add New ${categoryNames[category]}`;
+            document.getElementById('uploadModal').style.display = 'block';
+            document.getElementById('uploadForm').reset();
+            document.getElementById('imagePreview').style.display = 'none';
+        }
+
+        // Close upload modal
+        function closeUploadModal() {
+            document.getElementById('uploadModal').style.display = 'none';
+            document.getElementById('uploadForm').reset();
+            document.getElementById('imagePreview').style.display = 'none';
+        }
+
+        // Show success message
+        function showSuccessMessage(message) {
+            const messageDiv = document.getElementById('successMessage');
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 4000);
+        }
+
+        // =======================================
+        // UTILITY FUNCTIONS
+        // =======================================
+
+        // Clear all saved items
+        function clearAllSavedItems() {
+            if (confirm('🗑️ Are you sure you want to clear ALL saved items?\n\nThis will remove all items you added but keep the original portfolio.\n\n⚠️ THIS CANNOT BE UNDONE!')) {
+                try {
+                    localStorage.removeItem(STORAGE_KEY);
+                    
+                    // Reset to original data only
+                    portfolioData = {
+                        logo: [...originalPortfolioData.logo],
+                        post: [...originalPortfolioData.post],
+                        youtube: [...originalPortfolioData.youtube]
+                    };
+                    
+                    // Refresh all displays
+                    displayPortfolioItems('logo');
+                    displayPortfolioItems('post');
+                    displayPortfolioItems('youtube');
+                    
+                    showSuccessMessage('🗑️ All saved items cleared! Original portfolio restored.');
+                    updateStorageStatus();
+                    console.log('🗑️ All saved items cleared - portfolio reset to original');
+                } catch (error) {
+                    console.error('❌ Error clearing saved items:', error);
+                    alert('❌ Error clearing saved items. Check console for details.');
+                }
+            }
+        }
+
+        // Export portfolio as JSON
+        function exportPortfolioData() {
+            try {
+                const exportData = {
+                    originalItems: originalPortfolioData,
+                    userAddedItems: {
+                        logo: portfolioData.logo.filter(item => !item.isOriginal),
+                        post: portfolioData.post.filter(item => !item.isOriginal),
+                        youtube: portfolioData.youtube.filter(item => !item.isOriginal)
+                    },
+                    allItems: portfolioData,
+                    exportedOn: new Date().toISOString(),
+                    websiteUrl: 'https://nethuwa22.github.io/NETHUWA-EDITZ-22/',
+                    version: '2.0'
+                };
+                
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `nethuwa_editz_portfolio_backup_${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                
+                URL.revokeObjectURL(url);
+                showSuccessMessage('💾 Portfolio backup downloaded successfully!');
+                console.log('💾 Portfolio data exported successfully');
+            } catch (error) {
+                console.error('❌ Error exporting portfolio:', error);
+                alert('❌ Error exporting portfolio. Check console for details.');
+            }
+        }
+
+        // Get storage statistics
+        function getStorageStats() {
+            const stats = {
+                original: {
+                    logo: originalPortfolioData.logo.length,
+                    post: originalPortfolioData.post.length,
+                    youtube: originalPortfolioData.youtube.length
+                },
+                userAdded: {
+                    logo: portfolioData.logo.filter(item => !item.isOriginal).length,
+                    post: portfolioData.post.filter(item => !item.isOriginal).length,
+                    youtube: portfolioData.youtube.filter(item => !item.isOriginal).length
+                },
+                total: {
+                    logo: portfolioData.logo.length,
+                    post: portfolioData.post.length,
+                    youtube: portfolioData.youtube.length
+                }
+            };
+            
+            console.log('📊 NETHUWA EDITZ Portfolio Statistics:');
+            console.table(stats);
+            return stats;
         }
 
         // Trigger scroll animations
@@ -2168,288 +2462,9 @@
             }
         }
 
-        let currentUploadCategory = '';
-        let temporaryItems = { logo: [], post: [], youtube: [] };
-
-        // Save data to localStorage
-        function saveToLocalStorage() {
-            try {
-                localStorage.setItem('nethuwa_editz_items', JSON.stringify(temporaryItems));
-                console.log('Items saved to localStorage');
-            } catch (e) {
-                console.error('Error saving to localStorage:', e);
-            }
-        }
-
-        // Load data from localStorage
-        function loadFromLocalStorage() {
-            try {
-                const saved = localStorage.getItem('nethuwa_editz_items');
-                if (saved) {
-                    const parsedData = JSON.parse(saved);
-                    temporaryItems = parsedData;
-                    
-                    // Add saved items to portfolioData for display
-                    Object.keys(temporaryItems).forEach(category => {
-                        temporaryItems[category].forEach(item => {
-                            if (!portfolioData[category].find(existing => existing.timestamp === item.timestamp)) {
-                                portfolioData[category].push(item);
-                            }
-                        });
-                    });
-                    
-                    console.log('Items loaded from localStorage:', temporaryItems);
-                    return true;
-                }
-            } catch (e) {
-                console.error('Error loading from localStorage:', e);
-            }
-            return false;
-        }
-
-        // Clear all saved items
-        function clearAllSavedItems() {
-            if (confirm('Are you sure you want to clear all saved items? This cannot be undone.')) {
-                localStorage.removeItem('nethuwa_editz_items');
-                temporaryItems = { logo: [], post: [], youtube: [] };
-                
-                // Reset portfolioData to original items only
-                portfolioData.logo = portfolioData.logo.filter(item => !item.temporary);
-                portfolioData.post = portfolioData.post.filter(item => !item.temporary);
-                portfolioData.youtube = portfolioData.youtube.filter(item => !item.temporary);
-                
-                // Refresh displays
-                displayPortfolioItems('logo');
-                displayPortfolioItems('post');
-                displayPortfolioItems('youtube');
-                
-                showSuccessMessage('All saved items cleared!');
-                console.log('All saved items cleared');
-            }
-        }
-
-        // Export saved items as JSON
-        function exportSavedItems() {
-            const allItems = {
-                logo: portfolioData.logo,
-                post: portfolioData.post,
-                youtube: portfolioData.youtube,
-                exported: new Date().toISOString()
-            };
-            
-            const dataStr = JSON.stringify(allItems, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(dataBlob);
-            
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'nethuwa_editz_portfolio_backup.json';
-            link.click();
-            
-            URL.revokeObjectURL(url);
-            showSuccessMessage('Portfolio backup downloaded!');
-        }
-
-        // Open upload modal
-        function openUploadModal(category) {
-            currentUploadCategory = category;
-            const categoryNames = {
-                'logo': 'Logo Design',
-                'post': 'Social Media Post', 
-                'youtube': 'YouTube Graphic'
-            };
-            
-            document.getElementById('modalTitle').textContent = `Add New ${categoryNames[category]}`;
-            document.getElementById('uploadModal').style.display = 'block';
-            document.getElementById('uploadForm').reset();
-            document.getElementById('imagePreview').style.display = 'none';
-        }
-
-        // Close upload modal
-        function closeUploadModal() {
-            document.getElementById('uploadModal').style.display = 'none';
-            document.getElementById('uploadForm').reset();
-            document.getElementById('imagePreview').style.display = 'none';
-        }
-
-        // Show success message
-        function showSuccessMessage(message) {
-            const messageDiv = document.getElementById('successMessage');
-            messageDiv.textContent = message;
-            messageDiv.style.display = 'block';
-            
-            setTimeout(() => {
-                messageDiv.style.display = 'none';
-            }, 5000);
-        }
-
-        // Image preview functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const imageInput = document.getElementById('workImage');
-            if (imageInput) {
-                imageInput.addEventListener('change', function(e) {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const preview = document.getElementById('imagePreview');
-                            const previewImg = document.getElementById('previewImg');
-                            previewImg.src = e.target.result;
-                            preview.style.display = 'block';
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            }
-        });
-
-        // Handle form submission
-        document.addEventListener('DOMContentLoaded', function() {
-            const uploadForm = document.getElementById('uploadForm');
-            if (uploadForm) {
-                uploadForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const title = document.getElementById('workTitle').value;
-                    const description = document.getElementById('workDescription').value;
-                    const price = document.getElementById('workPrice').value;
-                    const tags = document.getElementById('workTags').value.split(',').map(tag => tag.trim());
-                    const imageFile = document.getElementById('workImage').files[0];
-                    
-                    if (imageFile) {
-                        // Create image element to resize
-                        const img = new Image();
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-                        
-                        img.onload = function() {
-                            // Set canvas size to portfolio image dimensions
-                            canvas.width = 400;
-                            canvas.height = 350;
-                            
-                            const imageAspect = img.width / img.height;
-                            const canvasAspect = canvas.width / canvas.height;
-                            
-                            let drawWidth, drawHeight, drawX, drawY;
-
-                            // Fill the canvas with a background color
-                            ctx.fillStyle = '#2d3748'; 
-                            ctx.fillRect(0, 0, canvas.width, canvas.height);
-                            
-                            if (imageAspect > canvasAspect) {
-                                drawWidth = canvas.width;
-                                drawHeight = drawWidth / imageAspect;
-                                drawX = 0;
-                                drawY = (canvas.height - drawHeight) / 2;
-                            } else {
-                                drawHeight = canvas.height;
-                                drawWidth = drawHeight * imageAspect;
-                                drawY = 0;
-                                drawX = (canvas.width - drawWidth) / 2;
-                            }
-                            
-                            // Draw the correctly scaled image
-                            ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
-                            
-                            // Convert canvas to base64
-                            const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
-                            
-                            const newItem = {
-                                title: title,
-                                description: description,
-                                price: parseFloat(price),
-                                tags: tags,
-                                image: resizedImageData,
-                                timestamp: new Date().toISOString(),
-                                temporary: true
-                            };
-                            
-                            // Add to temporary items
-                            temporaryItems[currentUploadCategory].push(newItem);
-                            
-                            // Add to main portfolio data for display
-                            portfolioData[currentUploadCategory].push(newItem);
-                            
-                            // Display updated items
-                            displayPortfolioItems(currentUploadCategory);
-                            
-                            // Close modal and show success
-                            closeUploadModal();
-                            showSuccessMessage('Work added temporarily! Check console for permanent save instructions.');
-                            
-                            // Show instructions in console
-                            console.log(`
-🎮 NETHUWA EDITZ - Item Added Successfully!
-
-📝 To make this item PERMANENT:
-1. Copy this code:
-${JSON.stringify(newItem, null, 2)}
-
-2. Open your HTML file in text editor
-3. Find the "portfolioData" section (around line 1800+)
-4. Add the above code to the "${currentUploadCategory}" array
-5. Save and upload to GitHub
-
-📞 Need help? Contact: 0773116253
-                            `);
-                            
-                            console.log('Added new item:', newItem);
-                        };
-                        
-                        // Load the uploaded image
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            img.src = e.target.result;
-                        };
-                        reader.readAsDataURL(imageFile);
-                    }
-                });
-            }
-        });
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('uploadModal');
-            if (event.target == modal) {
-                closeUploadModal();
-            }
-        }
-        function createPortfolioParticles(pageId) {
-            const portfolioPage = document.querySelector(`#${pageId} .portfolio-page`);
-            
-            // Remove existing particles
-            const existingParticles = portfolioPage.querySelectorAll('.portfolio-particle');
-            existingParticles.forEach(particle => particle.remove());
-            
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'portfolio-particle';
-                particle.style.position = 'absolute';
-                particle.style.width = Math.random() * 6 + 3 + 'px';
-                particle.style.height = particle.style.width;
-                
-                // Different colors for different pages
-                let colors = [];
-                if (pageId === 'logos') {
-                    colors = ['rgba(255, 107, 0, 0.4)', 'rgba(255, 221, 0, 0.4)', 'rgba(255, 69, 0, 0.3)'];
-                } else if (pageId === 'posts') {
-                    colors = ['rgba(0, 255, 65, 0.4)', 'rgba(0, 204, 51, 0.4)', 'rgba(34, 197, 94, 0.3)'];
-                } else if (pageId === 'youtube') {
-                    colors = ['rgba(255, 0, 102, 0.4)', 'rgba(204, 0, 68, 0.4)', 'rgba(239, 68, 68, 0.3)'];
-                }
-                
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '20%';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animation = `particleFloat ${Math.random() * 8 + 12}s ease-in-out infinite`;
-                particle.style.animationDelay = Math.random() * 3 + 's';
-                particle.style.pointerEvents = 'none';
-                particle.style.zIndex = '1';
-                
-                portfolioPage.appendChild(particle);
-            }
-        }
+        // =======================================
+        // EVENT LISTENERS AND INITIALIZATION
+        // =======================================
 
         // Navbar background on scroll
         window.addEventListener('scroll', () => {
@@ -2461,21 +2476,41 @@ ${JSON.stringify(newItem, null, 2)}
             }
         });
 
-        // Initialize website
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('uploadModal');
+            if (event.target == modal) {
+                closeUploadModal();
+            }
+        }
+
+        // =======================================
+        // INITIALIZE WEBSITE
+        // =======================================
+
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('NETHUWA EDITZ Website loaded!');
+            console.log(`
+🎮 NETHUWA EDITZ WEBSITE LOADED - PERSISTENT STORAGE VERSION v2.0
+
+✅ Original portfolio items: ${originalPortfolioData.logo.length + originalPortfolioData.post.length + originalPortfolioData.youtube.length} items
+✅ Real image upload functionality
+✅ Persistent localStorage storage
+✅ Auto-save on add/delete
+✅ Data survives browser refresh
+✅ Delete protection for original items
+
+🔄 Loading saved data...
+            `);
             
-            // Load saved items from localStorage first
-            const savedItemsLoaded = loadFromLocalStorage();
+            // Load saved items from localStorage
+            const savedItemsLoaded = loadFromStorage();
             
-            // Initialize animations
+            // Initialize animations and effects
             triggerAnimations();
-            
-            // Load logo items by default
-            displayPortfolioItems('logo');
-            
-            // Create floating particles
             createFloatingParticles();
+            
+            // Load portfolio items by default (logos page)
+            displayPortfolioItems('logo');
             
             // Setup image preview functionality
             const imageInput = document.getElementById('workImage');
@@ -2501,144 +2536,146 @@ ${JSON.stringify(newItem, null, 2)}
                 uploadForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
-                    const title = document.getElementById('workTitle').value;
-                    const description = document.getElementById('workDescription').value;
+                    const title = document.getElementById('workTitle').value.trim();
+                    const description = document.getElementById('workDescription').value.trim();
                     const price = document.getElementById('workPrice').value;
-                    const tags = document.getElementById('workTags').value.split(',').map(tag => tag.trim());
+                    const tags = document.getElementById('workTags').value.split(',').map(tag => tag.trim()).filter(tag => tag);
                     const imageFile = document.getElementById('workImage').files[0];
                     
-                    if (imageFile) {
-                        // Create image element to resize
-                        const img = new Image();
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-                        
-                        img.onload = function() {
-                            // Set canvas size to portfolio image dimensions
-                            canvas.width = 400;
-                            canvas.height = 350;
-                            
-                            const imageAspect = img.width / img.height;
-                            const canvasAspect = canvas.width / canvas.height;
-                            
-                            let drawWidth, drawHeight, drawX, drawY;
-
-                            // Fill the canvas with a background color
-                            ctx.fillStyle = '#2d3748'; 
-                            ctx.fillRect(0, 0, canvas.width, canvas.height);
-                            
-                            if (imageAspect > canvasAspect) {
-                                drawWidth = canvas.width;
-                                drawHeight = drawWidth / imageAspect;
-                                drawX = 0;
-                                drawY = (canvas.height - drawHeight) / 2;
-                            } else {
-                                drawHeight = canvas.height;
-                                drawWidth = drawHeight * imageAspect;
-                                drawY = 0;
-                                drawX = (canvas.width - drawWidth) / 2;
-                            }
-                            
-                            // Draw the correctly scaled image
-                            ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
-                            
-                            // Convert canvas to base64
-                            const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
-                            
-                            const newItem = {
-                                title: title,
-                                description: description,
-                                price: parseFloat(price),
-                                tags: tags,
-                                image: resizedImageData,
-                                timestamp: new Date().toISOString(),
-                                temporary: true
-                            };
-                            
-                            // Add to temporary items and save to localStorage
-                            temporaryItems[currentUploadCategory].push(newItem);
-                            saveToLocalStorage();
-                            
-                            // Add to main portfolio data for display
-                            portfolioData[currentUploadCategory].push(newItem);
-                            
-                            // Display updated items
-                            displayPortfolioItems(currentUploadCategory);
-                            
-                            // Close modal and show success
-                            closeUploadModal();
-                            showSuccessMessage('Work added and saved! Will persist after refresh.');
-                            
-                            console.log('Added and saved new item:', newItem);
-                        };
-                        
-                        // Load the uploaded image
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            img.src = e.target.result;
-                        };
-                        reader.readAsDataURL(imageFile);
+                    if (!title || !description || !price || !imageFile || tags.length === 0) {
+                        alert('❌ Please fill in all fields and upload an image!');
+                        return;
                     }
+                    
+                    console.log('📤 Processing new item upload...');
+                    
+                    // Create image element to resize
+                    const img = new Image();
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    img.onload = function() {
+                        // Set canvas size to portfolio image dimensions
+                        canvas.width = 400;
+                        canvas.height = 350;
+                        
+                        const imageAspect = img.width / img.height;
+                        const canvasAspect = canvas.width / canvas.height;
+                        
+                        let drawWidth, drawHeight, drawX, drawY;
+
+                        // Fill the canvas with a background color
+                        ctx.fillStyle = '#2d3748'; 
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        
+                        if (imageAspect > canvasAspect) {
+                            drawWidth = canvas.width;
+                            drawHeight = drawWidth / imageAspect;
+                            drawX = 0;
+                            drawY = (canvas.height - drawHeight) / 2;
+                        } else {
+                            drawHeight = canvas.height;
+                            drawWidth = drawHeight * imageAspect;
+                            drawY = 0;
+                            drawX = (canvas.width - drawWidth) / 2;
+                        }
+                        
+                        // Draw the correctly scaled image
+                        ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+                        
+                        // Convert canvas to base64
+                        const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
+                        
+                        const newItem = {
+                            title: title,
+                            description: description,
+                            price: parseFloat(price),
+                            tags: tags,
+                            image: resizedImageData,
+                            timestamp: new Date().toISOString(),
+                            isOriginal: false
+                        };
+                        
+                        // Add to portfolio data
+                        portfolioData[currentUploadCategory].push(newItem);
+                        
+                        // Save to localStorage
+                        const saved = saveToStorage();
+                        
+                        // Display updated items
+                        displayPortfolioItems(currentUploadCategory);
+                        
+                        // Close modal and show success
+                        closeUploadModal();
+                        
+                        if (saved) {
+                            showSuccessMessage('✅ Item added and saved permanently!');
+                            console.log('✅ Successfully added and saved new item:', newItem.title);
+                        } else {
+                            showSuccessMessage('⚠️ Item added but save failed - check console');
+                            console.error('⚠️ Item added to display but failed to save to localStorage');
+                        }
+                    };
+                    
+                    // Load the uploaded image
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        img.src = e.target.result;
+                    };
+                    reader.readAsDataURL(imageFile);
                 });
             }
             
-            const savedCount = Object.values(temporaryItems).reduce((sum, arr) => sum + arr.length, 0);
-            
-            // Show storage info if items were loaded
-            if (savedCount > 0) {
-                setTimeout(() => {
-                    showStorageInfo();
-                }, 2000);
-            }
+            // Show final status
+            const totalItems = portfolioData.logo.length + portfolioData.post.length + portfolioData.youtube.length;
+            const savedItems = portfolioData.logo.filter(item => !item.isOriginal).length +
+                             portfolioData.post.filter(item => !item.isOriginal).length +
+                             portfolioData.youtube.filter(item => !item.isOriginal).length;
             
             console.log(`
-🎮 NETHUWA EDITZ WEBSITE - PERSISTENT STORAGE VERSION
+🚀 WEBSITE READY!
 
-✅ Portfolio items directly included in code
-✅ Real image upload functionality added!
-✅ localStorage persistence - NO MORE REFRESH LOSS! 
-✅ Images automatically resized and optimized
-✅ Items saved across browser sessions
-✅ Delete buttons for user-added items
+📊 Portfolio Status:
+- Total items: ${totalItems}
+- Original items: ${totalItems - savedItems}
+- Saved items: ${savedItems}
+- Data loaded: ${savedItemsLoaded ? '✅' : '📝 No saved data'}
 
-Portfolio status:
-- Original Logos: 3 items
-- Original Posts: 3 items  
-- Original YouTube: 3 items
-- Saved items loaded: ${savedCount} items
+🎯 FEATURES ACTIVE:
+✅ Add new items with real image upload
+✅ Automatic save to localStorage
+✅ Delete user-added items (× button on hover)
+✅ Data persists after browser refresh
+✅ Original items are protected from deletion
 
-🚀 NOW YOU CAN:
-1. Click "+ Add New" buttons  
-2. Fill form and upload images
-3. Items appear immediately AND persist after refresh!
-4. Delete items you added (× button on hover)
-5. Use console commands for advanced features
-
-Advanced commands:
+🔧 CONSOLE COMMANDS AVAILABLE:
+- getStorageStats() - View detailed statistics  
 - clearAllSavedItems() - Clear all saved items
-- exportSavedItems() - Download backup file
-- loadFromLocalStorage() - Manually reload saved items
+- exportPortfolioData() - Download backup file
+- loadFromStorage() - Manually reload saved data
 
-Ready to build your persistent portfolio! 🎨✨
+📞 Need help? Contact: 0773116253
+🌐 Live site: https://nethuwa22.github.io/NETHUWA-EDITZ-22/
+
+Ready to build your portfolio! 🎨✨
             `);
+            
+            // Show storage status if there are saved items
+            if (savedItems > 0) {
+                setTimeout(() => updateStorageStatus(), 2000);
+            }
         });
 
-        // Interactive effects
-        document.addEventListener('mouseenter', function(e) {
-            if (e.target.classList.contains('portfolio-item') || 
-                e.target.classList.contains('service-card') || 
-                e.target.classList.contains('contact-method')) {
-                e.target.style.filter = 'brightness(1.1)';
-            }
-        }, true);
+        // =======================================
+        // GLOBAL FUNCTIONS (for console use)
+        // =======================================
 
-        document.addEventListener('mouseleave', function(e) {
-            if (e.target.classList.contains('portfolio-item') || 
-                e.target.classList.contains('service-card') || 
-                e.target.classList.contains('contact-method')) {
-                e.target.style.filter = 'brightness(1)';
-            }
-        }, true);
+        // Make these functions available globally for console access
+        window.getStorageStats = getStorageStats;
+        window.clearAllSavedItems = clearAllSavedItems;
+        window.exportPortfolioData = exportPortfolioData;
+        window.loadFromStorage = loadFromStorage;
+        window.saveToStorage = saveToStorage;
     </script>
 </body>
 </html>
