@@ -122,6 +122,43 @@
             box-shadow: 0 10px 25px rgba(0, 255, 65, 0.5);
         }
 
+        /* Data Source Info */
+        .data-info {
+            position: fixed;
+            top: 90px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 999;
+            min-width: 250px;
+        }
+
+        .data-info h4 {
+            color: #00ff41;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .data-info .status {
+            color: #00ff41;
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .data-info .error {
+            color: #ff4444;
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .data-info .loading {
+            color: #ffdd00;
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
         /* Admin Panel */
         .admin-panel {
             position: fixed;
@@ -132,7 +169,7 @@
             border-radius: 10px;
             padding: 15px;
             z-index: 999;
-            min-width: 250px;
+            min-width: 280px;
             display: none;
         }
 
@@ -154,6 +191,7 @@
             border: 2px solid rgba(255, 107, 0, 0.3);
             border-radius: 5px;
             color: white;
+            font-size: 0.9rem;
         }
 
         .admin-panel button {
@@ -165,7 +203,7 @@
             font-weight: bold;
             margin: 3px;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             width: 100%;
         }
 
@@ -177,30 +215,24 @@
             background: linear-gradient(135deg, #ff4444, #cc0000);
         }
 
-        /* Stats Bar */
-        .stats-bar {
-            position: fixed;
-            top: 90px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #00ff41;
-            border-radius: 10px;
-            padding: 15px;
-            z-index: 999;
-            min-width: 200px;
+        .admin-panel .generate-btn {
+            background: linear-gradient(135deg, #0066ff, #0044cc);
         }
 
-        .stats-bar h4 {
-            color: #00ff41;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
+        /* Stats Display */
+        .stats-display {
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.8rem;
         }
 
         .stat-item {
             display: flex;
             justify-content: space-between;
-            margin: 5px 0;
-            font-size: 0.8rem;
+            margin: 3px 0;
         }
 
         .stat-label {
@@ -210,6 +242,30 @@
         .stat-value {
             color: #00ff41;
             font-weight: bold;
+        }
+
+        /* Admin Login */
+        .admin-login {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #ffdd00;
+            border-radius: 10px;
+            padding: 10px 20px;
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-login:hover {
+            background: rgba(255, 221, 0, 0.1);
+        }
+
+        .admin-login span {
+            color: #ffdd00;
+            font-weight: bold;
+            font-size: 0.8rem;
         }
 
         /* Page Container */
@@ -457,42 +513,6 @@
             padding: 0 2rem;
         }
 
-        .portfolio-controls {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .control-btn {
-            background: linear-gradient(135deg, #ff6b00, #ff4500);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-weight: 900;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .control-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
-        }
-
-        .control-btn.secondary {
-            background: linear-gradient(135deg, #00ff41, #00cc33);
-            color: #000;
-        }
-
-        .control-btn.danger {
-            background: linear-gradient(135deg, #ff4444, #cc0000);
-            color: white;
-        }
-
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -592,47 +612,6 @@
             text-transform: uppercase;
         }
 
-        /* Add Work Button */
-        .add-work-btn {
-            background: rgba(45, 55, 72, 0.8);
-            border: 3px dashed rgba(255, 107, 0, 0.5);
-            border-radius: 20px;
-            min-height: 350px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.5s ease;
-        }
-
-        .add-work-btn:hover {
-            border-color: #ffdd00;
-            background: rgba(255, 107, 0, 0.15);
-            transform: translateY(-8px) scale(1.02);
-        }
-
-        .add-work-btn .icon {
-            font-size: 4rem;
-            margin-bottom: 2rem;
-            color: #ff6b00;
-        }
-
-        .add-work-btn h3 {
-            font-size: 1.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            color: #ff6b00;
-        }
-
-        .add-work-btn p {
-            color: #a0aec0;
-            text-align: center;
-            margin: 0;
-            font-size: 1rem;
-        }
-
         /* Delete Button */
         .delete-btn {
             position: absolute;
@@ -655,29 +634,26 @@
             display: block;
         }
 
-        /* Admin Login */
-        .admin-login {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #ffdd00;
-            border-radius: 10px;
-            padding: 10px 20px;
-            z-index: 999;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        /* Loading Animation */
+        .loading-animation {
+            text-align: center;
+            padding: 4rem;
+            color: #ff6b00;
         }
 
-        .admin-login:hover {
-            background: rgba(255, 221, 0, 0.1);
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 107, 0, 0.1);
+            border-left: 4px solid #ff6b00;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
         }
 
-        .admin-login span {
-            color: #ffdd00;
-            font-weight: bold;
-            font-size: 0.8rem;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Modal */
@@ -937,22 +913,6 @@
             }
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .hero-container {
@@ -989,15 +949,10 @@
                 flex-direction: column;
             }
 
-            .stats-bar, .admin-panel {
+            .data-info, .admin-panel {
                 position: relative;
                 margin: 20px;
                 max-width: none;
-            }
-
-            .portfolio-controls {
-                flex-direction: column;
-                align-items: center;
             }
 
             .admin-login {
@@ -1026,30 +981,35 @@
         </div>
     </nav>
 
-    <!-- Stats Bar -->
-    <div class="stats-bar">
-        <h4>📊 Portfolio Stats</h4>
-        <div class="stat-item">
-            <span class="stat-label">Logos:</span>
-            <span class="stat-value" id="logoCount">0</span>
+    <!-- Data Source Info -->
+    <div class="data-info">
+        <h4>🌍 Universal Access Data</h4>
+        <div id="dataStatus" class="status">🔄 Loading portfolio data...</div>
+        <div id="dataSource" class="status">📂 Source: GitHub Repository</div>
+        <div class="stats-display">
+            <div class="stat-item">
+                <span class="stat-label">Logos:</span>
+                <span class="stat-value" id="logoCount">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Posts:</span>
+                <span class="stat-value" id="postCount">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">YouTube:</span>
+                <span class="stat-value" id="youtubeCount">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Total:</span>
+                <span class="stat-value" id="totalCount">0</span>
+            </div>
         </div>
-        <div class="stat-item">
-            <span class="stat-label">Posts:</span>
-            <span class="stat-value" id="postCount">0</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">YouTube:</span>
-            <span class="stat-value" id="youtubeCount">0</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">Total Items:</span>
-            <span class="stat-value" id="totalCount">0</span>
-        </div>
+        <div id="lastUpdate" class="status">⏰ Last update: Loading...</div>
     </div>
 
     <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel">
-        <h4>🔐 Admin Panel</h4>
+        <h4>🔐 Admin Panel - Universal Access</h4>
         <div id="adminLogin">
             <input type="password" id="adminPassword" placeholder="Admin Password">
             <button onclick="adminLogin()">Login</button>
@@ -1058,8 +1018,9 @@
             <button onclick="openUploadModal('logo')">➕ Add Logo</button>
             <button onclick="openUploadModal('post')">➕ Add Post</button>
             <button onclick="openUploadModal('youtube')">➕ Add YouTube</button>
-            <button onclick="addSampleItems('logo')">🎮 Samples</button>
-            <button onclick="exportData()">📦 Export</button>
+            <button onclick="addSampleItems('logo')" class="generate-btn">🎮 Generate Samples</button>
+            <button onclick="generateDataFile()" class="generate-btn">📄 Generate Data File</button>
+            <button onclick="syncData()" class="generate-btn">🔄 Sync to Repository</button>
             <button onclick="clearAllData()" class="logout-btn">🗑️ Clear All</button>
             <button onclick="adminLogout()" class="logout-btn">🚪 Logout</button>
         </div>
@@ -1067,7 +1028,7 @@
 
     <!-- Admin Login Button -->
     <div class="admin-login" onclick="toggleAdminPanel()">
-        <span>🔐 Admin Login</span>
+        <span>🔐 Admin Universal Access</span>
     </div>
 
     <div id="home" class="page active">
@@ -1134,7 +1095,10 @@
                 </div>
                 
                 <div class="portfolio-grid" id="logoGrid">
-                    <!-- Items will be loaded here -->
+                    <div class="loading-animation">
+                        <div class="loading-spinner"></div>
+                        <p>Loading portfolio data from repository...</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1149,7 +1113,10 @@
                 </div>
                 
                 <div class="portfolio-grid" id="postsGrid">
-                    <!-- Items will be loaded here -->
+                    <div class="loading-animation">
+                        <div class="loading-spinner"></div>
+                        <p>Loading portfolio data from repository...</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1164,7 +1131,10 @@
                 </div>
                 
                 <div class="portfolio-grid" id="youtubeGrid">
-                    <!-- Items will be loaded here -->
+                    <div class="loading-animation">
+                        <div class="loading-spinner"></div>
+                        <p>Loading portfolio data from repository...</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1248,78 +1218,98 @@
 
     <!-- Success Message -->
     <div id="successMessage" class="success-message" style="display: none;">
-        Item added successfully!
+        Operation completed successfully!
     </div>
 
     <script>
         // =======================================
-        // NETHUWA EDITZ - GITHUB PAGES VERSION
+        // NETHUWA EDITZ - UNIVERSAL ACCESS VERSION
         // =======================================
 
         // Global variables
         let portfolioData = { logo: [], post: [], youtube: [] };
         let currentUploadCategory = '';
         let isAdminLoggedIn = false;
-        const ADMIN_PASSWORD = 'nethuwa2025'; // Change this password
+        const ADMIN_PASSWORD = 'nethuwa2025';
+
+        // GitHub Repository Configuration
+        const GITHUB_CONFIG = {
+            username: 'nethuwa22',
+            repository: 'NETHUWA-EDITZ-22',
+            dataFileName: 'portfolio-data.json',
+            branch: 'main'
+        };
+
+        // Build GitHub raw URL
+        const GITHUB_DATA_URL = `https://raw.githubusercontent.com/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repository}/${GITHUB_CONFIG.branch}/${GITHUB_CONFIG.dataFileName}`;
 
         // =======================================
-        // ADMIN FUNCTIONS
+        // DATA LOADING FUNCTIONS
         // =======================================
 
-        function toggleAdminPanel() {
-            const panel = document.getElementById('adminPanel');
-            panel.classList.toggle('show');
-        }
-
-        function adminLogin() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === ADMIN_PASSWORD) {
-                isAdminLoggedIn = true;
-                document.getElementById('adminLogin').style.display = 'none';
-                document.getElementById('adminControls').style.display = 'block';
-                showSuccessMessage('✅ Admin login successful!');
-                document.getElementById('adminPassword').value = '';
-            } else {
-                showSuccessMessage('❌ Invalid password!');
-                document.getElementById('adminPassword').value = '';
-            }
-        }
-
-        function adminLogout() {
-            isAdminLoggedIn = false;
-            document.getElementById('adminLogin').style.display = 'block';
-            document.getElementById('adminControls').style.display = 'none';
-            document.getElementById('adminPanel').classList.remove('show');
-            showSuccessMessage('🚪 Admin logged out!');
-        }
-
-        // =======================================
-        // DATA MANAGEMENT FUNCTIONS
-        // =======================================
-
-        function loadPortfolioData() {
+        async function loadPortfolioDataFromGitHub() {
+            updateDataStatus('🔄 Loading from GitHub repository...', 'loading');
+            
             try {
-                const savedData = localStorage.getItem('nethuwa_portfolio_data');
-                if (savedData) {
-                    portfolioData = JSON.parse(savedData);
+                console.log('🔄 Fetching data from:', GITHUB_DATA_URL);
+                
+                const response = await fetch(GITHUB_DATA_URL + '?cache=' + Date.now());
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data && data.portfolioData) {
+                    portfolioData = data.portfolioData;
+                    updateDataStatus('✅ Data loaded from GitHub successfully!', 'status');
+                    updateLastUpdate(data.lastUpdate || 'Unknown');
+                    console.log('✅ Portfolio data loaded from GitHub:', portfolioData);
                 } else {
-                    portfolioData = getDefaultPortfolioData();
-                    savePortfolioData();
+                    throw new Error('Invalid data format in GitHub file');
+                }
+                
+            } catch (error) {
+                console.error('❌ Failed to load from GitHub:', error);
+                updateDataStatus('⚠️ GitHub data not found - using default data', 'error');
+                
+                // Fallback to default data
+                portfolioData = getDefaultPortfolioData();
+                updateLastUpdate('Using default data');
+            }
+            
+            // Also try localStorage as backup
+            try {
+                const localData = localStorage.getItem('nethuwa_portfolio_data');
+                if (localData) {
+                    const parsedLocalData = JSON.parse(localData);
+                    // Merge with GitHub data if available
+                    if (Object.values(parsedLocalData).some(category => category.length > 0)) {
+                        console.log('📱 Found local data as backup');
+                    }
                 }
             } catch (error) {
-                console.error('Error loading portfolio data:', error);
-                portfolioData = getDefaultPortfolioData();
+                console.log('📱 No local backup data found');
             }
+            
             updateStats();
+            displayAllPortfolioItems();
         }
 
-        function savePortfolioData() {
-            try {
-                localStorage.setItem('nethuwa_portfolio_data', JSON.stringify(portfolioData));
-                return true;
-            } catch (error) {
-                console.error('Error saving portfolio data:', error);
-                return false;
+        function updateDataStatus(message, type) {
+            const element = document.getElementById('dataStatus');
+            element.textContent = message;
+            element.className = type;
+        }
+
+        function updateLastUpdate(timestamp) {
+            const element = document.getElementById('lastUpdate');
+            if (timestamp && timestamp !== 'Unknown') {
+                const date = new Date(timestamp);
+                element.textContent = `⏰ Last update: ${date.toLocaleString()}`;
+            } else {
+                element.textContent = `⏰ Last update: ${timestamp}`;
             }
         }
 
@@ -1416,6 +1406,103 @@
         }
 
         // =======================================
+        // ADMIN FUNCTIONS
+        // =======================================
+
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('show');
+        }
+
+        function adminLogin() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
+                document.getElementById('adminLogin').style.display = 'none';
+                document.getElementById('adminControls').style.display = 'block';
+                showSuccessMessage('✅ Admin login successful!');
+                document.getElementById('adminPassword').value = '';
+                
+                // Refresh displays to show admin controls
+                displayAllPortfolioItems();
+            } else {
+                showSuccessMessage('❌ Invalid password!');
+                document.getElementById('adminPassword').value = '';
+            }
+        }
+
+        function adminLogout() {
+            isAdminLoggedIn = false;
+            document.getElementById('adminLogin').style.display = 'block';
+            document.getElementById('adminControls').style.display = 'none';
+            document.getElementById('adminPanel').classList.remove('show');
+            showSuccessMessage('🚪 Admin logged out!');
+            
+            // Refresh displays to hide admin controls
+            displayAllPortfolioItems();
+        }
+
+        // =======================================
+        // DATA SYNC FUNCTIONS
+        // =======================================
+
+        function generateDataFile() {
+            if (!isAdminLoggedIn) {
+                showSuccessMessage('❌ Admin access required!');
+                return;
+            }
+
+            const exportData = {
+                portfolioData: portfolioData,
+                lastUpdate: new Date().toISOString(),
+                version: '2.0',
+                source: 'NETHUWA EDITZ Universal Access Version'
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = GITHUB_CONFIG.dataFileName;
+            link.click();
+            
+            showSuccessMessage('📄 Data file generated! Upload this to your GitHub repository.');
+            
+            // Show instructions
+            setTimeout(() => {
+                alert(`📋 INSTRUCTIONS:
+
+1. Upload the downloaded '${GITHUB_CONFIG.dataFileName}' file to your GitHub repository
+2. Go to: https://github.com/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repository}
+3. Click "Add file" > "Upload files"
+4. Upload the JSON file
+5. Commit changes
+6. Wait 2-5 minutes for changes to take effect
+7. Refresh your website to see updated data
+
+This will make your portfolio items visible to EVERYONE who visits your website!`);
+            }, 1000);
+        }
+
+        function syncData() {
+            if (!isAdminLoggedIn) {
+                showSuccessMessage('❌ Admin access required!');
+                return;
+            }
+
+            showSuccessMessage('🔄 Manual sync: Please use "Generate Data File" and upload to GitHub repository');
+            
+            // Also save to localStorage as backup
+            try {
+                localStorage.setItem('nethuwa_portfolio_data', JSON.stringify(portfolioData));
+                console.log('💾 Backup saved to localStorage');
+            } catch (error) {
+                console.error('❌ Failed to save backup:', error);
+            }
+        }
+
+        // =======================================
         // UTILITY FUNCTIONS
         // =======================================
 
@@ -1432,9 +1519,9 @@
                 youtube: '🎬'
             };
 
-            const shortTitle = title.length > 20 ? title.substring(0, 20) + '...' : title;
+            const shortTitle = title.length > 18 ? title.substring(0, 18) + '...' : title;
 
-            return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='${encodeURIComponent(colors[category])}'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3E${encodeURIComponent(shortTitle.toUpperCase())}%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3E${encodeURIComponent(category.toUpperCase())} DESIGN%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E${icons[category]}%3C/text%3E%3C/svg%3E`;
+            return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='${encodeURIComponent(colors[category])}'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3E${encodeURIComponent(shortTitle.toUpperCase())}%3C/text%3E%3Ctext x='200' y='120' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3E${encodeURIComponent(category.toUpperCase())} DESIGN%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E${icons[category]}%3C/text%3E%3Ctext x='200' y='250' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ%3C/text%3E%3C/svg%3E`;
         }
 
         function updateStats() {
@@ -1492,6 +1579,12 @@
         // PORTFOLIO DISPLAY FUNCTIONS
         // =======================================
 
+        function displayAllPortfolioItems() {
+            displayPortfolioItems('logo');
+            displayPortfolioItems('post');
+            displayPortfolioItems('youtube');
+        }
+
         function displayPortfolioItems(category) {
             const gridElement = document.getElementById(category === 'logo' ? 'logoGrid' : (category === 'post' ? 'postsGrid' : 'youtubeGrid'));
             
@@ -1509,6 +1602,17 @@
                     const portfolioItem = createPortfolioItemElement(item, category, index);
                     gridElement.appendChild(portfolioItem);
                 });
+            } else {
+                // Show empty state
+                const emptyState = document.createElement('div');
+                emptyState.className = 'loading-animation';
+                emptyState.innerHTML = `
+                    <div style="text-align: center; padding: 4rem; color: #666;">
+                        <h3>No ${category} items yet</h3>
+                        <p>Portfolio items will appear here when added</p>
+                    </div>
+                `;
+                gridElement.appendChild(emptyState);
             }
             
             updateStats();
@@ -1561,9 +1665,16 @@
             
             if (confirm(`🗑️ Are you sure you want to delete "${item.title}"?`)) {
                 portfolioData[category].splice(index, 1);
-                savePortfolioData();
+                
+                // Save to localStorage as backup
+                try {
+                    localStorage.setItem('nethuwa_portfolio_data', JSON.stringify(portfolioData));
+                } catch (error) {
+                    console.error('Failed to save backup:', error);
+                }
+                
                 displayPortfolioItems(category);
-                showSuccessMessage('🗑️ Item deleted successfully!');
+                showSuccessMessage('🗑️ Item deleted! Use "Generate Data File" to sync to repository.');
             }
         }
 
@@ -1586,12 +1697,15 @@
             
             portfolioData[category].push(item);
             
-            if (savePortfolioData()) {
-                displayPortfolioItems(category);
-                showSuccessMessage('✅ Item added and saved successfully!');
-            } else {
-                showSuccessMessage('⚠️ Item added but save failed!');
+            // Save to localStorage as backup
+            try {
+                localStorage.setItem('nethuwa_portfolio_data', JSON.stringify(portfolioData));
+            } catch (error) {
+                console.error('Failed to save backup:', error);
             }
+            
+            displayPortfolioItems(category);
+            showSuccessMessage('✅ Item added! Use "Generate Data File" to sync to repository.');
         }
 
         function addSampleItems(category) {
@@ -1602,29 +1716,29 @@
 
             const sampleTemplates = {
                 logo: [
-                    { title: "Gaming Clan Logo", price: 1500, tags: ["Gaming", "Clan", "Professional"] },
-                    { title: "Esports Team Emblem", price: 1800, tags: ["Esports", "Team", "Competitive"] },
-                    { title: "Streamer Brand Logo", price: 1200, tags: ["Streamer", "Brand", "Identity"] }
+                    { title: "Gaming Clan Logo", price: 1500, tags: ["Gaming", "Clan", "Professional"], desc: "Professional gaming clan logo with modern design elements" },
+                    { title: "Esports Team Emblem", price: 1800, tags: ["Esports", "Team", "Competitive"], desc: "Custom esports team emblem for competitive gaming" },
+                    { title: "Streamer Brand Logo", price: 1200, tags: ["Streamer", "Brand", "Identity"], desc: "Personal brand logo for gaming streamers" }
                 ],
                 post: [
-                    { title: "Free Fire Post", price: 300, tags: ["Free Fire", "Gaming", "Social"] },
-                    { title: "Instagram Story", price: 250, tags: ["Instagram", "Story", "Gaming"] },
-                    { title: "Victory Celebration", price: 350, tags: ["Victory", "Gaming", "Achievement"] }
+                    { title: "Free Fire Post", price: 300, tags: ["Free Fire", "Gaming", "Social"], desc: "Epic Free Fire social media post design" },
+                    { title: "Instagram Story", price: 250, tags: ["Instagram", "Story", "Gaming"], desc: "Professional Instagram story template" },
+                    { title: "Victory Celebration", price: 350, tags: ["Victory", "Gaming", "Achievement"], desc: "Victory celebration post design" }
                 ],
                 youtube: [
-                    { title: "Gaming Thumbnail", price: 500, tags: ["Thumbnail", "Gaming", "YouTube"] },
-                    { title: "Channel Banner", price: 800, tags: ["Banner", "Channel", "Branding"] },
-                    { title: "Video Intro Graphics", price: 600, tags: ["Intro", "Video", "Graphics"] }
+                    { title: "Gaming Thumbnail", price: 500, tags: ["Thumbnail", "Gaming", "YouTube"], desc: "Eye-catching gaming thumbnail design" },
+                    { title: "Channel Banner", price: 800, tags: ["Banner", "Channel", "Branding"], desc: "Professional YouTube channel banner" },
+                    { title: "Video Intro Graphics", price: 600, tags: ["Intro", "Video", "Graphics"], desc: "Custom video intro graphics package" }
                 ]
             };
 
-            if (confirm(`🎮 Add sample ${category} items to your portfolio?`)) {
+            if (confirm(`🎮 Generate sample ${category} items for your portfolio?`)) {
                 const samples = sampleTemplates[category] || [];
                 
                 samples.forEach(sample => {
                     const newItem = {
                         title: sample.title,
-                        description: `Professional ${sample.title.toLowerCase()} designed for gaming content creators`,
+                        description: sample.desc,
                         price: sample.price,
                         tags: sample.tags,
                         image: generateSampleImage(category, sample.title),
@@ -1634,7 +1748,7 @@
                     addPortfolioItem(category, newItem);
                 });
                 
-                showSuccessMessage(`✅ Added ${samples.length} sample ${category} items!`);
+                showSuccessMessage(`✅ Generated ${samples.length} sample ${category} items!`);
             }
         }
 
@@ -1647,14 +1761,16 @@
             if (confirm('🗑️ Are you sure you want to clear ALL portfolio data? This cannot be undone!')) {
                 if (confirm('⚠️ Last chance! This will delete everything. Continue?')) {
                     portfolioData = { logo: [], post: [], youtube: [] };
-                    savePortfolioData();
                     
-                    // Refresh all displays
-                    displayPortfolioItems('logo');
-                    displayPortfolioItems('post');
-                    displayPortfolioItems('youtube');
+                    // Save to localStorage
+                    try {
+                        localStorage.setItem('nethuwa_portfolio_data', JSON.stringify(portfolioData));
+                    } catch (error) {
+                        console.error('Failed to save backup:', error);
+                    }
                     
-                    showSuccessMessage('🗑️ All data cleared!');
+                    displayAllPortfolioItems();
+                    showSuccessMessage('🗑️ All data cleared! Use "Generate Data File" to sync to repository.');
                 }
             }
         }
@@ -1689,29 +1805,6 @@
         }
 
         // =======================================
-        // UTILITY FUNCTIONS
-        // =======================================
-
-        function exportData() {
-            const exportData = {
-                portfolioData: portfolioData,
-                exportDate: new Date().toISOString(),
-                version: '1.0',
-                source: 'NETHUWA EDITZ Portfolio - GitHub Pages'
-            };
-            
-            const dataStr = JSON.stringify(exportData, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            link.download = `nethuwa_portfolio_backup_${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
-            
-            showSuccessMessage('📦 Portfolio data exported for backup!');
-        }
-
-        // =======================================
         // EVENT LISTENERS
         // =======================================
 
@@ -1733,13 +1826,10 @@
 
         // Initialize website
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎮 NETHUWA EDITZ - GitHub Pages Version Loading...');
+            console.log('🌍 NETHUWA EDITZ - Universal Access Version Loading...');
             
-            // Load portfolio data
-            loadPortfolioData();
-            
-            // Display default page items
-            displayPortfolioItems('logo');
+            // Load portfolio data from GitHub
+            loadPortfolioDataFromGitHub();
             
             // Setup image preview for upload
             const imageInput = document.getElementById('workImage');
@@ -1801,20 +1891,15 @@
                 });
             }
 
-            console.log('✅ GitHub Pages version loaded successfully!');
+            console.log('✅ Universal Access version loaded successfully!');
         });
 
-        // Auto-save every 30 seconds (safety feature)
+        // Refresh data every 5 minutes
         setInterval(() => {
-            if (Object.values(portfolioData).some(category => category.length > 0)) {
-                savePortfolioData();
+            if (!isAdminLoggedIn) {
+                loadPortfolioDataFromGitHub();
             }
-        }, 30000);
-
-        // Save data before page unload
-        window.addEventListener('beforeunload', function() {
-            savePortfolioData();
-        });
+        }, 300000); // 5 minutes
     </script>
 </body>
 </html>
