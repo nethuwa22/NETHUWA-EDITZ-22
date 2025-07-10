@@ -122,6 +122,41 @@
             box-shadow: 0 10px 25px rgba(0, 255, 65, 0.5);
         }
 
+        /* Stats Bar */
+        .stats-bar {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #ff6b00;
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 999;
+            min-width: 200px;
+        }
+
+        .stats-bar h4 {
+            color: #ff6b00;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 0.8rem;
+        }
+
+        .stat-label {
+            color: #cccccc;
+        }
+
+        .stat-value {
+            color: #00ff41;
+            font-weight: bold;
+        }
+
         /* Page Container */
         .page {
             display: none;
@@ -367,9 +402,39 @@
             padding: 0 2rem;
         }
 
+        .portfolio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .control-btn {
+            background: linear-gradient(135deg, #ff6b00, #ff4500);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+        }
+
+        .control-btn.secondary {
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+        }
+
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2.5rem;
             padding: 1rem 0;
         }
@@ -391,7 +456,7 @@
 
         .portfolio-image {
             width: 100%;
-            height: 350px;
+            height: 300px;
             background: #2d3748;
             position: relative;
             overflow: hidden;
@@ -471,7 +536,7 @@
             background: rgba(45, 55, 72, 0.8);
             border: 3px dashed rgba(255, 107, 0, 0.5);
             border-radius: 20px;
-            min-height: 400px;
+            min-height: 350px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -529,6 +594,30 @@
             display: block;
         }
 
+        /* Batch Upload */
+        .batch-upload {
+            background: rgba(0, 102, 255, 0.1);
+            border: 2px solid #0066ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .batch-upload h4 {
+            color: #0066ff;
+            margin-bottom: 15px;
+        }
+
+        .batch-upload input[type="file"] {
+            margin: 10px;
+            padding: 10px;
+            background: rgba(0, 102, 255, 0.2);
+            border: 2px dashed #0066ff;
+            border-radius: 8px;
+            color: white;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -544,10 +633,10 @@
         .modal-content {
             background: linear-gradient(135deg, #1a2332, #0f1821);
             margin: 1% auto;
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 15px;
-            width: 85%;
-            max-width: 450px;
+            width: 90%;
+            max-width: 500px;
             max-height: 90vh;
             overflow-y: auto;
             border: 2px solid #ff6b00;
@@ -556,15 +645,15 @@
 
         .modal-header h2 {
             color: #ff6b00;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 900;
             text-transform: uppercase;
-            margin: 0 0 1rem 0;
+            margin: 0 0 1.5rem 0;
             text-align: center;
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
@@ -579,22 +668,22 @@
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 0.6rem;
+            padding: 12px;
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 107, 0, 0.3);
             border-radius: 8px;
             color: #ffffff;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-family: 'Arial', sans-serif;
         }
 
         .form-group textarea {
-            height: 60px;
+            height: 80px;
             resize: vertical;
         }
 
         .form-group input[type="file"] {
-            padding: 0.6rem;
+            padding: 12px;
             background: rgba(255, 107, 0, 0.1);
             border: 2px dashed rgba(255, 107, 0, 0.5);
             cursor: pointer;
@@ -607,8 +696,8 @@
             font-weight: bold;
             cursor: pointer;
             position: absolute;
-            top: 10px;
-            right: 15px;
+            top: 15px;
+            right: 20px;
         }
 
         .close:hover {
@@ -617,20 +706,20 @@
 
         .button-container {
             text-align: center;
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 107, 0, 0.2);
         }
 
         .modal-content .btn-primary,
         .modal-content .btn-secondary {
-            margin: 0.2rem;
+            margin: 0.5rem;
             display: inline-block;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
             cursor: pointer;
-            font-size: 0.8rem;
-            border-radius: 20px;
+            font-size: 0.9rem;
+            border-radius: 25px;
             text-transform: uppercase;
             font-weight: 900;
         }
@@ -747,107 +836,6 @@
             font-weight: 500;
         }
 
-        /* GitHub Simple Info */
-        .github-simple-info {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            border: 2px solid #00ff41;
-            font-size: 0.8rem;
-            max-width: 350px;
-            z-index: 1500;
-        }
-
-        .github-simple-info h4 {
-            color: #00ff41;
-            margin-bottom: 8px;
-        }
-
-        .github-simple-info .status {
-            color: #00ff41;
-            font-weight: bold;
-        }
-
-        .github-simple-info .setup {
-            color: #ffdd00;
-            font-weight: bold;
-        }
-
-        /* Simple Controls */
-        .simple-controls {
-            position: fixed;
-            top: 120px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            border: 2px solid #ff6b00;
-            font-size: 0.8rem;
-            max-width: 350px;
-            z-index: 1500;
-        }
-
-        .simple-controls h4 {
-            color: #ff6b00;
-            margin-bottom: 8px;
-        }
-
-        .simple-controls button {
-            background: linear-gradient(135deg, #ff6b00, #ff4500);
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin: 3px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            width: 100%;
-        }
-
-        .simple-controls button:hover {
-            background: linear-gradient(135deg, #ff4500, #cc3300);
-        }
-
-        .github-btn {
-            background: linear-gradient(135deg, #00ff41, #00cc33) !important;
-            color: #000 !important;
-        }
-
-        .test-btn {
-            background: linear-gradient(135deg, #0066ff, #0044cc) !important;
-        }
-
-        /* Setup Box */
-        .setup-box {
-            background: rgba(255, 107, 0, 0.1);
-            border: 2px solid #ff6b00;
-            border-radius: 10px;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 0.7rem;
-        }
-
-        /* Loading Indicator */
-        .loading {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            color: #ff6b00;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #ff6b00;
-            z-index: 3000;
-            display: none;
-        }
-
         /* Animations */
         @keyframes gradientShift {
             0% {
@@ -887,6 +875,22 @@
             }
         }
 
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero-container {
@@ -907,7 +911,10 @@
                 font-size: 2.5rem;
             }
 
-            .services-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
@@ -920,11 +927,15 @@
                 flex-direction: column;
             }
 
-            .github-simple-info,
-            .simple-controls {
+            .stats-bar {
                 position: relative;
                 margin: 20px;
                 max-width: none;
+            }
+
+            .portfolio-controls {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -946,6 +957,27 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <h4>📊 Portfolio Stats</h4>
+        <div class="stat-item">
+            <span class="stat-label">Logos:</span>
+            <span class="stat-value" id="logoCount">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Posts:</span>
+            <span class="stat-value" id="postCount">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">YouTube:</span>
+            <span class="stat-value" id="youtubeCount">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Total Items:</span>
+            <span class="stat-value" id="totalCount">0</span>
+        </div>
+    </div>
 
     <div id="home" class="page active">
         <section class="hero">
@@ -1010,6 +1042,12 @@
                     <p>Professional gaming logos, clan emblems, and brand identity designs</p>
                 </div>
                 
+                <div class="portfolio-controls">
+                    <button class="control-btn" onclick="openUploadModal('logo')">➕ Add Single Logo</button>
+                    <button class="control-btn secondary" onclick="openBatchUpload('logo')">📂 Batch Upload</button>
+                    <button class="control-btn" onclick="addSampleItems('logo')">🎮 Add Samples</button>
+                </div>
+                
                 <div class="portfolio-grid" id="logoGrid">
                     <div class="add-work-btn" onclick="openUploadModal('logo')">
                         <div class="icon">+</div>
@@ -1029,6 +1067,12 @@
                     <p>Instagram, Facebook, TikTok and social media graphics portfolio</p>
                 </div>
                 
+                <div class="portfolio-controls">
+                    <button class="control-btn" onclick="openUploadModal('post')">➕ Add Single Post</button>
+                    <button class="control-btn secondary" onclick="openBatchUpload('post')">📂 Batch Upload</button>
+                    <button class="control-btn" onclick="addSampleItems('post')">📱 Add Samples</button>
+                </div>
+                
                 <div class="portfolio-grid" id="postsGrid">
                     <div class="add-work-btn" onclick="openUploadModal('post')">
                         <div class="icon">+</div>
@@ -1046,6 +1090,12 @@
                 <div class="section-header">
                     <h2>YouTube Graphics</h2>
                     <p>YouTube banners, thumbnails, channel art and video graphics portfolio</p>
+                </div>
+                
+                <div class="portfolio-controls">
+                    <button class="control-btn" onclick="openUploadModal('youtube')">➕ Add Single Item</button>
+                    <button class="control-btn secondary" onclick="openBatchUpload('youtube')">📂 Batch Upload</button>
+                    <button class="control-btn" onclick="addSampleItems('youtube')">🎬 Add Samples</button>
                 </div>
                 
                 <div class="portfolio-grid" id="youtubeGrid">
@@ -1117,8 +1167,8 @@
                 <div class="form-group">
                     <label for="workImage">Image:</label>
                     <input type="file" id="workImage" name="image" accept="image/*" required>
-                    <div id="imagePreview" style="margin-top: 5px; display: none; text-align: center;">
-                        <img id="previewImg" style="max-width: 120px; max-height: 90px; border-radius: 6px;">
+                    <div id="imagePreview" style="margin-top: 10px; display: none; text-align: center;">
+                        <img id="previewImg" style="max-width: 150px; max-height: 120px; border-radius: 8px; border: 2px solid #ff6b00;">
                     </div>
                 </div>
                 
@@ -1135,83 +1185,63 @@
         </div>
     </div>
 
+    <!-- Batch Upload Modal -->
+    <div id="batchUploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBatchUploadModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="batchModalTitle">Batch Upload</h2>
+            </div>
+            <div class="batch-upload">
+                <h4>📂 Upload Multiple Images</h4>
+                <input type="file" id="batchImages" multiple accept="image/*">
+                <p style="font-size: 0.8rem; color: #cccccc; margin-top: 10px;">
+                    Select multiple images. Each will be added with default info (you can edit later).
+                </p>
+                <div class="button-container">
+                    <button onclick="processBatchUpload()" class="btn-primary">Process Images</button>
+                    <button onclick="closeBatchUploadModal()" class="btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Success Message -->
     <div id="successMessage" class="success-message" style="display: none;">
         Item added successfully!
     </div>
 
-    <!-- Loading Indicator -->
-    <div id="loadingIndicator" class="loading">
-        <p>🔄 Working with GitHub...</p>
-    </div>
-
-    <!-- GitHub Simple Info -->
-    <div class="github-simple-info" id="githubSimpleInfo">
-        <h4>🐙 Simple GitHub Solution</h4>
-        <p>Status: <span class="status" id="githubStatus">Ready to Setup</span></p>
-        <p>Method: <span class="setup">GitHub Gist (Free)</span></p>
-        <p>Total Items: <span id="totalItemCount">9</span></p>
-        <p>✅ NO API keys needed!</p>
-        <p>✅ Universal access when setup!</p>
-        <p style="font-size: 0.7rem; margin-top: 5px;">Easiest way for universal portfolio!</p>
-    </div>
-
-    <!-- Simple Controls -->
-    <div class="simple-controls" id="simpleControls">
-        <h4>🚀 EASIEST Universal Setup</h4>
-        
-        <div class="setup-box">
-            <strong>Step 1:</strong> Add items locally<br>
-            <strong>Step 2:</strong> Export data (JSON)<br>
-            <strong>Step 3:</strong> Create GitHub Gist<br>
-            <strong>Step 4:</strong> Deploy website<br>
-            <strong>Result:</strong> EVERYONE sees your portfolio!
-        </div>
-        
-        <button onclick="exportToGithub()" class="github-btn">📦 Export for GitHub</button>
-        <button onclick="testGithubLoad()" class="test-btn">🧪 Test GitHub Load</button>
-        <button onclick="showGithubGuide()">📋 Show Full Guide</button>
-        <button onclick="addTestItem()">➕ Add Test Item</button>
-        <button onclick="clearLocalData()">🗑️ Clear Data</button>
-        <button onclick="resetToDefaults()">🔄 Reset Defaults</button>
-        
-        <p style="font-size: 0.7rem; margin-top: 8px;">💡 This is the SIMPLEST universal solution!</p>
-    </div>
-
     <script>
         // =======================================
-        // NETHUWA EDITZ - SIMPLE GITHUB SOLUTION
+        // NETHUWA EDITZ - ENHANCED PORTFOLIO
         // =======================================
 
-        // Default portfolio data
-        const DEFAULT_PORTFOLIO_DATA = {
+        // Portfolio data structure - using memory (not localStorage for Claude demo)
+        let portfolioData = {
+            logo: [],
+            post: [],
+            youtube: []
+        };
+
+        let currentUploadCategory = '';
+        let currentBatchCategory = '';
+
+        // Sample data templates
+        const SAMPLE_DATA = {
             logo: [
                 {
                     title: "Elite Gaming Clan Logo",
                     description: "Professional gaming clan logo with modern design elements and custom typography for esports teams",
                     price: 1500,
                     tags: ["Logo", "Gaming", "Clan", "Esports"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='36' font-weight='900' text-anchor='middle' fill='white'%3EELITE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='180' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ECLAN LOGO%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional esports%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eteam branding%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E",
-                    isDefault: true,
-                    dateAdded: "2025-01-01T00:00:00.000Z"
+                    category: "logo"
                 },
                 {
                     title: "Free Fire Team Emblem",
                     description: "Custom Free Fire team emblem with mascot design and professional typography for competitive gaming",
                     price: 2000,
                     tags: ["Free Fire", "Team", "Emblem", "Competitive"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='32' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3ETEAM EMBLEM%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3ECustom mascot design%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith professional typography%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor competitive gaming%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='60' text-anchor='middle' fill='white'%3E🔥%3C/text%3E%3C/svg%3E",
-                    isDefault: true,
-                    dateAdded: "2025-01-01T00:00:00.000Z"
-                },
-                {
-                    title: "Streamer Brand Logo",
-                    description: "Personal brand logo for gaming streamers with unique identity and memorable visual elements",
-                    price: 1200,
-                    tags: ["Streamer", "Brand", "Identity", "Gaming"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3ESTREAMER%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EBRAND LOGO%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EPersonal brand identity%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming streamers%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith memorable elements%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='55' text-anchor='middle' fill='white'%3E🎮%3C/text%3E%3C/svg%3E",
-                    isDefault: true,
-                    dateAdded: "2025-01-01T00:00:00.000Z"
+                    category: "logo"
                 }
             ],
             post: [
@@ -1220,27 +1250,14 @@
                     description: "Epic Free Fire character showcase post with special effects and professional lighting for social media",
                     price: 350,
                     tags: ["Free Fire", "Character", "Showcase", "Effects"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='32' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ECHARACTER%3C/text%3E%3Ctext x='200' y='160' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ESHOWCASE%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EEpic character showcase%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith special effects%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eand professional lighting%3C/text%3E%3Ctext x='200' y='300' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E⚡%3C/text%3E%3C/svg%3E",
-                    isDefault: true,
-                    dateAdded: "2025-01-01T00:00:00.000Z"
+                    category: "post"
                 },
                 {
                     title: "Instagram Gaming Story",
                     description: "Professional Instagram story design for gaming content highlights and achievement posts",
                     price: 250,
                     tags: ["Instagram", "Story", "Gaming", "Highlights"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EINSTAGRAM%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMING STORY%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional story design%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming highlights%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eand achievements%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='55' text-anchor='middle' fill='white'%3E📱%3C/text%3E%3C/svg%3E",
-                    isDefault: true,
-                    dateAdded: "2025-01-01T00:00:00.000Z"
-                },
-                {
-                    title: "Victory Post Design",
-                    description: "Celebrate your gaming victories with epic post designs featuring dynamic effects and bold typography",
-                    price: 300,
-                    tags: ["Victory", "Gaming", "Celebration", "Dynamic"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='36' font-weight='900' text-anchor='middle' fill='white'%3EVICTORY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EPOST DESIGN%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3ECelebrate gaming victories%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith epic designs and%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Edynamic effects%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='60' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E",
-                    isDefault: true,
-                    dateAdded: "2025-01-01T00:00:00.000Z"
+                    category: "post"
                 }
             ],
             youtube: [
@@ -1249,180 +1266,59 @@
                     description: "Epic Free Fire gameplay thumbnail with character showcase and explosive effects to maximize views",
                     price: 500,
                     tags: ["Thumbnail", "Free Fire", "Gameplay", "Epic"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='110' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMEPLAY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EEpic gameplay showcase%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith explosive effects%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Eto maximize views%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎬%3C/text%3E%3C/svg%3E",
-                    isDefault: true,
-                    dateAdded: "2025-01-01T00:00:00.000Z"
+                    category: "youtube"
                 },
                 {
-                    title: "Free Fire Channel Banner",
-                    description: "Professional Free Fire YouTube banner with character design and channel branding elements",
+                    title: "Gaming Channel Banner",
+                    description: "Professional gaming YouTube banner with character design and channel branding elements",
                     price: 800,
-                    tags: ["Banner", "Free Fire", "Channel", "Branding"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ECHANNEL%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3EBANNER%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EProfessional YouTube%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echannel branding with%3C/text%3E%3Ctext x='200' y='230' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echaracter design%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎯%3C/text%3E%3C/svg%3E",
-                    isDefault: true,
-                    dateAdded: "2025-01-01T00:00:00.000Z"
-                },
-                {
-                    title: "Gaming Montage Thumbnail",
-                    description: "High-energy gaming montage thumbnail with dynamic composition and eye-catching visual effects",
-                    price: 600,
-                    tags: ["Montage", "Gaming", "Thumbnail", "Dynamic"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EMONTAGE%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EHigh-energy montage%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith dynamic composition%3C/text%3E%3Ctext x='200' y='230' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Eand eye-catching effects%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E⚡%3C/text%3E%3C/svg%3E",
-                    isDefault: true,
-                    dateAdded: "2025-01-01T00:00:00.000Z"
+                    tags: ["Banner", "Gaming", "Channel", "Branding"],
+                    category: "youtube"
                 }
             ]
         };
 
-        // Working portfolio data
-        let portfolioData = JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
-        let currentUploadCategory = '';
-
         // =======================================
-        // GITHUB SIMPLE FUNCTIONS
+        // UTILITY FUNCTIONS
         // =======================================
 
-        function showLoading(show = true) {
-            document.getElementById('loadingIndicator').style.display = show ? 'block' : 'none';
-        }
-
-        function updateItemCount() {
-            const totalCount = Object.values(portfolioData).reduce((total, category) => total + category.length, 0);
-            document.getElementById('totalItemCount').textContent = totalCount;
-        }
-
-        function exportToGithub() {
-            try {
-                const exportData = {
-                    portfolioData: portfolioData,
-                    exportDate: new Date().toISOString(),
-                    version: '3.0',
-                    source: 'NETHUWA EDITZ Simple GitHub Version',
-                    instructions: {
-                        step1: 'Create GitHub Gist with this JSON data',
-                        step2: 'Make gist public',
-                        step3: 'Get raw URL',
-                        step4: 'Use in website code',
-                        step5: 'Deploy website for universal access'
-                    }
-                };
-                
-                const dataStr = JSON.stringify(exportData, null, 2);
-                const dataBlob = new Blob([dataStr], { type: 'application/json' });
-                
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(dataBlob);
-                link.download = `nethuwa_editz_github_data_${new Date().toISOString().split('T')[0]}.json`;
-                link.click();
-                
-                showSuccessMessage('📦 GitHub data exported! Next: Create GitHub Gist with this JSON.');
-                console.log('📦 Portfolio data exported for GitHub');
-                
-                // Show guide after export
-                setTimeout(() => {
-                    showGithubGuide();
-                }, 2000);
-                
-            } catch (error) {
-                console.error('❌ Export failed:', error);
-                showSuccessMessage('❌ Export failed!');
-            }
-        }
-
-        function testGithubLoad() {
-            // Demo function to show how GitHub loading would work
-            showLoading(true);
-            setTimeout(() => {
-                showLoading(false);
-                showSuccessMessage('🧪 GitHub load simulation complete! Setup real GitHub Gist for actual loading.');
-                console.log('🧪 GitHub load test completed');
-            }, 2000);
-        }
-
-        function showGithubGuide() {
-            const guide = `
-🚀 SIMPLE UNIVERSAL ACCESS SETUP:
-
-📦 Step 1: Export Data (✅ Done if you clicked Export)
-• Downloads JSON file with your portfolio
-
-🐙 Step 2: Create GitHub Gist
-• Go to: https://gist.github.com
-• Create new gist
-• Name: nethuwa_editz_portfolio.json
-• Paste your JSON data
-• Make it PUBLIC
-• Click "Create public gist"
-
-🔗 Step 3: Get Raw URL
-• Click "Raw" button in your gist
-• Copy the URL (looks like: https://gist.githubusercontent.com/...)
-
-💻 Step 4: Update Website Code
-• Replace GITHUB_DATA_URL in code with your raw URL
-• Deploy website to hosting (GitHub Pages, Netlify, etc.)
-
-🌍 Step 5: Universal Access!
-• Anyone visiting your website URL sees your portfolio
-• When you update gist, everyone sees changes
-• NO API keys needed!
-• 100% FREE solution!
-
-💡 This is the EASIEST way for universal portfolio access!
-            `;
-            
-            alert(guide);
-        }
-
-        function addTestItem() {
-            const testItem = {
-                title: `Test Item ${Date.now()}`,
-                description: "This is a test item to demonstrate adding functionality",
-                price: 999,
-                tags: ["Test", "Demo", "Sample"],
-                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='180' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3ETEST ITEM%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3E${new Date().toLocaleTimeString()}%3C/text%3E%3C/svg%3E",
-                isDefault: false,
-                dateAdded: new Date().toISOString()
+        function generateSampleImage(category, title) {
+            const colors = {
+                logo: '#ff6b00',
+                post: '#00ff41', 
+                youtube: '#ff0066'
             };
             
-            portfolioData.logo.push(testItem);
-            updateItemCount();
-            displayPortfolioItems('logo');
-            showSuccessMessage('✅ Test item added! Export to GitHub to share with everyone.');
+            const icons = {
+                logo: '💎',
+                post: '📱',
+                youtube: '🎬'
+            };
+
+            return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='${encodeURIComponent(colors[category])}'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3E${encodeURIComponent(title.toUpperCase())}%3C/text%3E%3Ctext x='200' y='150' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3E${encodeURIComponent(category.toUpperCase())} DESIGN%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E${icons[category]}%3C/text%3E%3C/svg%3E`;
         }
 
-        function clearLocalData() {
-            if (confirm('🗑️ Clear all local data? This will remove custom items but keep defaults.')) {
-                portfolioData = JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
-                updateItemCount();
-                
-                // Refresh displays
-                displayPortfolioItems('logo');
-                displayPortfolioItems('post');
-                displayPortfolioItems('youtube');
-                
-                showSuccessMessage('🗑️ Local data cleared!');
-            }
+        function updateStats() {
+            document.getElementById('logoCount').textContent = portfolioData.logo.length;
+            document.getElementById('postCount').textContent = portfolioData.post.length;
+            document.getElementById('youtubeCount').textContent = portfolioData.youtube.length;
+            document.getElementById('totalCount').textContent = 
+                portfolioData.logo.length + portfolioData.post.length + portfolioData.youtube.length;
         }
 
-        function resetToDefaults() {
-            if (confirm('🔄 Reset to default portfolio items?')) {
-                portfolioData = JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
-                updateItemCount();
-                
-                // Refresh current display
-                const currentPage = document.querySelector('.page.active').id;
-                if (['logos', 'posts', 'youtube'].includes(currentPage)) {
-                    const category = currentPage === 'logos' ? 'logo' : (currentPage === 'posts' ? 'post' : 'youtube');
-                    displayPortfolioItems(category);
-                }
-                
-                showSuccessMessage('🔄 Reset to defaults!');
-            }
+        function showSuccessMessage(message) {
+            const messageDiv = document.getElementById('successMessage');
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            messageDiv.style.animation = 'slideInRight 0.4s ease-out';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
         }
 
         // =======================================
-        // PORTFOLIO FUNCTIONS
+        // NAVIGATION FUNCTIONS
         // =======================================
 
         function showPage(pageId) {
@@ -1455,6 +1351,10 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // =======================================
+        // PORTFOLIO DISPLAY FUNCTIONS
+        // =======================================
+
         function displayPortfolioItems(category) {
             const gridElement = document.getElementById(category === 'logo' ? 'logoGrid' : (category === 'post' ? 'postsGrid' : 'youtubeGrid'));
             
@@ -1471,7 +1371,7 @@
             }
 
             // Add items from portfolio data
-            if (portfolioData[category]) {
+            if (portfolioData[category] && portfolioData[category].length > 0) {
                 portfolioData[category].forEach((item, index) => {
                     const portfolioItem = createPortfolioItemElement(item, category, index);
                     gridElement.appendChild(portfolioItem);
@@ -1479,6 +1379,7 @@
             }
             
             console.log(`📊 Displayed ${portfolioData[category]?.length || 0} ${category} items`);
+            updateStats();
         }
 
         function createPortfolioItemElement(item, category, index) {
@@ -1496,9 +1397,8 @@
                 tagsHtml = tagArray.map(tag => `<span class="tag">${tag.toUpperCase()}</span>`).join('');
             }
             
-            // Add delete button for user-added items (not default items)
-            const deleteButton = !item.isDefault ? 
-                `<button class="delete-btn" onclick="deletePortfolioItem('${category}', ${index})" title="Delete this item">×</button>` : '';
+            // Delete button for all items
+            const deleteButton = `<button class="delete-btn" onclick="deletePortfolioItem('${category}', ${index})" title="Delete this item">×</button>`;
             
             portfolioItem.innerHTML = `
                 ${deleteButton}
@@ -1521,16 +1421,36 @@
         function deletePortfolioItem(category, index) {
             const item = portfolioData[category][index];
             
-            if (item.isDefault) {
-                alert('❌ Cannot delete default portfolio items!');
-                return;
-            }
-            
             if (confirm(`🗑️ Are you sure you want to delete "${item.title}"?`)) {
                 portfolioData[category].splice(index, 1);
-                updateItemCount();
                 displayPortfolioItems(category);
-                showSuccessMessage('🗑️ Item deleted! Export to GitHub to sync changes.');
+                showSuccessMessage('🗑️ Item deleted successfully!');
+                console.log('🗑️ Deleted item:', item.title);
+            }
+        }
+
+        // =======================================
+        // SAMPLE DATA FUNCTIONS
+        // =======================================
+
+        function addSampleItems(category) {
+            if (confirm(`🎮 Add sample ${category} items to your portfolio?`)) {
+                const samples = SAMPLE_DATA[category] || [];
+                
+                samples.forEach(sample => {
+                    const newItem = {
+                        ...sample,
+                        image: generateSampleImage(category, sample.title),
+                        dateAdded: new Date().toISOString(),
+                        id: Date.now() + Math.random()
+                    };
+                    
+                    portfolioData[category].push(newItem);
+                });
+                
+                displayPortfolioItems(category);
+                showSuccessMessage(`✅ Added ${samples.length} sample ${category} items!`);
+                console.log(`✅ Added ${samples.length} sample items to ${category}`);
             }
         }
 
@@ -1558,49 +1478,99 @@
             document.getElementById('imagePreview').style.display = 'none';
         }
 
-        function showSuccessMessage(message) {
-            const messageDiv = document.getElementById('successMessage');
-            messageDiv.textContent = message;
-            messageDiv.style.display = 'block';
-            messageDiv.style.animation = 'slideInRight 0.4s ease-out';
+        function openBatchUpload(category) {
+            currentBatchCategory = category;
+            const categoryNames = {
+                'logo': 'Logos',
+                'post': 'Social Posts', 
+                'youtube': 'YouTube Graphics'
+            };
             
-            setTimeout(() => {
-                messageDiv.style.display = 'none';
-            }, 5000);
+            document.getElementById('batchModalTitle').textContent = `Batch Upload ${categoryNames[category]}`;
+            document.getElementById('batchUploadModal').style.display = 'block';
+            document.getElementById('batchImages').value = '';
+        }
+
+        function closeBatchUploadModal() {
+            document.getElementById('batchUploadModal').style.display = 'none';
+            document.getElementById('batchImages').value = '';
+        }
+
+        function processBatchUpload() {
+            const files = document.getElementById('batchImages').files;
+            
+            if (files.length === 0) {
+                alert('❌ Please select images first!');
+                return;
+            }
+
+            console.log(`📂 Processing ${files.length} images for ${currentBatchCategory}`);
+            
+            let processedCount = 0;
+            
+            Array.from(files).forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newItem = {
+                        title: `${currentBatchCategory.charAt(0).toUpperCase() + currentBatchCategory.slice(1)} Design ${Date.now()}-${index}`,
+                        description: `Professional ${currentBatchCategory} design created for gaming content`,
+                        price: currentBatchCategory === 'logo' ? 1500 : (currentBatchCategory === 'post' ? 300 : 600),
+                        tags: [currentBatchCategory.charAt(0).toUpperCase() + currentBatchCategory.slice(1), "Gaming", "Professional"],
+                        image: e.target.result,
+                        dateAdded: new Date().toISOString(),
+                        id: Date.now() + Math.random()
+                    };
+                    
+                    portfolioData[currentBatchCategory].push(newItem);
+                    processedCount++;
+                    
+                    if (processedCount === files.length) {
+                        displayPortfolioItems(currentBatchCategory);
+                        closeBatchUploadModal();
+                        showSuccessMessage(`✅ Added ${files.length} items via batch upload!`);
+                        console.log(`✅ Batch upload complete: ${files.length} items`);
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
         }
 
         // =======================================
         // EVENT LISTENERS
         // =======================================
 
-        // Close modal when clicking outside
+        // Close modals when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('uploadModal');
-            if (event.target == modal) {
+            const uploadModal = document.getElementById('uploadModal');
+            const batchModal = document.getElementById('batchUploadModal');
+            
+            if (event.target == uploadModal) {
                 closeUploadModal();
+            }
+            if (event.target == batchModal) {
+                closeBatchUploadModal();
             }
         }
 
         // Initialize website
         document.addEventListener('DOMContentLoaded', function() {
             console.log(`
-🎮 NETHUWA EDITZ - SIMPLE GITHUB SOLUTION
+🎮 NETHUWA EDITZ - ENHANCED PORTFOLIO
 
-🐙 GitHub Gist: Easiest universal access method
-📦 Export/Import: Simple JSON file workflow  
-🌍 Universal Access: Deploy once, access everywhere
-🆓 100% Free: No API keys, no complex setup
-🚀 Professional: Perfect for customer delivery
+✨ New Features:
+📊 Live Stats Display
+📂 Batch Upload System
+🎮 Sample Data Generator
+🗑️ Easy Item Management
+💾 Memory Storage (Demo)
 
-EASIEST Universal Portfolio Solution!
+Ready for your amazing portfolio!
             `);
             
-            // Initialize portfolio data and display
-            portfolioData = JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
-            updateItemCount();
-            displayPortfolioItems('logo');
+            // Initialize with empty data
+            updateStats();
             
-            // Setup image preview
+            // Setup image preview for single upload
             const imageInput = document.getElementById('workImage');
             if (imageInput) {
                 imageInput.addEventListener('change', function(e) {
@@ -1637,45 +1607,16 @@ EASIEST Universal Portfolio Solution!
                     
                     console.log('📤 Processing new item upload...');
                     
-                    const img = new Image();
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    
-                    img.onload = function() {
-                        canvas.width = 400;
-                        canvas.height = 350;
-                        
-                        const imageAspect = img.width / img.height;
-                        const canvasAspect = canvas.width / canvas.height;
-                        
-                        let drawWidth, drawHeight, drawX, drawY;
-
-                        ctx.fillStyle = '#2d3748'; 
-                        ctx.fillRect(0, 0, canvas.width, canvas.height);
-                        
-                        if (imageAspect > canvasAspect) {
-                            drawWidth = canvas.width;
-                            drawHeight = drawWidth / imageAspect;
-                            drawX = 0;
-                            drawY = (canvas.height - drawHeight) / 2;
-                        } else {
-                            drawHeight = canvas.height;
-                            drawWidth = drawHeight * imageAspect;
-                            drawY = 0;
-                            drawX = (canvas.width - drawWidth) / 2;
-                        }
-                        
-                        ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
-                        const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
-                        
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
                         const newItem = {
                             title: title,
                             description: description,
                             price: parseFloat(price),
                             tags: tags,
-                            image: resizedImageData,
+                            image: e.target.result,
                             dateAdded: new Date().toISOString(),
-                            isDefault: false
+                            id: Date.now() + Math.random()
                         };
                         
                         // Add to portfolio data
@@ -1684,17 +1625,11 @@ EASIEST Universal Portfolio Solution!
                         }
                         portfolioData[currentUploadCategory].push(newItem);
                         
-                        // Update display and count
-                        updateItemCount();
+                        // Update display
                         displayPortfolioItems(currentUploadCategory);
                         closeUploadModal();
-                        showSuccessMessage('✅ Item added locally! Export to GitHub for universal access!');
+                        showSuccessMessage('✅ Item added successfully!');
                         console.log('✅ Item added:', newItem.title);
-                    };
-                    
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        img.src = e.target.result;
                     };
                     reader.readAsDataURL(imageFile);
                 });
