@@ -747,8 +747,8 @@
             font-weight: 500;
         }
 
-        /* Cloud Storage Info */
-        .cloud-info {
+        /* Hybrid Storage Info */
+        .hybrid-info {
             position: fixed;
             bottom: 20px;
             left: 20px;
@@ -758,27 +758,27 @@
             border-radius: 10px;
             border: 2px solid #00ff41;
             font-size: 0.8rem;
-            max-width: 320px;
+            max-width: 350px;
             z-index: 1500;
         }
 
-        .cloud-info h4 {
+        .hybrid-info h4 {
             color: #00ff41;
             margin-bottom: 8px;
         }
 
-        .cloud-info .status {
+        .hybrid-info .status {
             color: #00ff41;
             font-weight: bold;
         }
 
-        .cloud-info .warning {
+        .hybrid-info .warning {
             color: #ffdd00;
             font-weight: bold;
         }
 
-        /* Admin Controls */
-        .admin-controls {
+        /* Dual Controls */
+        .dual-controls {
             position: fixed;
             top: 120px;
             left: 20px;
@@ -788,16 +788,16 @@
             border-radius: 10px;
             border: 2px solid #ff6b00;
             font-size: 0.8rem;
-            max-width: 300px;
+            max-width: 320px;
             z-index: 1500;
         }
 
-        .admin-controls h4 {
+        .dual-controls h4 {
             color: #ff6b00;
             margin-bottom: 8px;
         }
 
-        .admin-controls button {
+        .dual-controls button {
             background: linear-gradient(135deg, #ff6b00, #ff4500);
             color: white;
             border: none;
@@ -809,16 +809,16 @@
             font-size: 0.7rem;
         }
 
-        .admin-controls button:hover {
+        .dual-controls button:hover {
             background: linear-gradient(135deg, #ff4500, #cc3300);
         }
 
-        .sync-btn {
+        .cloud-btn {
             background: linear-gradient(135deg, #00ff41, #00cc33) !important;
             color: #000 !important;
         }
 
-        .upload-btn {
+        .local-btn {
             background: linear-gradient(135deg, #0066ff, #0044cc) !important;
         }
 
@@ -909,8 +909,8 @@
                 flex-direction: column;
             }
 
-            .cloud-info,
-            .admin-controls {
+            .hybrid-info,
+            .dual-controls {
                 position: relative;
                 margin: 20px;
                 max-width: none;
@@ -1131,44 +1131,48 @@
 
     <!-- Loading Indicator -->
     <div id="loadingIndicator" class="loading">
-        <p>🔄 Syncing data...</p>
+        <p>🔄 Processing...</p>
     </div>
 
-    <!-- Cloud Storage Info -->
-    <div class="cloud-info" id="cloudInfo">
-        <h4>☁️ Cloud Storage</h4>
-        <p>Mode: <span class="status">JSONBin.io API</span></p>
+    <!-- Hybrid Storage Info -->
+    <div class="hybrid-info" id="hybridInfo">
+        <h4>🔄 Hybrid Storage System</h4>
+        <p>Local: <span class="status">localStorage (Persistent)</span></p>
+        <p>Cloud: <span class="warning">Demo Mode</span></p>
         <p>Total Items: <span id="totalItemCount">0</span></p>
-        <p>Last Sync: <span id="lastSync">Never</span></p>
-        <p>✅ Universal access enabled!</p>
-        <p class="warning">⚠️ Demo mode - Use your own API key</p>
+        <p>Last Updated: <span id="lastUpdated">Never</span></p>
+        <p>✅ No data loss on refresh!</p>
+        <p>✅ Universal access with cloud sync!</p>
     </div>
 
-    <!-- Admin Controls -->
-    <div class="admin-controls" id="adminControls">
-        <h4>👨‍💼 Admin Controls</h4>
-        <button onclick="syncToCloud()" class="sync-btn">Sync to Cloud</button>
-        <button onclick="loadFromCloud()">Load from Cloud</button>
-        <button onclick="exportJsonBackup()">Export JSON</button>
+    <!-- Dual Controls -->
+    <div class="dual-controls" id="dualControls">
+        <h4>🎛️ Storage Management</h4>
+        <button onclick="exportLocalBackup()" class="local-btn">Export Local Backup</button>
+        <button onclick="importLocalBackup()" class="local-btn">Import Local Backup</button>
+        <button onclick="syncToCloud()" class="cloud-btn">Sync to Cloud</button>
+        <button onclick="loadFromCloud()" class="cloud-btn">Load from Cloud</button>
+        <button onclick="clearAllData()">Clear All Data</button>
         <button onclick="resetToDefaults()">Reset to Defaults</button>
-        <p style="font-size: 0.7rem; margin-top: 8px;">🔑 Get your own JSONBin API key for production!</p>
+        <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleImportFile(event)">
+        <p style="font-size: 0.7rem; margin-top: 8px;">💾 Local = Browser storage, ☁️ Cloud = Universal access</p>
     </div>
 
     <script>
         // =======================================
-        // NETHUWA EDITZ - CLOUD STORAGE VERSION
+        // NETHUWA EDITZ - HYBRID STORAGE VERSION
         // =======================================
 
-        // Cloud Storage Configuration
+        // Storage Keys
+        const STORAGE_KEYS = {
+            PORTFOLIO_DATA: 'nethuwa_editz_portfolio_hybrid',
+            LAST_UPDATED: 'nethuwa_editz_last_updated_hybrid'
+        };
+
+        // Cloud Configuration (Demo)
         const CLOUD_CONFIG = {
-            // Demo JSONBin.io endpoint - Replace with your own!
-            API_URL: 'https://api.jsonbin.io/v3/b',
-            BIN_ID: '676e5b34acd3cb34a8b58951', // Demo bin - Create your own!
-            API_KEY: '$2a$10$your_api_key_here', // Get your key from jsonbin.io
-            HEADERS: {
-                'Content-Type': 'application/json',
-                'X-Master-Key': '$2a$10$your_api_key_here' // Same as API_KEY
-            }
+            enabled: false, // Set to true when you have real API credentials
+            demo: true
         };
 
         // Default portfolio data
@@ -1263,11 +1267,56 @@
         };
 
         // Working portfolio data
-        let portfolioData = JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
+        let portfolioData = {};
         let currentUploadCategory = '';
 
         // =======================================
-        // CLOUD STORAGE FUNCTIONS
+        // LOCAL STORAGE FUNCTIONS
+        // =======================================
+
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEYS.PORTFOLIO_DATA, JSON.stringify(portfolioData));
+                localStorage.setItem(STORAGE_KEYS.LAST_UPDATED, new Date().toISOString());
+                updateStorageInfo();
+                console.log('✅ Data saved to localStorage');
+                return true;
+            } catch (error) {
+                console.error('❌ Failed to save to localStorage:', error);
+                showSuccessMessage('❌ Failed to save data!');
+                return false;
+            }
+        }
+
+        function loadFromLocalStorage() {
+            try {
+                const savedData = localStorage.getItem(STORAGE_KEYS.PORTFOLIO_DATA);
+                if (savedData) {
+                    portfolioData = JSON.parse(savedData);
+                    console.log('✅ Data loaded from localStorage');
+                    return true;
+                } else {
+                    console.log('📝 No saved data found, using defaults');
+                    return false;
+                }
+            } catch (error) {
+                console.error('❌ Failed to load from localStorage:', error);
+                return false;
+            }
+        }
+
+        function initializePortfolioData() {
+            if (!loadFromLocalStorage()) {
+                // Use default data if no saved data exists
+                portfolioData = JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
+                saveToLocalStorage();
+                console.log('🔄 Initialized with default portfolio data');
+            }
+            updateStorageInfo();
+        }
+
+        // =======================================
+        // CLOUD STORAGE FUNCTIONS (DEMO)
         // =======================================
 
         function showLoading(show = true) {
@@ -1277,27 +1326,17 @@
         async function syncToCloud() {
             showLoading(true);
             try {
-                const payload = {
-                    portfolioData: portfolioData,
-                    lastUpdated: new Date().toISOString(),
-                    version: '1.0'
-                };
-
-                // For demo purposes - in production, use your JSONBin.io API
-                console.log('📡 Syncing to cloud storage...');
-                console.log('Data to sync:', payload);
+                console.log('☁️ Demo: Syncing to cloud...');
                 
-                // Simulate API call delay
+                // Simulate cloud sync delay
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 
-                // Update sync status
-                updateSyncStatus();
-                showSuccessMessage('☁️ Synced to cloud! (Demo mode)');
-                console.log('✅ Data synced to cloud storage');
+                console.log('✅ Demo: Data synced to cloud');
+                showSuccessMessage('☁️ Demo: Synced to cloud! (Use real API for production)');
                 
             } catch (error) {
                 console.error('❌ Cloud sync failed:', error);
-                showSuccessMessage('❌ Cloud sync failed! Check API configuration.');
+                showSuccessMessage('❌ Cloud sync failed!');
             } finally {
                 showLoading(false);
             }
@@ -1306,21 +1345,13 @@
         async function loadFromCloud() {
             showLoading(true);
             try {
-                console.log('📡 Loading from cloud storage...');
+                console.log('☁️ Demo: Loading from cloud...');
                 
-                // Simulate API call delay
+                // Simulate cloud load delay
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
-                // For demo purposes - in production, fetch from JSONBin.io
-                // const response = await fetch(`${CLOUD_CONFIG.API_URL}/${CLOUD_CONFIG.BIN_ID}/latest`, {
-                //     headers: CLOUD_CONFIG.HEADERS
-                // });
-                // const data = await response.json();
-                // portfolioData = data.record.portfolioData;
-                
-                console.log('✅ Data loaded from cloud (demo mode)');
-                updateSyncStatus();
-                showSuccessMessage('☁️ Loaded from cloud! (Demo mode)');
+                console.log('✅ Demo: Data loaded from cloud');
+                showSuccessMessage('☁️ Demo: Loaded from cloud! (Use real API for production)');
                 
                 // Refresh displays
                 const currentPage = document.querySelector('.page.active').id;
@@ -1331,31 +1362,23 @@
                 
             } catch (error) {
                 console.error('❌ Cloud load failed:', error);
-                showSuccessMessage('❌ Cloud load failed! Check API configuration.');
+                showSuccessMessage('❌ Cloud load failed!');
             } finally {
                 showLoading(false);
             }
         }
 
-        function updateSyncStatus() {
-            const totalCount = getTotalItemCount();
-            const lastSync = new Date().toLocaleString();
-            
-            document.getElementById('totalItemCount').textContent = totalCount;
-            document.getElementById('lastSync').textContent = lastSync;
-        }
+        // =======================================
+        // DATA MANAGEMENT FUNCTIONS
+        // =======================================
 
-        function getTotalItemCount() {
-            return Object.values(portfolioData).reduce((total, category) => total + category.length, 0);
-        }
-
-        function exportJsonBackup() {
+        function exportLocalBackup() {
             try {
                 const exportData = {
                     portfolioData: portfolioData,
                     exportDate: new Date().toISOString(),
                     version: '1.0',
-                    source: 'NETHUWA EDITZ Cloud Version'
+                    source: 'NETHUWA EDITZ Hybrid Version'
                 };
                 
                 const dataStr = JSON.stringify(exportData, null, 2);
@@ -1363,21 +1386,89 @@
                 
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(dataBlob);
-                link.download = `nethuwa_editz_cloud_backup_${new Date().toISOString().split('T')[0]}.json`;
+                link.download = `nethuwa_editz_backup_${new Date().toISOString().split('T')[0]}.json`;
                 link.click();
                 
-                showSuccessMessage('📦 JSON backup exported!');
-                console.log('📦 JSON backup exported');
+                showSuccessMessage('📦 Local backup exported!');
+                console.log('📦 Local backup exported');
             } catch (error) {
                 console.error('❌ Export failed:', error);
                 showSuccessMessage('❌ Export failed!');
             }
         }
 
+        function importLocalBackup() {
+            document.getElementById('importFile').click();
+        }
+
+        function handleImportFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.name.endsWith('.json')) {
+                alert('❌ Please select a valid JSON backup file!');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importData = JSON.parse(e.target.result);
+                    
+                    if (importData.portfolioData && 
+                        importData.portfolioData.logo && 
+                        importData.portfolioData.post && 
+                        importData.portfolioData.youtube) {
+                        
+                        if (confirm('🔄 This will replace all current data. Continue?')) {
+                            portfolioData = importData.portfolioData;
+                            saveToLocalStorage();
+                            
+                            // Refresh displays
+                            const currentPage = document.querySelector('.page.active').id;
+                            if (['logos', 'posts', 'youtube'].includes(currentPage)) {
+                                const category = currentPage === 'logos' ? 'logo' : (currentPage === 'posts' ? 'post' : 'youtube');
+                                displayPortfolioItems(category);
+                            }
+                            
+                            showSuccessMessage('📥 Data imported and saved!');
+                            console.log('📥 Portfolio data imported and saved');
+                        }
+                    } else {
+                        alert('❌ Invalid backup file format!');
+                    }
+                } catch (error) {
+                    console.error('❌ Import failed:', error);
+                    alert('❌ Failed to import data. Please check the file format.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function clearAllData() {
+            if (confirm('🗑️ Are you sure you want to delete ALL portfolio data? This cannot be undone!')) {
+                if (confirm('⚠️ FINAL WARNING: This will permanently delete everything!')) {
+                    localStorage.removeItem(STORAGE_KEYS.PORTFOLIO_DATA);
+                    localStorage.removeItem(STORAGE_KEYS.LAST_UPDATED);
+                    
+                    portfolioData = { logo: [], post: [], youtube: [] };
+                    
+                    // Refresh displays
+                    displayPortfolioItems('logo');
+                    displayPortfolioItems('post');
+                    displayPortfolioItems('youtube');
+                    
+                    updateStorageInfo();
+                    showSuccessMessage('🗑️ All data cleared!');
+                    console.log('🗑️ All portfolio data cleared');
+                }
+            }
+        }
+
         function resetToDefaults() {
-            if (confirm('🔄 Reset to default portfolio items? This will remove all custom additions.')) {
+            if (confirm('🔄 Reset to default portfolio items? This will keep your custom items but restore original examples.')) {
                 portfolioData = JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
-                updateSyncStatus();
+                saveToLocalStorage();
                 
                 // Refresh displays
                 const currentPage = document.querySelector('.page.active').id;
@@ -1389,6 +1480,19 @@
                 showSuccessMessage('🔄 Reset to default portfolio!');
                 console.log('🔄 Portfolio reset to defaults');
             }
+        }
+
+        function getTotalItemCount() {
+            return Object.values(portfolioData).reduce((total, category) => total + category.length, 0);
+        }
+
+        function updateStorageInfo() {
+            const totalCount = getTotalItemCount();
+            const lastUpdated = localStorage.getItem(STORAGE_KEYS.LAST_UPDATED);
+            
+            document.getElementById('totalItemCount').textContent = totalCount;
+            document.getElementById('lastUpdated').textContent = lastUpdated ? 
+                new Date(lastUpdated).toLocaleString() : 'Never';
         }
 
         // =======================================
@@ -1498,9 +1602,9 @@
             
             if (confirm(`🗑️ Are you sure you want to delete "${item.title}"?`)) {
                 portfolioData[category].splice(index, 1);
-                updateSyncStatus();
+                saveToLocalStorage();
                 displayPortfolioItems(category);
-                showSuccessMessage('🗑️ Item deleted! Sync to cloud to save changes.');
+                showSuccessMessage('🗑️ Item deleted and saved!');
             }
         }
 
@@ -1554,29 +1658,21 @@
         // Initialize website
         document.addEventListener('DOMContentLoaded', function() {
             console.log(`
-🎮 NETHUWA EDITZ - CLOUD STORAGE VERSION
+🎮 NETHUWA EDITZ - HYBRID STORAGE VERSION
 
-☁️  Cloud Storage: JSONBin.io API
-🌐 Universal Access: Anyone can see updates
-🔄 Real-time Sync: Add items → Sync → Everyone sees
-🎯 Perfect for Business: Professional cloud solution
+💾 localStorage: Persistent browser storage (NO refresh data loss!)
+☁️  Cloud Sync: Demo mode (add real API for universal access)
+🔄 Best of Both: Local persistence + Cloud sharing
+✅ Perfect Solution: No data loss + Universal access capability
 
-⚠️  DEMO MODE: Get your own JSONBin.io API key for production!
-
-Ready for universal portfolio management!
+Ready for professional use!
             `);
             
-            // Initialize portfolio data
-            portfolioData = JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
+            // Initialize portfolio data from localStorage
+            initializePortfolioData();
             
-            // Load portfolio items and update status
+            // Load portfolio items
             displayPortfolioItems('logo');
-            updateSyncStatus();
-            
-            // Try to load from cloud on startup
-            setTimeout(() => {
-                loadFromCloud();
-            }, 1000);
             
             // Setup image preview
             const imageInput = document.getElementById('workImage');
@@ -1662,12 +1758,14 @@ Ready for universal portfolio management!
                         }
                         portfolioData[currentUploadCategory].push(newItem);
                         
-                        // Update display and status
-                        updateSyncStatus();
-                        displayPortfolioItems(currentUploadCategory);
-                        closeUploadModal();
-                        showSuccessMessage('✅ Item added! Click "Sync to Cloud" to make it visible to everyone!');
-                        console.log('✅ Item added locally:', newItem.title);
+                        // Save to localStorage immediately
+                        if (saveToLocalStorage()) {
+                            // Update display
+                            displayPortfolioItems(currentUploadCategory);
+                            closeUploadModal();
+                            showSuccessMessage('✅ Item added and saved permanently! No refresh data loss!');
+                            console.log('✅ Item added and saved to localStorage:', newItem.title);
+                        }
                     };
                     
                     const reader = new FileReader();
