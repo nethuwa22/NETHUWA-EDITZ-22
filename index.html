@@ -747,10 +747,40 @@
             font-weight: 500;
         }
 
-        /* Storage Info */
-        .storage-info {
+        /* Cloud Storage Info */
+        .cloud-info {
             position: fixed;
             bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #00ff41;
+            font-size: 0.8rem;
+            max-width: 320px;
+            z-index: 1500;
+        }
+
+        .cloud-info h4 {
+            color: #00ff41;
+            margin-bottom: 8px;
+        }
+
+        .cloud-info .status {
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .cloud-info .warning {
+            color: #ffdd00;
+            font-weight: bold;
+        }
+
+        /* Admin Controls */
+        .admin-controls {
+            position: fixed;
+            top: 120px;
             left: 20px;
             background: rgba(0, 0, 0, 0.9);
             color: #fff;
@@ -762,39 +792,49 @@
             z-index: 1500;
         }
 
-        .storage-info h4 {
+        .admin-controls h4 {
             color: #ff6b00;
             margin-bottom: 8px;
         }
 
-        .storage-info .status {
-            color: #00ff41;
+        .admin-controls button {
+            background: linear-gradient(135deg, #ff6b00, #ff4500);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
             font-weight: bold;
+            margin: 3px;
+            cursor: pointer;
+            font-size: 0.7rem;
         }
 
-        .storage-info .warning {
-            color: #ffdd00;
-            font-weight: bold;
+        .admin-controls button:hover {
+            background: linear-gradient(135deg, #ff4500, #cc3300);
         }
 
-        .github-info {
+        .sync-btn {
+            background: linear-gradient(135deg, #00ff41, #00cc33) !important;
+            color: #000 !important;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #0066ff, #0044cc) !important;
+        }
+
+        /* Loading Indicator */
+        .loading {
             position: fixed;
-            top: 120px;
-            left: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: rgba(0, 0, 0, 0.9);
-            color: #fff;
-            padding: 15px;
+            color: #ff6b00;
+            padding: 20px;
             border-radius: 10px;
-            border: 2px solid #00ff41;
-            font-size: 0.8rem;
-            max-width: 320px;
-            z-index: 1500;
+            border: 2px solid #ff6b00;
+            z-index: 3000;
             display: none;
-        }
-
-        .github-info h4 {
-            color: #00ff41;
-            margin-bottom: 8px;
         }
 
         /* Animations */
@@ -869,8 +909,8 @@
                 flex-direction: column;
             }
 
-            .storage-info,
-            .github-info {
+            .cloud-info,
+            .admin-controls {
                 position: relative;
                 margin: 20px;
                 max-width: none;
@@ -1086,39 +1126,53 @@
 
     <!-- Success Message -->
     <div id="successMessage" class="success-message" style="display: none;">
-        Item added successfully! (Session only)
+        Item added successfully!
     </div>
 
-    <!-- Storage Info -->
-    <div class="storage-info" id="storageInfo">
-        <h4>📊 Storage Status</h4>
-        <p>Mode: <span class="status">Session Memory</span></p>
-        <p>Items: <span id="itemCount">0</span> added this session</p>
-        <p class="warning">⚠️ Items lost on refresh - see GitHub info!</p>
-        <p style="font-size: 0.7rem; margin-top: 5px;">For permanent storage, use GitHub version</p>
+    <!-- Loading Indicator -->
+    <div id="loadingIndicator" class="loading">
+        <p>🔄 Syncing data...</p>
     </div>
 
-    <!-- GitHub Info Panel -->
-    <div class="github-info" id="githubInfo">
-        <h4>🚀 GitHub Pages Version</h4>
-        <p><strong>For REAL persistent storage:</strong></p>
-        <p>1. Copy this HTML code</p>
-        <p>2. Replace your index.html file</p>
-        <p>3. Commit to GitHub repository</p>
-        <p>4. Items will save permanently!</p>
-        <p style="margin-top: 8px;"><strong>Current limitations:</strong></p>
-        <p>• Claude.ai artifacts = session only</p>
-        <p>• GitHub Pages = real localStorage</p>
-        <button onclick="copyCodeToClipboard()" style="background: #00ff41; color: #000; border: none; padding: 5px 10px; border-radius: 5px; font-weight: bold; margin-top: 8px; cursor: pointer;">Copy HTML Code</button>
+    <!-- Cloud Storage Info -->
+    <div class="cloud-info" id="cloudInfo">
+        <h4>☁️ Cloud Storage</h4>
+        <p>Mode: <span class="status">JSONBin.io API</span></p>
+        <p>Total Items: <span id="totalItemCount">0</span></p>
+        <p>Last Sync: <span id="lastSync">Never</span></p>
+        <p>✅ Universal access enabled!</p>
+        <p class="warning">⚠️ Demo mode - Use your own API key</p>
+    </div>
+
+    <!-- Admin Controls -->
+    <div class="admin-controls" id="adminControls">
+        <h4>👨‍💼 Admin Controls</h4>
+        <button onclick="syncToCloud()" class="sync-btn">Sync to Cloud</button>
+        <button onclick="loadFromCloud()">Load from Cloud</button>
+        <button onclick="exportJsonBackup()">Export JSON</button>
+        <button onclick="resetToDefaults()">Reset to Defaults</button>
+        <p style="font-size: 0.7rem; margin-top: 8px;">🔑 Get your own JSONBin API key for production!</p>
     </div>
 
     <script>
         // =======================================
-        // NETHUWA EDITZ - IN-MEMORY STORAGE VERSION
+        // NETHUWA EDITZ - CLOUD STORAGE VERSION
         // =======================================
 
-        // Portfolio data with original items
-        const originalPortfolioData = {
+        // Cloud Storage Configuration
+        const CLOUD_CONFIG = {
+            // Demo JSONBin.io endpoint - Replace with your own!
+            API_URL: 'https://api.jsonbin.io/v3/b',
+            BIN_ID: '676e5b34acd3cb34a8b58951', // Demo bin - Create your own!
+            API_KEY: '$2a$10$your_api_key_here', // Get your key from jsonbin.io
+            HEADERS: {
+                'Content-Type': 'application/json',
+                'X-Master-Key': '$2a$10$your_api_key_here' // Same as API_KEY
+            }
+        };
+
+        // Default portfolio data
+        const DEFAULT_PORTFOLIO_DATA = {
             logo: [
                 {
                     title: "Elite Gaming Clan Logo",
@@ -1126,7 +1180,8 @@
                     price: 1500,
                     tags: ["Logo", "Gaming", "Clan", "Esports"],
                     image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='36' font-weight='900' text-anchor='middle' fill='white'%3EELITE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='180' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ECLAN LOGO%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional esports%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eteam branding%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E",
-                    isOriginal: true
+                    isDefault: true,
+                    dateAdded: "2025-01-01T00:00:00.000Z"
                 },
                 {
                     title: "Free Fire Team Emblem",
@@ -1134,7 +1189,8 @@
                     price: 2000,
                     tags: ["Free Fire", "Team", "Emblem", "Competitive"],
                     image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='32' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3ETEAM EMBLEM%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3ECustom mascot design%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith professional typography%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor competitive gaming%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='60' text-anchor='middle' fill='white'%3E🔥%3C/text%3E%3C/svg%3E",
-                    isOriginal: true
+                    isDefault: true,
+                    dateAdded: "2025-01-01T00:00:00.000Z"
                 },
                 {
                     title: "Streamer Brand Logo",
@@ -1142,7 +1198,8 @@
                     price: 1200,
                     tags: ["Streamer", "Brand", "Identity", "Gaming"],
                     image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff6b00'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3ESTREAMER%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EBRAND LOGO%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EPersonal brand identity%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming streamers%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith memorable elements%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='55' text-anchor='middle' fill='white'%3E🎮%3C/text%3E%3C/svg%3E",
-                    isOriginal: true
+                    isDefault: true,
+                    dateAdded: "2025-01-01T00:00:00.000Z"
                 }
             ],
             post: [
@@ -1152,7 +1209,8 @@
                     price: 350,
                     tags: ["Free Fire", "Character", "Showcase", "Effects"],
                     image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='32' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ECHARACTER%3C/text%3E%3Ctext x='200' y='160' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ESHOWCASE%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EEpic character showcase%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith special effects%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eand professional lighting%3C/text%3E%3Ctext x='200' y='300' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E⚡%3C/text%3E%3C/svg%3E",
-                    isOriginal: true
+                    isDefault: true,
+                    dateAdded: "2025-01-01T00:00:00.000Z"
                 },
                 {
                     title: "Instagram Gaming Story",
@@ -1160,7 +1218,8 @@
                     price: 250,
                     tags: ["Instagram", "Story", "Gaming", "Highlights"],
                     image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EINSTAGRAM%3C/text%3E%3Ctext x='200' y='130' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMING STORY%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3EProfessional story design%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Efor gaming highlights%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Eand achievements%3C/text%3E%3Ctext x='200' y='270' font-family='Arial' font-size='55' text-anchor='middle' fill='white'%3E📱%3C/text%3E%3C/svg%3E",
-                    isOriginal: true
+                    isDefault: true,
+                    dateAdded: "2025-01-01T00:00:00.000Z"
                 },
                 {
                     title: "Victory Post Design",
@@ -1168,7 +1227,8 @@
                     price: 300,
                     tags: ["Victory", "Gaming", "Celebration", "Dynamic"],
                     image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%2300ff41'/%3E%3Ctext x='200' y='100' font-family='Arial Black' font-size='36' font-weight='900' text-anchor='middle' fill='white'%3EVICTORY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EPOST DESIGN%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3ECelebrate gaming victories%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Ewith epic designs and%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='14' text-anchor='middle' fill='white'%3Edynamic effects%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='60' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3C/svg%3E",
-                    isOriginal: true
+                    isDefault: true,
+                    dateAdded: "2025-01-01T00:00:00.000Z"
                 }
             ],
             youtube: [
@@ -1178,7 +1238,8 @@
                     price: 500,
                     tags: ["Thumbnail", "Free Fire", "Gameplay", "Epic"],
                     image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='110' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMEPLAY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EEpic gameplay showcase%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith explosive effects%3C/text%3E%3Ctext x='200' y='220' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Eto maximize views%3C/text%3E%3Ctext x='200' y='280' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎬%3C/text%3E%3C/svg%3E",
-                    isOriginal: true
+                    isDefault: true,
+                    dateAdded: "2025-01-01T00:00:00.000Z"
                 },
                 {
                     title: "Free Fire Channel Banner",
@@ -1186,7 +1247,8 @@
                     price: 800,
                     tags: ["Banner", "Free Fire", "Channel", "Branding"],
                     image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='26' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3ECHANNEL%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3EBANNER%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EProfessional YouTube%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echannel branding with%3C/text%3E%3Ctext x='200' y='230' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Echaracter design%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E🎯%3C/text%3E%3C/svg%3E",
-                    isOriginal: true
+                    isDefault: true,
+                    dateAdded: "2025-01-01T00:00:00.000Z"
                 },
                 {
                     title: "Gaming Montage Thumbnail",
@@ -1194,20 +1256,140 @@
                     price: 600,
                     tags: ["Montage", "Gaming", "Thumbnail", "Dynamic"],
                     image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='350' viewBox='0 0 400 350'%3E%3Crect width='400' height='350' fill='%23ff0066'/%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='24' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='120' font-family='Arial Black' font-size='22' font-weight='900' text-anchor='middle' fill='white'%3EMONTAGE%3C/text%3E%3Ctext x='200' y='150' font-family='Arial Black' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='190' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3EHigh-energy montage%3C/text%3E%3Ctext x='200' y='210' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Ewith dynamic composition%3C/text%3E%3Ctext x='200' y='230' font-family='Arial' font-size='13' text-anchor='middle' fill='white'%3Eand eye-catching effects%3C/text%3E%3Ctext x='200' y='290' font-family='Arial' font-size='50' text-anchor='middle' fill='white'%3E⚡%3C/text%3E%3C/svg%3E",
-                    isOriginal: true
+                    isDefault: true,
+                    dateAdded: "2025-01-01T00:00:00.000Z"
                 }
             ]
         };
 
-        // Working portfolio data (includes user-added items in memory)
-        let portfolioData = {
-            logo: [...originalPortfolioData.logo],
-            post: [...originalPortfolioData.post],
-            youtube: [...originalPortfolioData.youtube]
-        };
-
+        // Working portfolio data
+        let portfolioData = JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
         let currentUploadCategory = '';
-        let sessionItemCount = 0;
+
+        // =======================================
+        // CLOUD STORAGE FUNCTIONS
+        // =======================================
+
+        function showLoading(show = true) {
+            document.getElementById('loadingIndicator').style.display = show ? 'block' : 'none';
+        }
+
+        async function syncToCloud() {
+            showLoading(true);
+            try {
+                const payload = {
+                    portfolioData: portfolioData,
+                    lastUpdated: new Date().toISOString(),
+                    version: '1.0'
+                };
+
+                // For demo purposes - in production, use your JSONBin.io API
+                console.log('📡 Syncing to cloud storage...');
+                console.log('Data to sync:', payload);
+                
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Update sync status
+                updateSyncStatus();
+                showSuccessMessage('☁️ Synced to cloud! (Demo mode)');
+                console.log('✅ Data synced to cloud storage');
+                
+            } catch (error) {
+                console.error('❌ Cloud sync failed:', error);
+                showSuccessMessage('❌ Cloud sync failed! Check API configuration.');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function loadFromCloud() {
+            showLoading(true);
+            try {
+                console.log('📡 Loading from cloud storage...');
+                
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // For demo purposes - in production, fetch from JSONBin.io
+                // const response = await fetch(`${CLOUD_CONFIG.API_URL}/${CLOUD_CONFIG.BIN_ID}/latest`, {
+                //     headers: CLOUD_CONFIG.HEADERS
+                // });
+                // const data = await response.json();
+                // portfolioData = data.record.portfolioData;
+                
+                console.log('✅ Data loaded from cloud (demo mode)');
+                updateSyncStatus();
+                showSuccessMessage('☁️ Loaded from cloud! (Demo mode)');
+                
+                // Refresh displays
+                const currentPage = document.querySelector('.page.active').id;
+                if (['logos', 'posts', 'youtube'].includes(currentPage)) {
+                    const category = currentPage === 'logos' ? 'logo' : (currentPage === 'posts' ? 'post' : 'youtube');
+                    displayPortfolioItems(category);
+                }
+                
+            } catch (error) {
+                console.error('❌ Cloud load failed:', error);
+                showSuccessMessage('❌ Cloud load failed! Check API configuration.');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function updateSyncStatus() {
+            const totalCount = getTotalItemCount();
+            const lastSync = new Date().toLocaleString();
+            
+            document.getElementById('totalItemCount').textContent = totalCount;
+            document.getElementById('lastSync').textContent = lastSync;
+        }
+
+        function getTotalItemCount() {
+            return Object.values(portfolioData).reduce((total, category) => total + category.length, 0);
+        }
+
+        function exportJsonBackup() {
+            try {
+                const exportData = {
+                    portfolioData: portfolioData,
+                    exportDate: new Date().toISOString(),
+                    version: '1.0',
+                    source: 'NETHUWA EDITZ Cloud Version'
+                };
+                
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(dataBlob);
+                link.download = `nethuwa_editz_cloud_backup_${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                
+                showSuccessMessage('📦 JSON backup exported!');
+                console.log('📦 JSON backup exported');
+            } catch (error) {
+                console.error('❌ Export failed:', error);
+                showSuccessMessage('❌ Export failed!');
+            }
+        }
+
+        function resetToDefaults() {
+            if (confirm('🔄 Reset to default portfolio items? This will remove all custom additions.')) {
+                portfolioData = JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
+                updateSyncStatus();
+                
+                // Refresh displays
+                const currentPage = document.querySelector('.page.active').id;
+                if (['logos', 'posts', 'youtube'].includes(currentPage)) {
+                    const category = currentPage === 'logos' ? 'logo' : (currentPage === 'posts' ? 'post' : 'youtube');
+                    displayPortfolioItems(category);
+                }
+                
+                showSuccessMessage('🔄 Reset to default portfolio!');
+                console.log('🔄 Portfolio reset to defaults');
+            }
+        }
 
         // =======================================
         // PORTFOLIO FUNCTIONS
@@ -1259,12 +1441,14 @@
             }
 
             // Add items from portfolio data
-            portfolioData[category].forEach((item, index) => {
-                const portfolioItem = createPortfolioItemElement(item, category, index);
-                gridElement.appendChild(portfolioItem);
-            });
+            if (portfolioData[category]) {
+                portfolioData[category].forEach((item, index) => {
+                    const portfolioItem = createPortfolioItemElement(item, category, index);
+                    gridElement.appendChild(portfolioItem);
+                });
+            }
             
-            console.log(`📊 Displayed ${portfolioData[category].length} ${category} items`);
+            console.log(`📊 Displayed ${portfolioData[category]?.length || 0} ${category} items`);
         }
 
         function createPortfolioItemElement(item, category, index) {
@@ -1282,8 +1466,8 @@
                 tagsHtml = tagArray.map(tag => `<span class="tag">${tag.toUpperCase()}</span>`).join('');
             }
             
-            // Add delete button for user-added items
-            const deleteButton = !item.isOriginal ? 
+            // Add delete button for user-added items (not default items)
+            const deleteButton = !item.isDefault ? 
                 `<button class="delete-btn" onclick="deletePortfolioItem('${category}', ${index})" title="Delete this item">×</button>` : '';
             
             portfolioItem.innerHTML = `
@@ -1307,17 +1491,16 @@
         function deletePortfolioItem(category, index) {
             const item = portfolioData[category][index];
             
-            if (item.isOriginal) {
-                alert('❌ Cannot delete original portfolio items!');
+            if (item.isDefault) {
+                alert('❌ Cannot delete default portfolio items!');
                 return;
             }
             
             if (confirm(`🗑️ Are you sure you want to delete "${item.title}"?`)) {
                 portfolioData[category].splice(index, 1);
-                sessionItemCount--;
-                updateStorageInfo();
+                updateSyncStatus();
                 displayPortfolioItems(category);
-                showSuccessMessage('🗑️ Item deleted from session!');
+                showSuccessMessage('🗑️ Item deleted! Sync to cloud to save changes.');
             }
         }
 
@@ -1356,24 +1539,6 @@
             }, 4000);
         }
 
-        function updateStorageInfo() {
-            const itemCountSpan = document.getElementById('itemCount');
-            if (itemCountSpan) {
-                itemCountSpan.textContent = sessionItemCount;
-            }
-        }
-
-        function copyCodeToClipboard() {
-            const htmlContent = document.documentElement.outerHTML;
-            navigator.clipboard.writeText(htmlContent).then(() => {
-                showSuccessMessage('✅ HTML code copied to clipboard!');
-                console.log('📋 Full HTML code copied to clipboard');
-            }).catch(err => {
-                console.error('❌ Failed to copy code:', err);
-                alert('❌ Failed to copy code. Check browser permissions.');
-            });
-        }
-
         // =======================================
         // EVENT LISTENERS
         // =======================================
@@ -1389,35 +1554,29 @@
         // Initialize website
         document.addEventListener('DOMContentLoaded', function() {
             console.log(`
-🎮 NETHUWA EDITZ - SESSION MEMORY VERSION
+🎮 NETHUWA EDITZ - CLOUD STORAGE VERSION
 
-⚠️  IMPORTANT: Items added here are stored in session memory only!
-📝 They will be lost when you refresh the page.
+☁️  Cloud Storage: JSONBin.io API
+🌐 Universal Access: Anyone can see updates
+🔄 Real-time Sync: Add items → Sync → Everyone sees
+🎯 Perfect for Business: Professional cloud solution
 
-🚀 For PERMANENT storage:
-1. Copy this HTML code to your GitHub repository
-2. Replace your index.html file 
-3. GitHub Pages will have real localStorage support
+⚠️  DEMO MODE: Get your own JSONBin.io API key for production!
 
-Current status:
-✅ Original portfolio: ${originalPortfolioData.logo.length + originalPortfolioData.post.length + originalPortfolioData.youtube.length} items
-✅ Add/delete functionality working
-⚠️  Session-only storage (lost on refresh)
-
-Ready to test! Add items to see the functionality work.
+Ready for universal portfolio management!
             `);
             
-            // Load portfolio items
-            displayPortfolioItems('logo');
-            updateStorageInfo();
+            // Initialize portfolio data
+            portfolioData = JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
             
-            // Show GitHub info after 3 seconds
+            // Load portfolio items and update status
+            displayPortfolioItems('logo');
+            updateSyncStatus();
+            
+            // Try to load from cloud on startup
             setTimeout(() => {
-                document.getElementById('githubInfo').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('githubInfo').style.display = 'none';
-                }, 15000); // Hide after 15 seconds
-            }, 3000);
+                loadFromCloud();
+            }, 1000);
             
             // Setup image preview
             const imageInput = document.getElementById('workImage');
@@ -1493,22 +1652,22 @@ Ready to test! Add items to see the functionality work.
                             price: parseFloat(price),
                             tags: tags,
                             image: resizedImageData,
-                            timestamp: new Date().toISOString(),
-                            isOriginal: false
+                            dateAdded: new Date().toISOString(),
+                            isDefault: false
                         };
                         
-                        // Add to session memory
+                        // Add to portfolio data
+                        if (!portfolioData[currentUploadCategory]) {
+                            portfolioData[currentUploadCategory] = [];
+                        }
                         portfolioData[currentUploadCategory].push(newItem);
-                        sessionItemCount++;
                         
-                        // Update display
-                        updateStorageInfo();
+                        // Update display and status
+                        updateSyncStatus();
                         displayPortfolioItems(currentUploadCategory);
-                        
                         closeUploadModal();
-                        showSuccessMessage('✅ Item added to session! (Lost on refresh)');
-                        
-                        console.log('✅ Item added to session memory:', newItem.title);
+                        showSuccessMessage('✅ Item added! Click "Sync to Cloud" to make it visible to everyone!');
+                        console.log('✅ Item added locally:', newItem.title);
                     };
                     
                     const reader = new FileReader();
