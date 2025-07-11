@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NETHUWA EDITZ - Gaming Design Studio</title>
+    <title>FF GRAPHICS - Gaming Design Studio</title>
     <style>
         * {
             margin: 0;
@@ -29,7 +29,6 @@
             z-index: 1000;
             padding: 1rem 0;
             border-bottom: 2px solid #ff6b00;
-            transition: all 0.3s ease;
         }
 
         .nav-container {
@@ -60,12 +59,6 @@
             font-weight: 900;
             color: #000;
             box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover .logo-icon {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 30px rgba(255, 107, 0, 0.8);
         }
 
         .logo-text {
@@ -76,7 +69,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: 2px;
-            transition: all 0.3s ease;
         }
 
         .nav-menu {
@@ -133,7 +125,7 @@
             display: block;
         }
 
-        /* Hero Section */
+        /* Home Page Styles */
         .hero {
             min-height: 100vh;
             background: radial-gradient(circle at center, #1a2332 0%, #0a0e1a 100%);
@@ -142,6 +134,18 @@
             position: relative;
             overflow: hidden;
             padding-top: 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 0, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 65, 0.2) 0%, transparent 50%);
         }
 
         .hero-container {
@@ -165,13 +169,11 @@
         }
 
         .hero-content .main-title {
-            background: linear-gradient(135deg, #ff6b00, #ffdd00, #ff6b00);
-            background-size: 200% 200%;
+            background: linear-gradient(135deg, #ff6b00, #ffdd00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientShift 3s ease-in-out infinite alternate;
-            display: block;
+            text-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
         }
 
         .hero-content .sub-title {
@@ -193,7 +195,9 @@
             align-items: center;
         }
 
-        .btn-primary, .btn-secondary {
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b00, #ff4500);
+            color: white;
             padding: 18px 40px;
             border-radius: 30px;
             text-decoration: none;
@@ -206,21 +210,30 @@
             box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #ff6b00, #ff4500);
-            color: white;
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 0, 0.6);
         }
 
         .btn-secondary {
             background: linear-gradient(135deg, #00ff41, #00cc33);
             color: #000;
+            padding: 18px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.4);
         }
 
-        .btn-primary:hover, .btn-secondary:hover {
-            transform: translateY(-3px) scale(1.05);
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 255, 65, 0.6);
         }
 
-        /* Hero Visual */
+        /* Gaming Character Visual */
         .hero-visual {
             position: relative;
             height: 600px;
@@ -232,31 +245,40 @@
         .character-display {
             width: 450px;
             height: 550px;
-            background: linear-gradient(135deg, #ff6b00, #00ff41, #0066ff, #ff6b00);
-            background-size: 400% 400%;
+            background: linear-gradient(135deg, #ff6b00, #00ff41, #0066ff);
             border-radius: 25px;
             position: relative;
             overflow: hidden;
-            animation: gradientRotate 8s ease-in-out infinite;
-            box-shadow: 
-                0 20px 40px rgba(255, 107, 0, 0.3),
-                0 0 60px rgba(0, 255, 65, 0.2);
+            animation: float 4s ease-in-out infinite;
+            box-shadow: 0 20px 40px rgba(255, 107, 0, 0.3);
             border: 3px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        }
+
+        .character-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="hexagon" width="30" height="30" patternUnits="userSpaceOnUse"><polygon points="15,5 25,12 25,23 15,30 5,23 5,12" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="200" height="200" fill="url(%23hexagon)"/></svg>');
         }
 
         .character-display::after {
-            content: '🎮 NETHUWA EDITZ';
+            content: '🎮 FREE FIRE GRAPHICS';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 1.8rem;
             font-weight: 900;
             text-align: center;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 2;
         }
 
-        /* Services Section */
+        /* Services Preview on Home */
         .services-preview {
             padding: 120px 0;
             background: linear-gradient(135deg, #1a2332 0%, #0f1821 100%);
@@ -278,12 +300,10 @@
             font-weight: 900;
             margin-bottom: 1rem;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #ff6b00, #ffdd00, #ff6b00);
-            background-size: 200% 200%;
+            background: linear-gradient(135deg, #ff6b00, #ffdd00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientShift 3s ease-in-out infinite;
         }
 
         .section-header p {
@@ -305,13 +325,16 @@
             border: 2px solid rgba(255, 107, 0, 0.3);
             border-radius: 20px;
             padding: 3rem;
-            transition: all 0.4s ease;
-            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
             cursor: pointer;
+            text-align: center;
         }
 
         .service-card:hover {
-            transform: translateY(-15px) scale(1.02);
+            transform: translateY(-15px);
             border-color: #ff6b00;
             box-shadow: 0 25px 50px rgba(255, 107, 0, 0.3);
         }
@@ -354,7 +377,7 @@
             text-transform: uppercase;
         }
 
-        /* Portfolio Pages */
+        /* Portfolio Page Styles */
         .portfolio-page {
             padding: 120px 0;
             background: linear-gradient(135deg, #1a2332 0%, #0a0e1a 100%);
@@ -369,35 +392,37 @@
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2.5rem;
             padding: 1rem 0;
         }
 
         .portfolio-item {
             background: rgba(45, 55, 72, 0.8);
-            border: 2px solid rgba(255, 107, 0, 0.3);
+            border: 2px solid #ff6b00;
             border-radius: 20px;
             overflow: hidden;
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
             position: relative;
         }
 
         .portfolio-item:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(255, 107, 0, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(255, 107, 0, 0.2);
             border-color: #ffdd00;
         }
 
         .portfolio-image {
             width: 100%;
-            height: 300px;
-            background: #2d3748;
+            height: 350px;
+            background: #00ff41;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            border-radius: 15px 15px 0 0;
         }
 
         .portfolio-image.logo-theme {
@@ -405,22 +430,24 @@
         }
 
         .portfolio-image.post-theme {
-            background: linear-gradient(135deg, #00ff41, #00cc33);
+            background: #00ff41;
         }
 
         .portfolio-image.youtube-theme {
             background: linear-gradient(135deg, #ff0066, #cc0044);
         }
 
-        .portfolio-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .image-upload-text {
+            color: white;
+            font-weight: 900;
+            font-size: 1.2rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .portfolio-content {
             padding: 2rem;
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            background: #2d3748;
         }
 
         .portfolio-content h3 {
@@ -438,6 +465,25 @@
             font-size: 0.9rem;
         }
 
+        /* Image display improvements */
+        .portfolio-image img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+            object-position: center !important;
+            border-radius: 15px 15px 0 0 !important;
+            display: block !important;
+            background: #2d3748 !important;
+        }
+
+        /* Fix for uploaded images */
+        .portfolio-image[style*="background-image"] {
+            background-size: contain !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-color: #2d3748 !important;
+        }
+
         .portfolio-tags {
             display: flex;
             gap: 0.5rem;
@@ -446,7 +492,7 @@
         }
 
         .tag {
-            background: linear-gradient(135deg, #ff6b00, #ff4500);
+            background: #ff6b00;
             color: #000;
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
@@ -456,7 +502,7 @@
         }
 
         .portfolio-price {
-            background: linear-gradient(135deg, #00ff41, #00cc33);
+            background: #00ff41;
             color: #000;
             padding: 10px 20px;
             border-radius: 20px;
@@ -466,10 +512,52 @@
             text-transform: uppercase;
         }
 
+        /* Add Work Button - Matching Screenshot Style */
+        .add-work-btn {
+            background: rgba(45, 55, 72, 0.8);
+            border: 3px dashed #ff6b00;
+            border-radius: 20px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-work-btn:hover {
+            border-color: #ffdd00;
+            background: rgba(255, 107, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .add-work-btn .icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: #a0aec0;
+        }
+
+        .add-work-btn h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: #ff6b00;
+        }
+
+        .add-work-btn p {
+            color: #a0aec0;
+            text-align: center;
+            margin: 0;
+            font-size: 1rem;
+        }
+
         /* Contact Section */
         .contact {
             padding: 120px 0;
             background: radial-gradient(circle at center, #1a2332 0%, #0a0e1a 100%);
+            position: relative;
         }
 
         .contact-container {
@@ -553,31 +641,90 @@
             font-weight: 500;
         }
 
-        /* Animations */
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 100% 50%;
-            }
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
         }
 
-        @keyframes gradientRotate {
-            0% {
-                background-position: 0% 50%;
-            }
-            25% {
-                background-position: 100% 50%;
+        .modal-content {
+            background: linear-gradient(135deg, #1a2332, #0f1821);
+            margin: 5% auto;
+            padding: 3rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            border: 2px solid #ff6b00;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            color: #ff6b00;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b00;
+            box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
+        }
+
+        .close {
+            color: #ff6b00;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: -1rem;
+        }
+
+        .close:hover {
+            color: #ffdd00;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
             }
             50% {
-                background-position: 100% 100%;
-            }
-            75% {
-                background-position: 0% 100%;
-            }
-            100% {
-                background-position: 0% 50%;
+                transform: translateY(-20px);
             }
         }
 
@@ -592,6 +739,10 @@
                 font-size: 3rem;
             }
 
+            .nav-menu {
+                gap: 1rem;
+            }
+
             .character-display {
                 width: 300px;
                 height: 350px;
@@ -601,10 +752,7 @@
                 font-size: 2.5rem;
             }
 
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
+            .services-grid,
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
@@ -617,14 +765,27 @@
                 flex-direction: column;
             }
         }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo" onclick="showPage('home')">
-                <div class="logo-icon">NE</div>
-                <div class="logo-text">EDITZ</div>
+                <div class="logo-icon">FF</div>
+                <div class="logo-text">GRAPHICS</div>
             </div>
             <ul class="nav-menu">
                 <li><a onclick="showPage('home')" class="nav-link active">Home</a></li>
@@ -637,7 +798,9 @@
         </div>
     </nav>
 
+    <!-- HOME PAGE -->
     <div id="home" class="page active">
+        <!-- Hero Section -->
         <section class="hero">
             <div class="hero-container">
                 <div class="hero-content">
@@ -659,30 +822,31 @@
             </div>
         </section>
 
+        <!-- Services Preview -->
         <section class="services-preview">
             <div class="services-container">
-                <div class="section-header">
+                <div class="section-header fade-in">
                     <h2>Our Services</h2>
                     <p>Professional gaming graphics for content creators and gamers</p>
                 </div>
                 
                 <div class="services-grid">
-                    <div class="service-card" onclick="showPage('logos')">
-                        <div class="service-icon">💎</div>
+                    <div class="service-card fade-in" onclick="showPage('logos')">
+                        <div class="service-icon">🎨</div>
                         <h3>Logo Design</h3>
                         <p>Gaming logos, clan emblems, brand identity designs that make you stand out</p>
                         <div class="service-price">From LKR 1200</div>
                     </div>
                     
-                    <div class="service-card" onclick="showPage('posts')">
-                        <div class="service-icon">📸</div>
+                    <div class="service-card fade-in" onclick="showPage('posts')">
+                        <div class="service-icon">📱</div>
                         <h3>Social Posts</h3>
                         <p>Instagram, Facebook, TikTok graphics that boost your social media presence</p>
                         <div class="service-price">From LKR 250</div>
                     </div>
                     
-                    <div class="service-card" onclick="showPage('youtube')">
-                        <div class="service-icon">🎥</div>
+                    <div class="service-card fade-in" onclick="showPage('youtube')">
+                        <div class="service-icon">🎬</div>
                         <h3>YouTube Graphics</h3>
                         <p>Banners, thumbnails, channel art that increase views and subscribers</p>
                         <div class="service-price">From LKR 500</div>
@@ -692,435 +856,773 @@
         </section>
     </div>
 
+    <!-- LOGO DESIGN PAGE -->
     <div id="logos" class="page">
         <section class="portfolio-page">
             <div class="portfolio-container">
-                <div class="section-header">
+                <div class="section-header fade-in">
                     <h2>Logo Design Portfolio</h2>
                     <p>Professional gaming logos, clan emblems, and brand identity designs</p>
                 </div>
                 
                 <div class="portfolio-grid" id="logoGrid">
-                    <!-- Logo items will be loaded here -->
+                    <!-- Add Work Button -->
+                    <div class="add-work-btn" onclick="openModal('logo')">
+                        <div class="icon">+</div>
+                        <h3>Add New Logo</h3>
+                        <p>Click to upload your logo design work</p>
+                    </div>
+
+                    <!-- Sample Logo Items -->
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image logo-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Logo Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Gaming Clan Logo</h3>
+                            <p>Professional gaming clan logo with modern design elements and custom typography</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Logo</span>
+                                <span class="tag">Gaming</span>
+                                <span class="tag">Clan</span>
+                            </div>
+                            <div class="portfolio-price">LKR 1500</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image logo-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Logo Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Esports Team Logo</h3>
+                            <p>Professional esports team branding with mascot design and team identity</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Logo</span>
+                                <span class="tag">Esports</span>
+                                <span class="tag">Team</span>
+                            </div>
+                            <div class="portfolio-price">LKR 2000</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image logo-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Logo Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>YouTube Channel Logo</h3>
+                            <p>Gaming YouTube channel logo with avatar integration and brand colors</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Logo</span>
+                                <span class="tag">YouTube</span>
+                                <span class="tag">Channel</span>
+                            </div>
+                            <div class="portfolio-price">LKR 1200</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 
+    <!-- SOCIAL MEDIA POSTS PAGE -->
     <div id="posts" class="page">
         <section class="portfolio-page">
             <div class="portfolio-container">
-                <div class="section-header">
+                <div class="section-header fade-in">
                     <h2>Social Media Posts</h2>
                     <p>Instagram, Facebook, TikTok and social media graphics portfolio</p>
                 </div>
                 
                 <div class="portfolio-grid" id="postsGrid">
-                    <!-- Post items will be loaded here -->
+                    <!-- Add Work Button -->
+                    <div class="add-work-btn" onclick="openModal('post')">
+                        <div class="icon">+</div>
+                        <h3>Add New Post</h3>
+                        <p>Click to upload your social media work</p>
+                    </div>
+
+                    <!-- 10 Sample Post Items Ready for Image Upload -->
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image post-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Post Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Character Post</h3>
+                            <p>Epic Free Fire character showcase with special effects and lighting</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Character</span>
+                                <span class="tag">Gaming</span>
+                            </div>
+                            <div class="portfolio-price">LKR 350</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image post-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Post Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Instagram Gaming Story</h3>
+                            <p>Professional Instagram story design for gaming content highlights</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Instagram</span>
+                                <span class="tag">Story</span>
+                                <span class="tag">Gaming</span>
+                            </div>
+                            <div class="portfolio-price">LKR 200</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image post-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Post Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>PUBG Squad Post</h3>
+                            <p>PUBG Mobile squad victory celebration post with team highlights</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">PUBG</span>
+                                <span class="tag">Squad</span>
+                                <span class="tag">Victory</span>
+                            </div>
+                            <div class="portfolio-price">LKR 300</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image post-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Post Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Facebook Gaming Event</h3>
+                            <p>Gaming tournament announcement with event details and prizes</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Facebook</span>
+                                <span class="tag">Tournament</span>
+                                <span class="tag">Event</span>
+                            </div>
+                            <div class="portfolio-price">LKR 400</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image post-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Post Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>TikTok Gaming Highlight</h3>
+                            <p>Viral TikTok gaming moment with trending effects and music</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">TikTok</span>
+                                <span class="tag">Viral</span>
+                                <span class="tag">Gaming</span>
+                            </div>
+                            <div class="portfolio-price">LKR 250</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image post-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Post Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Diamond Store Promo</h3>
+                            <p>Free Fire diamond store promotional post with special offers</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Promo</span>
+                                <span class="tag">Diamond</span>
+                                <span class="tag">Store</span>
+                            </div>
+                            <div class="portfolio-price">LKR 350</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image post-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Post Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Gaming Clan Recruitment</h3>
+                            <p>Professional clan recruitment post with requirements and benefits</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Clan</span>
+                                <span class="tag">Recruitment</span>
+                                <span class="tag">Gaming</span>
+                            </div>
+                            <div class="portfolio-price">LKR 300</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image post-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Post Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Esports Team Post</h3>
+                            <p>Professional esports team announcement with player lineup</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Esports</span>
+                                <span class="tag">Team</span>
+                                <span class="tag">Professional</span>
+                            </div>
+                            <div class="portfolio-price">LKR 500</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image post-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Post Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Gaming Achievement Post</h3>
+                            <p>Epic gaming achievement celebration with stats and highlights</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Achievement</span>
+                                <span class="tag">Gaming</span>
+                                <span class="tag">Stats</span>
+                            </div>
+                            <div class="portfolio-price">LKR 350</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image post-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Post Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Stream Announcement</h3>
+                            <p>Gaming stream announcement with schedule and special events</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Stream</span>
+                                <span class="tag">Live</span>
+                                <span class="tag">Gaming</span>
+                            </div>
+                            <div class="portfolio-price">LKR 300</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image post-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Post Image</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Gaming Tips Post</h3>
+                            <p>Educational gaming tips and tricks post for skill improvement</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Tips</span>
+                                <span class="tag">Educational</span>
+                                <span class="tag">Gaming</span>
+                            </div>
+                            <div class="portfolio-price">LKR 250</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 
+    <!-- YOUTUBE PAGE -->
     <div id="youtube" class="page">
         <section class="portfolio-page">
             <div class="portfolio-container">
-                <div class="section-header">
+                <div class="section-header fade-in">
                     <h2>YouTube Graphics</h2>
                     <p>YouTube banners, thumbnails, channel art and video graphics portfolio</p>
                 </div>
                 
                 <div class="portfolio-grid" id="youtubeGrid">
-                    <!-- YouTube items will be loaded here -->
+                    <!-- Add Work Button -->
+                    <div class="add-work-btn" onclick="openModal('youtube')">
+                        <div class="icon">+</div>
+                        <h3>Add YouTube Work</h3>
+                        <p>Click to upload your YouTube graphics</p>
+                    </div>
+
+                    <!-- Free Fire YouTube Thumbnails and Banners Only -->
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image youtube-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Thumbnail</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Gameplay Thumbnail</h3>
+                            <p>Epic Free Fire gameplay thumbnail with character showcase and effects</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Thumbnail</span>
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Gameplay</span>
+                            </div>
+                            <div class="portfolio-price">LKR 500</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image youtube-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Banner</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Channel Banner</h3>
+                            <p>Professional Free Fire YouTube banner with character and branding</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Banner</span>
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Channel</span>
+                            </div>
+                            <div class="portfolio-price">LKR 800</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image youtube-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Thumbnail</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Booyah Thumbnail</h3>
+                            <p>Victory celebration thumbnail with Free Fire Booyah moment and stats</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Thumbnail</span>
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Booyah</span>
+                            </div>
+                            <div class="portfolio-price">LKR 500</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image youtube-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Banner</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Esports Banner</h3>
+                            <p>Esports team banner with Free Fire tournament theme and team info</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Banner</span>
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Esports</span>
+                            </div>
+                            <div class="portfolio-price">LKR 900</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image youtube-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Thumbnail</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Live Stream Thumbnail</h3>
+                            <p>Live stream thumbnail with Free Fire characters and "LIVE" indicator</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Thumbnail</span>
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Live</span>
+                            </div>
+                            <div class="portfolio-price">LKR 450</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image youtube-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Banner</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Squad Banner</h3>
+                            <p>Squad YouTube banner featuring Free Fire team with member names</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Banner</span>
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Squad</span>
+                            </div>
+                            <div class="portfolio-price">LKR 750</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image youtube-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Thumbnail</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Character Review</h3>
+                            <p>Character showcase thumbnail with Free Fire new character abilities</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Thumbnail</span>
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Character</span>
+                            </div>
+                            <div class="portfolio-price">LKR 500</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image youtube-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Banner</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Gaming Banner</h3>
+                            <p>Personal Free Fire gaming banner with custom character and style</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Banner</span>
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Gaming</span>
+                            </div>
+                            <div class="portfolio-price">LKR 650</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image youtube-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Thumbnail</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Tips Thumbnail</h3>
+                            <p>Free Fire tips and tricks thumbnail with pro gameplay strategies</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Thumbnail</span>
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Tips</span>
+                            </div>
+                            <div class="portfolio-price">LKR 450</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image youtube-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Banner</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Tournament Banner</h3>
+                            <p>Tournament banner with Free Fire championship theme and prize info</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Banner</span>
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Tournament</span>
+                            </div>
+                            <div class="portfolio-price">LKR 850</div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image youtube-theme" onclick="uploadImage(this)">
+                            <div class="image-upload-text">Click to Upload Thumbnail</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Free Fire Highlight Reel</h3>
+                            <p>Best moments compilation thumbnail with Free Fire epic gameplay clips</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Thumbnail</span>
+                                <span class="tag">Free Fire</span>
+                                <span class="tag">Highlights</span>
+                            </div>
+                            <div class="portfolio-price">LKR 500</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 
+    <!-- CONTACT PAGE -->
     <div id="contact" class="page">
         <section class="contact">
             <div class="contact-container">
-                <h2>Ready to Order?</h2>
-                <p>Get professional gaming graphics that will take your content to the next level!</p>
+                <div class="fade-in">
+                    <h2>Ready to Order?</h2>
+                    <p>Get professional gaming graphics that will take your content to the next level!</p>
+                </div>
                 
-                <div class="contact-methods">
+                <div class="contact-methods fade-in">
                     <div class="contact-method">
                         <h3>WhatsApp</h3>
-                        <p>0773116253</p>
+                        <p>+94 77 123 4567</p>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <h3>Telegram</h3>
+                        <p>@ffgraphics_lk</p>
                     </div>
                     
                     <div class="contact-method">
                         <h3>Email</h3>
-                        <p>Fnethuwa@gmail.com</p>
+                        <p>ffgraphics@gmail.com</p>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <h3>Instagram</h3>
+                        <p>@ff_graphics_studio</p>
                     </div>
                 </div>
                 
                 <div class="hero-buttons">
-                    <a href="https://wa.me/94773116253" class="btn-primary">WhatsApp Now</a>
+                    <a href="https://wa.me/94771234567" class="btn-primary">WhatsApp Now</a>
                     <a onclick="showPage('home')" class="btn-secondary">Back to Home</a>
                 </div>
             </div>
         </section>
     </div>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <p>&copy; 2025 NETHUWA EDITZ STUDIO. Professional Gaming Graphics Designer • Sri Lanka</p>
+            <p>&copy; 2025 FF GRAPHICS STUDIO. Professional Gaming Graphics Designer • Sri Lanka</p>
         </div>
     </footer>
 
+    <!-- Modal for Adding Work -->
+    <div id="workModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Add New Work</h2>
+            </div>
+            <form id="workForm">
+                <div class="form-group">
+                    <label for="workTitle">Title:</label>
+                    <input type="text" id="workTitle" name="title" placeholder="Enter work title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workDescription">Description:</label>
+                    <textarea id="workDescription" name="description" rows="3" placeholder="Enter work description" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workPrice">Price (LKR):</label>
+                    <input type="number" id="workPrice" name="price" placeholder="Enter price" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workImage">Image:</label>
+                    <input type="file" id="workImage" name="image" accept="image/*" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workTags">Tags (comma separated):</label>
+                    <input type="text" id="workTags" name="tags" placeholder="e.g., Gaming, Logo, Professional" required>
+                </div>
+                
+                <button type="submit" class="btn-primary">Add Work</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // =======================================
-        // NETHUWA EDITZ - COMPLETE PORTFOLIO DATA
-        // =======================================
+        let currentCategory = '';
 
-        const PORTFOLIO_DATA = {
-            logo: [
-                {
-                    title: "Elite Gaming Clan Logo",
-                    description: "Professional gaming clan logo with modern design elements and custom typography for esports teams",
-                    price: 1500,
-                    tags: ["Logo", "Gaming", "Clan", "Esports"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ff6b00'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EELITE GAMING%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ECLAN LOGO%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EProfessional esports team branding%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E💎%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "logo_1"
-                },
-                {
-                    title: "Free Fire Team Emblem",
-                    description: "Custom Free Fire team emblem with mascot design and professional typography for competitive gaming",
-                    price: 2000,
-                    tags: ["Free Fire", "Team", "Emblem", "Competitive"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ff4500'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EFREE FIRE%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ETEAM EMBLEM%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3ECompetitive gaming team logo%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E🔥%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "logo_2"
-                },
-                {
-                    title: "Streamer Brand Logo",
-                    description: "Personal brand logo for gaming streamers with unique identity and memorable visual elements",
-                    price: 1200,
-                    tags: ["Streamer", "Brand", "Identity", "Gaming"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%236b46c1'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ESTREAMER%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EBRAND LOGO%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EPersonal gaming brand identity%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E🎮%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "logo_3"
-                },
-                {
-                    title: "Esports Organization Logo",
-                    description: "Professional esports organization logo with premium design and corporate branding elements",
-                    price: 2500,
-                    tags: ["Esports", "Organization", "Premium", "Corporate"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%230f172a'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='%23ff6b00'%3EESPORTS ORG%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='%23ff6b00'%3ELOGO%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EPremium corporate branding%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='%23ff6b00'%3E🏆%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "logo_4"
-                },
-                {
-                    title: "Gaming Channel Identity",
-                    description: "Complete gaming channel identity package with logo, banner, and brand guidelines",
-                    price: 1800,
-                    tags: ["Gaming", "Channel", "Identity", "Package"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23dc2626'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EGAMING CHANNEL%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EIDENTITY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EComplete branding package%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E📺%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "logo_5"
-                },
-                {
-                    title: "Pro Player Personal Logo",
-                    description: "Personal logo design for professional gamers and content creators with signature style",
-                    price: 1600,
-                    tags: ["Pro Player", "Personal", "Signature", "Style"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%2310b981'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EPRO PLAYER%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ELOGO%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EPersonal signature design%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E⭐%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "logo_6"
-                },
-                {
-                    title: "Mobile Gaming Logo",
-                    description: "Specialized mobile gaming logo design optimized for small screens and app icons",
-                    price: 1400,
-                    tags: ["Mobile", "Gaming", "App", "Icon"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f59e0b'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EMOBILE GAMING%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ELOGO%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EOptimized for mobile apps%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E📱%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "logo_7"
-                },
-                {
-                    title: "Tournament Logo Design",
-                    description: "Official tournament logo with professional branding for gaming competitions and events",
-                    price: 2200,
-                    tags: ["Tournament", "Competition", "Event", "Official"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%233b82f6'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3ETOURNAMENT%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ELOGO%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EOfficial competition branding%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E🏅%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "logo_8"
-                },
-                {
-                    title: "Battle Royale Clan Logo",
-                    description: "Aggressive battle royale clan logo with military-inspired design and tactical elements",
-                    price: 1900,
-                    tags: ["Battle Royale", "Clan", "Military", "Tactical"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23059669'/%3E%3Ctext x='200' y='70' font-family='Arial Black' font-size='12' font-weight='900' text-anchor='middle' fill='white'%3EBATTLE ROYALE%3C/text%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ECLAN LOGO%3C/text%3E%3Ctext x='200' y='120' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EMilitary tactical design%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E⚔️%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "logo_9"
-                },
-                {
-                    title: "Cyber Gaming Logo",
-                    description: "Futuristic cyber gaming logo with neon effects and digital aesthetic elements",
-                    price: 1700,
-                    tags: ["Cyber", "Futuristic", "Neon", "Digital"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%2306b6d4'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3ECYBER GAMING%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ELOGO%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EFuturistic neon design%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E🚀%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "logo_10"
-                }
-            ],
-            post: [
-                {
-                    title: "Free Fire Character Showcase",
-                    description: "Epic Free Fire character showcase post with special effects and professional lighting for social media",
-                    price: 350,
-                    tags: ["Free Fire", "Character", "Showcase", "Effects"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%2300ff41'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EFF CHARACTER%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ESHOWCASE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EEpic character showcase design%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E📱%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "post_1"
-                },
-                {
-                    title: "Instagram Gaming Story",
-                    description: "Professional Instagram story design for gaming content highlights and achievement posts",
-                    price: 250,
-                    tags: ["Instagram", "Story", "Gaming", "Highlights"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e91e63'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EINSTAGRAM%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ESTORY%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EGaming content highlights%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E📸%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "post_2"
-                },
-                {
-                    title: "Victory Celebration Post",
-                    description: "Epic victory celebration post design with dynamic effects and bold typography for social media",
-                    price: 300,
-                    tags: ["Victory", "Gaming", "Celebration", "Dynamic"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23fbbf24'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EVICTORY%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EPOST%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EEpic celebration design%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E🏆%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "post_3"
-                },
-                {
-                    title: "TikTok Gaming Post",
-                    description: "Viral TikTok gaming post design with trending effects and eye-catching animations",
-                    price: 280,
-                    tags: ["TikTok", "Gaming", "Viral", "Trending"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23000000'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='%23ff0050'%3ETIKTOK%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='%23ff0050'%3EGAMING%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EViral trending design%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='%23ff0050'%3E🎵%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "post_4"
-                },
-                {
-                    title: "Facebook Gaming Cover",
-                    description: "Professional Facebook gaming page cover design with brand consistency and engagement focus",
-                    price: 320,
-                    tags: ["Facebook", "Gaming", "Cover", "Brand"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%231877f2'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EFACEBOOK%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ECOVER%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EGaming page design%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E👍%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "post_5"
-                },
-                {
-                    title: "Tournament Announcement",
-                    description: "Official tournament announcement post with registration details and prize information",
-                    price: 400,
-                    tags: ["Tournament", "Announcement", "Official", "Prize"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23dc2626'/%3E%3Ctext x='200' y='70' font-family='Arial Black' font-size='12' font-weight='900' text-anchor='middle' fill='white'%3ETOURNAMENT%3C/text%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EANNOUNCEMENT%3C/text%3E%3Ctext x='200' y='120' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EOfficial event promotion%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E🎯%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "post_6"
-                },
-                {
-                    title: "Gaming Motivational Quote",
-                    description: "Inspirational gaming quote post with typography design and motivational graphics",
-                    price: 200,
-                    tags: ["Motivational", "Quote", "Typography", "Inspiration"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%236366f1'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EMOTIVATIONAL%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EQUOTE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EInspirational typography%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E💪%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "post_7"
-                },
-                {
-                    title: "Esports Team Recruitment",
-                    description: "Professional esports team recruitment post with skills requirements and team branding",
-                    price: 380,
-                    tags: ["Esports", "Recruitment", "Team", "Professional"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23059669'/%3E%3Ctext x='200' y='70' font-family='Arial Black' font-size='12' font-weight='900' text-anchor='middle' fill='white'%3EESPORTS TEAM%3C/text%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ERECRUITMENT%3C/text%3E%3Ctext x='200' y='120' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EProfessional team recruitment%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E👥%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "post_8"
-                },
-                {
-                    title: "Gaming Setup Showcase",
-                    description: "Gaming setup showcase post highlighting PC builds and gaming peripherals with tech specs",
-                    price: 340,
-                    tags: ["Gaming Setup", "PC Build", "Tech", "Showcase"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23374151'/%3E%3Ctext x='200' y='70' font-family='Arial Black' font-size='12' font-weight='900' text-anchor='middle' fill='white'%3EGAMING SETUP%3C/text%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ESHOWCASE%3C/text%3E%3Ctext x='200' y='120' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EPC builds and peripherals%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E🖥️%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "post_9"
-                },
-                {
-                    title: "Streaming Schedule Post",
-                    description: "Professional streaming schedule post with time slots and game lineup for content creators",
-                    price: 290,
-                    tags: ["Streaming", "Schedule", "Content", "Creator"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%239333ea'/%3E%3Ctext x='200' y='70' font-family='Arial Black' font-size='12' font-weight='900' text-anchor='middle' fill='white'%3ESTREAMING%3C/text%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ESCHEDULE%3C/text%3E%3Ctext x='200' y='120' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EContent creator schedule%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E📅%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "post_10"
-                }
-            ],
-            youtube: [
-                {
-                    title: "Free Fire Gameplay Thumbnail",
-                    description: "Epic Free Fire gameplay thumbnail with character showcase and explosive effects to maximize views",
-                    price: 500,
-                    tags: ["Thumbnail", "Free Fire", "Gameplay", "Epic"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ff0066'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EFF GAMEPLAY%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EMaximize views and clicks%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E🎬%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "youtube_1"
-                },
-                {
-                    title: "Gaming Channel Banner",
-                    description: "Professional gaming YouTube banner with character design and channel branding elements",
-                    price: 800,
-                    tags: ["Banner", "Gaming", "Channel", "Branding"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23dc2626'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3ECHANNEL%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EBANNER%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EProfessional branding%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E📺%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "youtube_2"
-                },
-                {
-                    title: "Gaming Montage Thumbnail",
-                    description: "High-energy gaming montage thumbnail with dynamic composition and eye-catching visual effects",
-                    price: 600,
-                    tags: ["Montage", "Gaming", "Thumbnail", "Dynamic"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f59e0b'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EMONTAGE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EHigh-energy composition%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E⚡%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "youtube_3"
-                },
-                {
-                    title: "Live Stream Overlay",
-                    description: "Complete live stream overlay package with alerts, webcam frame and professional graphics",
-                    price: 1200,
-                    tags: ["Live Stream", "Overlay", "Package", "Professional"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%239333ea'/%3E%3Ctext x='200' y='70' font-family='Arial Black' font-size='12' font-weight='900' text-anchor='middle' fill='white'%3ELIVE STREAM%3C/text%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EOVERLAY%3C/text%3E%3Ctext x='200' y='120' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EComplete package design%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E🔴%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "youtube_4"
-                },
-                {
-                    title: "Tutorial Thumbnail Design",
-                    description: "Educational gaming tutorial thumbnail with clear typography and instructional graphics",
-                    price: 450,
-                    tags: ["Tutorial", "Educational", "Gaming", "Instructional"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%2310b981'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3ETUTORIAL%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ETHUMBNAIL%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EEducational content design%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E📚%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "youtube_5"
-                },
-                {
-                    title: "Channel Intro Animation",
-                    description: "Animated channel intro graphics with logo reveal and professional motion design",
-                    price: 1500,
-                    tags: ["Intro", "Animation", "Channel", "Motion"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23059669'/%3E%3Ctext x='200' y='70' font-family='Arial Black' font-size='12' font-weight='900' text-anchor='middle' fill='white'%3ECHANNEL INTRO%3C/text%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EANIMATION%3C/text%3E%3Ctext x='200' y='120' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EMotion graphics design%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E🎞️%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "youtube_6"
-                },
-                {
-                    title: "End Screen Template",
-                    description: "Professional YouTube end screen template with subscribe button and video recommendations",
-                    price: 350,
-                    tags: ["End Screen", "Template", "Subscribe", "Professional"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23be185d'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EEND SCREEN%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ETEMPLATE%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3ESubscribe and recommend%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E📺%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "youtube_7"
-                },
-                {
-                    title: "Gaming Reaction Thumbnail",
-                    description: "Expressive gaming reaction thumbnail with emotion capture and viral potential design",
-                    price: 480,
-                    tags: ["Reaction", "Gaming", "Emotion", "Viral"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ec4899'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EGAMING%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EREACTION%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EExpressive emotion capture%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E😱%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "youtube_8"
-                },
-                {
-                    title: "Gaming News Banner",
-                    description: "Breaking gaming news banner with urgent typography and news-style graphics",
-                    price: 420,
-                    tags: ["News", "Gaming", "Breaking", "Banner"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23dc2626'/%3E%3Ctext x='200' y='80' font-family='Arial Black' font-size='14' font-weight='900' text-anchor='middle' fill='white'%3EGAMING NEWS%3C/text%3E%3Ctext x='200' y='105' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3EBANNER%3C/text%3E%3Ctext x='200' y='140' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EBreaking news style%3C/text%3E%3Ctext x='200' y='200' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E📰%3C/text%3E%3Ctext x='200' y='260' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "youtube_9"
-                },
-                {
-                    title: "Let's Play Series Thumbnail",
-                    description: "Consistent Let's Play series thumbnail with episode numbering and game branding",
-                    price: 390,
-                    tags: ["Let's Play", "Series", "Episode", "Consistent"],
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%236366f1'/%3E%3Ctext x='200' y='70' font-family='Arial Black' font-size='12' font-weight='900' text-anchor='middle' fill='white'%3ELET'S PLAY%3C/text%3E%3Ctext x='200' y='90' font-family='Arial Black' font-size='16' font-weight='900' text-anchor='middle' fill='white'%3ESERIES%3C/text%3E%3Ctext x='200' y='120' font-family='Arial' font-size='12' text-anchor='middle' fill='white'%3EConsistent episode design%3C/text%3E%3Ctext x='200' y='180' font-family='Arial' font-size='40' text-anchor='middle' fill='white'%3E🎮%3C/text%3E%3Ctext x='200' y='240' font-family='Arial' font-size='10' text-anchor='middle' fill='white'%3ENETHUWA EDITZ STUDIO%3C/text%3E%3C/svg%3E",
-                    id: "youtube_10"
-                }
-            ]
-        };
-
-        // =======================================
-        // NAVIGATION FUNCTIONS
-        // =======================================
-
+        // Page Navigation
         function showPage(pageId) {
             // Hide all pages
             const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
 
             // Show selected page
             document.getElementById(pageId).classList.add('active');
 
             // Update navigation active state
             const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => link.classList.remove('active'));
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
 
+            // Find and activate the corresponding nav link
             const activeLink = Array.from(navLinks).find(link => 
-                link.getAttribute('onclick') && link.getAttribute('onclick').includes(pageId)
+                link.getAttribute('onclick').includes(pageId)
             );
             if (activeLink) {
                 activeLink.classList.add('active');
             }
 
-            // Load portfolio items for the specific category
-            if (['logos', 'posts', 'youtube'].includes(pageId)) {
-                const category = pageId === 'logos' ? 'logo' : (pageId === 'posts' ? 'post' : 'youtube');
-                displayPortfolioItems(category);
-            }
-
+            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Trigger animations for visible elements
+            setTimeout(() => {
+                triggerAnimations();
+            }, 100);
         }
 
-        // =======================================
-        // PORTFOLIO DISPLAY FUNCTIONS
-        // =======================================
+        // Trigger scroll animations
+        function triggerAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-        function displayPortfolioItems(category) {
-            const gridElement = document.getElementById(category === 'logo' ? 'logoGrid' : (category === 'post' ? 'postsGrid' : 'youtubeGrid'));
-            
-            if (!gridElement) {
-                console.error('Grid element not found for category:', category);
-                return;
-            }
-            
-            // Clear grid
-            gridElement.innerHTML = '';
-
-            // Add items from portfolio data
-            if (PORTFOLIO_DATA[category] && PORTFOLIO_DATA[category].length > 0) {
-                PORTFOLIO_DATA[category].forEach((item, index) => {
-                    const portfolioItem = createPortfolioItemElement(item, category, index);
-                    gridElement.appendChild(portfolioItem);
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
                 });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Modal functions
+        function openModal(category) {
+            currentCategory = category;
+            document.getElementById('workModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('workModal').style.display = 'none';
+            document.getElementById('workForm').reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('workModal');
+            if (event.target == modal) {
+                closeModal();
             }
         }
 
-        function createPortfolioItemElement(item, category, index) {
-            const portfolioItem = document.createElement('div');
-            portfolioItem.className = 'portfolio-item';
+        // Image upload function
+        function uploadImage(imageElement) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
             
-            const themeClass = category === 'logo' ? 'logo-theme' : (category === 'post' ? 'post-theme' : 'youtube-theme');
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Create img element for better display
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.width = '100%';
+                        img.style.height = '100%';
+                        img.style.objectFit = 'contain';
+                        img.style.objectPosition = 'center';
+                        img.style.borderRadius = '15px 15px 0 0';
+                        img.style.background = '#2d3748';
+                        
+                        // Clear the image element and add the new image
+                        imageElement.innerHTML = '';
+                        imageElement.appendChild(img);
+                        
+                        // Remove background styling
+                        imageElement.style.backgroundImage = '';
+                        imageElement.style.background = '#2d3748';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
             
-            // Handle tags
-            let tagsHtml = '';
-            if (Array.isArray(item.tags)) {
-                tagsHtml = item.tags.map(tag => `<span class="tag">${tag.toUpperCase()}</span>`).join('');
-            } else if (typeof item.tags === 'string' && item.tags) {
-                const tagArray = item.tags.split(',').map(tag => tag.trim());
-                tagsHtml = tagArray.map(tag => `<span class="tag">${tag.toUpperCase()}</span>`).join('');
+            input.click();
+        }
+
+        // Form submission to add new work
+        document.getElementById('workForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const title = formData.get('title');
+            const description = formData.get('description');
+            const price = formData.get('price');
+            const tags = formData.get('tags').split(',').map(tag => tag.trim());
+            const imageFile = formData.get('image');
+            
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    addWorkToPortfolio({
+                        title,
+                        description,
+                        price,
+                        tags,
+                        image: e.target.result,
+                        category: currentCategory
+                    });
+                };
+                reader.readAsDataURL(imageFile);
             }
             
+            closeModal();
+        });
+
+        function addWorkToPortfolio(workData) {
+            const { title, description, price, tags, image, category } = workData;
+            
+            // Determine the section and theme based on category
+            let pageId, themeClass;
+            switch(category) {
+                case 'logo':
+                    pageId = 'logoGrid';
+                    themeClass = 'logo-theme';
+                    break;
+                case 'post':
+                    pageId = 'postsGrid';
+                    themeClass = 'post-theme';
+                    break;
+                case 'youtube':
+                    pageId = 'youtubeGrid';
+                    themeClass = 'youtube-theme';
+                    break;
+            }
+            
+            // Create new portfolio item
+            const portfolioItem = document.createElement('div');
+            portfolioItem.className = 'portfolio-item fade-in visible';
             portfolioItem.innerHTML = `
-                <div class="portfolio-image ${themeClass}">
-                    <img src="${item.image}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: contain;">
+                <div class="portfolio-image ${themeClass}" onclick="uploadImage(this)" style="background: #2d3748;">
+                    <img src="${image}" alt="${title}" style="width: 100%; height: 100%; object-fit: contain; object-position: center; border-radius: 15px 15px 0 0; background: #2d3748;">
                 </div>
                 <div class="portfolio-content">
-                    <h3>${item.title.toUpperCase()}</h3>
-                    <p>${item.description}</p>
+                    <h3>${title.toUpperCase()}</h3>
+                    <p>${description}</p>
                     <div class="portfolio-tags">
-                        ${tagsHtml}
+                        ${tags.map(tag => `<span class="tag">${tag.toUpperCase()}</span>`).join('')}
                     </div>
-                    <div class="portfolio-price">LKR ${parseFloat(item.price).toFixed(0)}</div>
+                    <div class="portfolio-price">LKR ${price}</div>
                 </div>
             `;
-
-            return portfolioItem;
+            
+            // Add to the appropriate section
+            const section = document.getElementById(pageId);
+            section.appendChild(portfolioItem);
+            
+            // Show success message
+            alert('Work added successfully!');
         }
 
-        // Initialize website
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 NETHUWA EDITZ - Portfolio Website Loading...');
-            
-            // Show home page by default
-            showPage('home');
-            
-            console.log('✅ Website loaded successfully with all portfolio items!');
-            console.log('Portfolio Data:', PORTFOLIO_DATA);
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.95))';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9))';
+            }
         });
+
+        // Initialize animations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            triggerAnimations();
+        });
+
+        // Interactive effects
+        document.addEventListener('mouseenter', function(e) {
+            if (e.target.classList.contains('portfolio-item') || 
+                e.target.classList.contains('service-card') || 
+                e.target.classList.contains('contact-method')) {
+                e.target.style.filter = 'brightness(1.1)';
+            }
+        }, true);
+
+        document.addEventListener('mouseleave', function(e) {
+            if (e.target.classList.contains('portfolio-item') || 
+                e.target.classList.contains('service-card') || 
+                e.target.classList.contains('contact-method')) {
+                e.target.style.filter = 'brightness(1)';
+            }
+        }, true);
     </script>
 </body>
 </html>
